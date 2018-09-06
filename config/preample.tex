@@ -13,6 +13,9 @@
 \sisetup{inter-unit-product = \ensuremath{{}\cdot{}}}
 \sisetup{output-decimal-marker = {,} }
 \DeclareSIUnit{\kroner}{kr.}
+\DeclareSIUnit{\LSb}{LSb}
+\DeclareSIUnit{\cycles}{cycles}
+\DeclareSIUnit{\div}{Div}
 
 \usepackage{graphicx}
 \newsubfloat{figure}% Allow subfloats in figure environment
@@ -24,8 +27,8 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \captionsetup{font=small,
-labelfont={it,bf},textfont=sf,
-format=hang}
+	labelfont={it,bf},textfont=sf,
+	format=hang}
 
 % Packages for color handling
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
@@ -34,15 +37,17 @@ format=hang}
 
 \usepackage{lscape}
 
+\usepackage{enumitem}
+
 % TODONotes http://ctan.org/pkg/todonotes
 \usepackage{todonotes}
 \usepackage{placeins}
 
 \usepackage[hidelinks]{hyperref}  
 \hypersetup{bookmarks=false}
-\hypersetup{pdftitle={Inverteret Pendul}} 
-\hypersetup{pdfsubject={4. Semester Projekt, E17, Grp. [3]}}
-\hypersetup{pdfauthor={J\"{o}rn Jacobi, Simon Møller, Søren Frank, Kenneth Petersen, Dennis Amtoft Jensen, Jonas Jensen Holmgren}}
+\hypersetup{pdftitle={Batteristyresystem til Lithium Batterier}} 
+\hypersetup{pdfsubject={7. semester afgangsprojekt}}
+\hypersetup{pdfauthor={Kenneth Lukas Petersen, Søren Bolding Frank}}
 
 
 % For includering af .pdf
@@ -61,7 +66,12 @@ format=hang}
 \newcommand{\g}{9,82 \si{\meter\per\second\squared}}
 \newcommand{\dcite}[1]{\quotedblbase{#1}\textquotedblright}
 \newcommand{\husk}[2]{\todo[inline,color=green!40]{#1: #2}}
+\newcommand{\jj}[1]{\todo[inline,color=green!40]{JJ: #1}}
+\newcommand{\Kenneth}[1]{\todo[inline,color=blue!40]{Kenneth: #1}}
+\newcommand{\note}[1]{\todo[inline]{#1}}
 \DeclareMathOperator{\lapl}{\mathcal{L}}
+
+
 % Remove paragraph indentation for document
 \setlength{\parindent}{0pt}
 \newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
@@ -69,7 +79,6 @@ format=hang}
 
 % Listings package
 \usepackage{listings}
-
 
 %Fede overskrifter
 \usepackage{kpfonts}
@@ -82,45 +91,46 @@ format=hang}
 \newcommand\numindent{\kern37pt}
 \newlength\chaptertitleboxheight
 \makechapterstyle{hansen}{
-  \renewcommand\printchaptername{\raggedleft}
-  \renewcommand\printchapternum{%
-    \begingroup%
-    \leavevmode%
-    \chapnumfont%
-    \strut%
-    \numlifter{\thechapter}%
-    \numindent%
-\endgroup%
-}
-  \renewcommand*{\printchapternonum}{%
-    \vphantom{\begingroup%
-      \leavevmode%
-      \chapnumfont%
-      \numlifter{\vphantom{9}}%
-      \numindent%
-      \endgroup}
-    \afterchapternum}
-  \setlength\midchapskip{0pt}
-  \setlength\beforechapskip{0.5\baselineskip}
-  \setlength{\afterchapskip}{1\baselineskip}
-  \renewcommand\chapnumfont{%
-    \fontsize{3cm}{0cm}%
-    \bfseries%
-    \sffamily%
-    \color{chaptercolor}%
-  }
-  \renewcommand\chaptitlefont{%
-    \normalfont%
-    \huge%
-    \bfseries%
-    \raggedleft%
-  }%
-  \settototalheight\chaptertitleboxheight{%
-    \parbox{\textwidth}{\chaptitlefont \strut bg\\bg\strut}}
-  \renewcommand\printchaptertitle[1]{%
-    \parbox[t][\chaptertitleboxheight][t]{\textwidth}{%
-      %\microtypesetup{protrusion=false}% add this if you use microtype
-      \chaptitlefont\strut ##1\strut}%
+	\renewcommand\printchaptername{\raggedleft}
+	\renewcommand\printchapternum{%
+		\begingroup%
+		\leavevmode%
+		\chapnumfont%
+		\strut%
+		\numlifter{\thechapter}%
+		\numindent%
+		\endgroup%
+	}
+	\renewcommand*{\printchapternonum}{%
+		\vphantom{\begingroup%
+			\leavevmode%
+			\chapnumfont%
+			\numlifter{\vphantom{9}}%
+			\numindent%
+			\endgroup}
+		\afterchapternum}
+	\setlength\midchapskip{0pt}
+	\setlength\beforechapskip{0.5\baselineskip}
+	\setlength{\afterchapskip}{1\baselineskip}
+	\renewcommand\chapnumfont{%
+		\fontsize{3cm}{0cm}%
+		\bfseries%
+		\sffamily%
+		\color{chaptercolor}%
+	}
+	\renewcommand\chaptitlefont{%
+		\normalfont%
+		%\huge%
+		\LARGE%
+		\bfseries%
+		\raggedleft%
+	}%
+	\settototalheight\chaptertitleboxheight{%
+		\parbox{\textwidth}{\chaptitlefont \strut bg\\bg\strut}}
+	\renewcommand\printchaptertitle[1]{%
+		\parbox[t][\chaptertitleboxheight][t]{\textwidth}{%
+			%\microtypesetup{protrusion=false}% add this if you use microtype
+			\chaptitlefont\strut ##1\strut}%
 }}
 \chapterstyle{hansen}
 \aliaspagestyle{chapter}{empty} % just to save some space
@@ -132,3 +142,10 @@ format=hang}
 %\siglespacing
 %\onehalfspacing                                       
 %\doublespacing
+
+%compile debug, check pdflatex time
+\newcommand\showtimer{Timer: \the\numexpr\the\pdfelapsedtime*1000/65536 \relax}
+%\pdfresettimer}
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\fancyfoot[CE,CO]{\showtimer}

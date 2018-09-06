@@ -3,26 +3,29 @@
 \emph{Lithium batterier er højtydende, langtidsholdbare og fås i forskellige former, hvilket gør dem velegnet til mange forskellige applikationer. De har dog ulempen at hvis de ikke overvåges kan de hurtigt forgå eller, i værste tilfælde, kan der opstå farlige situationer. Derfor bruges der et batteristyresystem til opladning, afladning og vedligeholdelse. Batteristyresystemet overvåger konstant batteriet, for at sikre sig at alle dets parametre er i orden. Er der flere batteri-celler i serie, holder systemet dem også i balance. }
 
 \section{Forord}\label{sec:forord}
-forord
 
 \section{Formål}
 Formålet med dette afgangsprojekt er at udarbejde et produkt der efterviser nogle af de opnåede fagligheder igennem uddannelsen som Diplomingeniør i Elektronik og Datateknik.
 
 \section{Problemformulering}
-Linak er gået ind på markedet indenfor reclinerstole, hvor et nyt aktuatorsystem er under udvikling. En batteripakke vil indgå i det samlede system. Batteripakken kommer til at bestå af en seriekobling af lithium celler, hvilket kræver et system til overvågning og balancering af cellerne. Batteristyresystemet (BMS)’en vil sidde mellem batterierne og elektronikken for at styre op- og afladning af batteripakken, samt bidrage med en sikkerhed i batteripakken. \\
+Linak er gået ind på markedet indenfor reclinerstole, hvor et nyt aktuatorsystem er under udvikling. En batteripakke vil indgå i det samlede system. Batteripakken kommer til at bestå af en seriekobling af lithium celler, hvilket kræver et system til overvågning og balancering af cellerne. Batteristyresystemet (BMS)’en vil sidde mellem batterierne og elektronikken for at styre op- og afladning af batteripakken, samt bidrage med sikkerhed i batteripakken. \\
 
-Projektet er udbygget efter problemet som opstår ved opladning og afladning af Lithium celler. Disse celler skal nøje overvåges, og sidder der flere i serie, skal de også være i nærmest perfekt balance med hinanden. Dette er for at sikre samme slid på alle celler, og at de alle leverer den samme strøm. 
+Her skal udvikles et batteristyresystem, som udvikles...
+
+
+Projektet er udbygget efter problemet som opstår ved opladning og afladning af Lithium celler. Disse celler skal nøje overvåges, og sidder der flere i serie, skal de også være i balance med hinanden. Dette er for at sikre samme slid på alle celler, og at de alle leverer den samme strøm. 
 
 \section{Projektafgrænsning}
+I dette projekt designes et batteristyresystem, som skal kunne balancere en seriekobling af fire 18650 lithium celler. Der tilstræbes at designe og konstruere en funktionel prototype.
 \subsection{Kravspecifikation} \label{afs:kravspecifikation}
-\subsection{Funktionaliteter}
 
 \begin{itemize}
 	\item Opladning og afladning af Lithium celler
+	\item Afladning under opladning
 	\item Balancering under opladning og afladning v/ flere celler i serie
 	\item Afladningsbeskyttelse/kortslutningsbeskyttelse
-	\item Maksimal lade- og afladestrøm
-	\item Temperaturmålinger
+	\item Kontrol af maksimal lade- og afladestrøm
+	\item Temperaturmålinger af celler for sikker drift
 	\item State of charge
 	\item State of health
 \end{itemize}

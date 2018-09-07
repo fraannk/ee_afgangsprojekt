@@ -1,17 +1,23 @@
 \chapter{Indledning}
 
-\emph{Lithium batterier er højtydende, langtidsholdbare og fås i forskellige former, hvilket gør dem velegnet til mange forskellige applikationer. De har dog ulempen at hvis de ikke overvåges kan de hurtigt forgå eller, i værste fald, kan der opstå farlige situationer. Derfor anvendes et batteristyresystem til opladning, afladning og vedligeholdelse. Batteristyresystemet overvåger konstant de individuelle celler og batteriet som helhed, for at sikre at parametrene er i orden. Er der flere batteri-celler i serie, skal systemet holde dem i balance med hinanden. }
+\emph{Lithium batterier er højtydende, langtidsholdbare og fås i forskellige former, hvilket gør dem velegnet til mange forskellige applikationer. De har dog ulempen at hvis de ikke overvåges kan de hurtigt forgå eller, i værste fald, kan der opstå farlige situationer. Derfor anvendes et batteristyresystem til opladning, afladning og vedligeholdelse. Batteristyresystemet overvåger konstant de individuelle celler og batteriet som helhed, for at sikre at parametrene er i orden. I denne rapport vil læseren blive guidet igennem processen bag udviklingen af et batteristyresystem.}
 
 \section{Formål}
 Formålet med dette afgangsprojekt er at udarbejde et produkt, der efterviser nogle af de opnåede fagligheder igennem uddannelsen som Diplomingeniør i Elektronik og Datateknik - både teoretisk og praktisk.
 
 \section{Problemformulering}
-Linak er gået ind på markedet indenfor reclinerstole, hvor et nyt aktuatorsystem er under udvikling. En batteripakke vil indgå i det samlede system. Batteripakken kommer til at bestå af en seriekobling af lithium celler, hvilket kræver et system til overvågning og balancering af cellerne. Batteristyresystemet (BMS)’en vil sidde mellem batterierne og elektronikken for at styre op- og afladning af batteripakken, samt bidrage med sikkerhed i batteripakken. \\
+Linak er gået ind på markedet indenfor reclinerstole, hvor et nyt aktuatorsystem er under udvikling. Da en batteripakke vil indgå i det samlede system, og den består af en seriekobling af lithium celler, er der brug for et batteristyresystem. Batteristyresystemet (BMS’en) vil sidde mellem batterierne og elektronikken for at styre op- og afladning af batteripakken, samt bidrage med sikkerhed i batteripakken. Problemformuleringen er derfor som følgende:\\
 
-Her skal udvikles et batteristyresystem, som udvikles...
+Et batteristyresystem ønskes udviklet og realiseret ved hjælp af en microcontroller og integrerede kredse eller transistorer. Det ønskes også at være muligt at se aktuel batteristatus via et display eller en konsol. Derudover ønskes det at batteristyresystemet kan overvåge 4-6 celler i serie. \\
 
-
-Projektet er udbygget efter problemet som opstår ved opladning og afladning af Lithium celler. Disse celler skal nøje overvåges, og sidder der flere i serie, skal de også være i balance med hinanden. Dette er for at sikre samme slid på alle celler, og at de alle leverer den samme strøm. 
+Der ønskes også svar på følgende problemstillinger: 
+\begin{itemize}[noitemsep]
+	\item Hvordan opbygges en BMS ved hjælp af integrerede kredse?
+	\item Hvordan opbygges en BMS ved hjælp af transistorer? 
+	\item Hvordan fremstilles software til kontrol af batteripakken?
+	\item Hvilken topologi af batteristyresystemer egner sig bedst til løsning af Linak's problemstilling? 
+	\item Hvordan sikres der imod kortslutning og overcurrent/overvoltage? 
+\end{itemize}
 
 \section{Projektafgrænsning}
 Et batteristyresystem kan realiseres på forskellige måder. I dette projekt vil forskellige topologier blive undersøgt, hvorefter den bedst egnede ud fra vægtningsskemaet, som ses i tabel XXXXXX, vil blive udviklet og realiseret. \\

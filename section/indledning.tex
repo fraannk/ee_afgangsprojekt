@@ -14,24 +14,27 @@ Her skal udvikles et batteristyresystem, som udvikles...
 Projektet er udbygget efter problemet som opstår ved opladning og afladning af Lithium celler. Disse celler skal nøje overvåges, og sidder der flere i serie, skal de også være i balance med hinanden. Dette er for at sikre samme slid på alle celler, og at de alle leverer den samme strøm. 
 
 \section{Projektafgrænsning}
-Under dette projekt designes et batteristyresystem, som skal kunne balancere en seriekobling af fire 18650 lithium celler. Der tilstræbes at designe og konstruere en funktionel prototype.
+Et batteristyresystem kan realiseres på forskellige måder. I dette projekt vil forskellige topologier blive undersøgt, hvorefter den bedst egnede ud fra vægtningsskemaet, som ses i tabel XXXXXX, vil blive udviklet og realiseret. \\
+
+Projektet går ud på, at realisere to prototyper af samme topologi. Den ene prototype bliver bygget op omkring en færdig balanceringskreds, hvor den anden prototype vil realiseres diskret. De to prototyper vil efterfølgende blive analyseret og sammenlignet ud fra skemaet, som ses i tabel XXXXX, for 
+
+
+Under dette projekt designes et batteristyresystem, som skal kunne balancere en seriekobling af fire 18650 Lithium-Ion celler. Der tilstræbes at designe og konstruere en funktionel prototype.
+
 \subsection{Kravspecifikation} \label{afs:kravspecifikation}
-Max aflade strøm (8A) \\
-Balanceringsspænding (50mV opløsning) \\
-Indgangsspænding fra oplader (18V)\\
-"Låsning" af yderpunkter på batteriernes afladekurve (Brug af 80\%)
+I dette afsnit fremstår de opsatte krav til projektet. Kravene er en sammenfatning af ..... \\
 
-
-
-\begin{itemize}
-	\item Opladning og afladning af Lithium celler
-	\item Afladning under opladning
-	\item Balancering under opladning og afladning v/ flere celler i serie
-	\item Afladningsbeskyttelse/kortslutningsbeskyttelse
-	\item Kontrol af maksimal lade- og afladestrøm
-	\item Temperaturmålinger af celler for sikker drift
-	\item State of charge
-	\item State of health
+\begin{itemize}[noitemsep]
+	\item Max afladestrøm, $I_{out} = 8\ampere$
+	\item Max opladestrøm, $I_{in} = 1*C$ (kapacitet)
+	\item Afladning af batteripakken under opladning
+	\item Balancering under opladning og afladning flere celler i serie. Balanceringsspændingen skal have en opløsningen på  $V_{bal} = 50\milli\volt$
+	\item "Låsning" af yderpunkter på batteriernes afladekurve (Brug af 80\%)
+	\item Afladnings- og kortslutningsbeskyttelse
+	\item Temperaturmålinger af celler for sikker drift $\SI{-20}{\celsius}$ til $\SI{50}{\celsius}$
+	\item State of charge (SOC) - Cellernes kapacitet
+	\item State of health (SOH) - Antal fulde lade cycles
+	\item Softwaren er en del af produktet og skal overholde ANSI(C90) standarden
 \end{itemize}
 
 \subsection{Vægtningsskema}

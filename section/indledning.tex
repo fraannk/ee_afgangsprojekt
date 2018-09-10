@@ -15,7 +15,7 @@ Linak er gået ind på markedet indenfor reclinerstole, hvor et nyt aktuatorsyst
 Et batteristyresystem skal udvikles og realiseres ved hjælp af en microcontroller og integrerede kredse eller transistorer. Det ønskes at være muligt at se aktuel batteristatus via et display eller en konsol samt at batteristyresystemet kan overvåge en seriekobling af fire 18650 Lithium-Ion celler.
 \\
 
-Der ønskes også svar på følgende problemstillinger: 
+Der ønskes svar på følgende problemstillinger: 
 
 \begin{itemize}[noitemsep]
 	\item Hvordan kan en BMS opbygges ved hjælp af en integreret balanceringskreds?
@@ -40,9 +40,9 @@ I dette afsnit fremstår de opsatte krav til projektet. Kravene er en sammenfatn
 
 \subsubsection{Krav til hardware}
 \begin{itemize}[noitemsep]
-	\item Max afladestrøm, $I_{out} = 8\ampere$
-	\item Max opladestrøm, $I_{in} = 1*C$ (kapacitet)
-	\item Balancering under opladning og afladning flere celler i serie. Balanceringsspændingen skal have en opløsning på  $V_{bal} = 50\milli\volt$
+	\item Max afladestrøm, $I_{out} = 6\ampere$
+	\item Max opladestrøm, $I_{in} = 1\ampere$
+	\item Balancering under opladning ved flere celler i serie. Balanceringsspændingen skal have en opløsning på  $V_{bal} = 50\milli\volt$
 	\item Afladning af batteripakken under opladning
 	\item Afladnings- og kortslutningsbeskyttelse
 	\item I tilfælde af software fejl skal hardwaren ikke kunne tage skade

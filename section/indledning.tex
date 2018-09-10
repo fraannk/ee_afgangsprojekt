@@ -34,20 +34,22 @@ Formålet med at sammenligne de to fremgangsmåder er at få et overblik over, h
 
 \subsection{Kravspecifikation} \label{afs:kravspecifikation}
 I dette afsnit fremstår de opsatte krav til projektet. Kravene er en sammenfatning af selvvalgte og Linaks ønsker til funktionalitet.
-
+\subsubsection{Krav til hardware}
 \begin{itemize}[noitemsep]
 	\item Max afladestrøm, $I_{out} = 8\ampere$
 	\item Max opladestrøm, $I_{in} = 1*C$ (kapacitet)
 	\item Afladning af batteripakken under opladning
 	\item Balancering under opladning og afladning flere celler i serie. Balanceringsspændingen skal have en opløsningen på  $V_{bal} = 50\milli\volt$
-	\item "Låsning" af yderpunkter på batteriernes afladekurve (Brug af 80\%)
 	\item Afladnings- og kortslutningsbeskyttelse
+\end{itemize}
+\subsubsection{Krav til software}
+\begin{itemize}[noitemsep]
+	\item "Låsning" af yderpunkter på batteriernes afladekurve (Brug af 80\%)
 	\item Temperaturmålinger af celler for sikker drift $\SI{-20}{\celsius}$ til $\SI{50}{\celsius}$
 	\item State of charge (SOC) - Information om cellernes kapacitet
 	\item State of health (SOH) - Information om antallet af fulde lade cycles
 	\item Softwaren er en del af produktet og skal overholde ANSI(C90) standarden
 \end{itemize}
-
 
 
 \section{Løsningsmodel}

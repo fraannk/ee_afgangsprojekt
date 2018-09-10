@@ -4,6 +4,9 @@
 
 \section{Formål}
 Formålet med dette afgangsprojekt er at udarbejde et produkt, der efterviser nogle af de opnåede fagligheder igennem uddannelsen som Diplomingeniør i Elektronik og Datateknik - både teoretisk og praktisk.
+\\
+
+Projektet skal afspejle et løsningsforslag fra erhvervslivet, således at slutresultatet er brugbart for Linak, som kan tage udgangspunkt i rapporten til intern evaluering. 
 
 \section{Problemformulering}
 Linak er gået ind på markedet indenfor reclinerstole, hvor et nyt aktuatorsystem er under udvikling. Da en batteripakke vil indgå i det samlede system, og den består af en seriekobling af lithium celler, er der brug for et batteristyresystem. Batteristyresystemet (BMS’en) vil sidde mellem batterierne og elektronikken for at styre op- og afladning af batteripakken, samt bidrage med sikkerhed i batteripakken. Problemformuleringen er derfor som følgende:
@@ -34,14 +37,17 @@ Formålet med at sammenligne de to fremgangsmåder er at få et overblik over, h
 
 \subsection{Kravspecifikation} \label{afs:kravspecifikation}
 I dette afsnit fremstår de opsatte krav til projektet. Kravene er en sammenfatning af selvvalgte og Linaks ønsker til funktionalitet.
+
 \subsubsection{Krav til hardware}
 \begin{itemize}[noitemsep]
 	\item Max afladestrøm, $I_{out} = 8\ampere$
 	\item Max opladestrøm, $I_{in} = 1*C$ (kapacitet)
+	\item Balancering under opladning og afladning flere celler i serie. Balanceringsspændingen skal have en opløsning på  $V_{bal} = 50\milli\volt$
 	\item Afladning af batteripakken under opladning
-	\item Balancering under opladning og afladning flere celler i serie. Balanceringsspændingen skal have en opløsningen på  $V_{bal} = 50\milli\volt$
 	\item Afladnings- og kortslutningsbeskyttelse
+	\item Batterisystemet skal virke uafhæningt af antallet af celler (1-4 celler)
 \end{itemize}
+
 \subsubsection{Krav til software}
 \begin{itemize}[noitemsep]
 	\item "Låsning" af yderpunkter på batteriernes afladekurve (Brug af 80\%)
@@ -53,10 +59,10 @@ I dette afsnit fremstår de opsatte krav til projektet. Kravene er en sammenfatn
 
 
 \section{Løsningsmodel}
-Bliver udarbejdet senenere
+Bliver udarbejdet senere
 
 \section{Læsevejledning}
-Bliver udarbejdet senenere
+Bliver udarbejdet senere
 
 \section{Proces- og arbejdsmetode}
 Projektarbejdet er delt op i tre faser. Research og forberedelse, udvikling og test, færdiggørelse og konklusion. I research-fasen samles alt relevant information omkring emnet for at opnå en bedre forståelse. Udviklingsfasen tager udgangspunkt i de opsatte krav, hvor flere iterationer vil gennemløbes for at opnå kravene. Den sidste del i projektet vil være en sammenfatning af projektet som helhed.

@@ -1,7 +1,37 @@
 \section{Om batteristyresystemer}
-Et batteristyresystem er et elektronisk system, der styrer de enkelte battericeller eller hele batteripakken. Den overvåger og holder styr på cellens tilstand, herunder spænding, kapacitet, ladning og temperatur. Dertil søger systemet for at holde cellerne beskyttet i et sikkert operation område (Safe Operating Area). Systemet sørger for at batteripakkens celler er i balance med hinanden, hvilket praktisk betyder at cellespændingerne er tilnærmelsesvis ens.
+Et batteristyresystem er et elektronisk system, der styrer de enkelte battericeller eller hele batteripakken. Den overvåger og holder styr på cellens tilstand herunder spænding, kapacitet, ladning og temperatur. Dertil søger systemet for at holde cellerne beskyttet i et sikkert operation område (Safe Operating Area). Systemet sørger for at batteripakkens celler er i balance med hinanden, hvilket praktisk betyder at cellespændingerne er tilnærmelsesvis ens. I tilfælde af at parametre skulle overstige deres max værdi, skal systemet søge for at afbryde batteriet fra belastningen eller opladeren.
 \\
 
+De primære formål med en BMS er derfor som følgende:
+\begin{itemize}[noitemsep]
+	\item Den minimere risikoen for beskadigelse af cellerne
+	\item Den skal overvåge og kontrollere batteripakkens op- og afladningsprocess
+\end{itemize}
+
+
+\section{Funktionaliteter i et batteristyresystem}
+Herunder vil de mest centrale funktionaliteter i projektet blive beskrevet.
+
+\subsection{Op- og afladningskontrol}
+Battericeller bliver oftest skadet ved forkert op- og afladning. Derfor er netop disse to punkter en essentiel opgave for et batteristyresystem.
+
+\subsection{Cellebalancering}
+Ideelt set er alle battericeller produceret ens med samme egenskaber og opfører sig ens under hele cellens leve tid. Desværre er det langt fra virkeligheden, hvor der er produktionstolerancer, hvor nogle celler vil være stærkere end andre. I praksis betyder det forskelle på minimal, nominal og maksimal spænding samt forskelle i kapacitet. I batteripakker hvor flere celler indgår, vil forskellen på stærke og svage celler blive forstørret med hver lade-oplade cyklus. Under opladning kan en svag celle blive svagere indtil den fejler, hvilket kan forsage permanent skade på hele batteripakken.
+\\
+Ved hjælp af cellebalancering, kan forskelle på cellerne mindskes og derved forøge en batteripakkes levetid.
+
+\subsection{State of Charge (SoC)}
+
+\subsection{State of Health (SoH)}
+Safe Operating Area
+
+\subsection{Temperaturmåling}
+Måling af temperature i en batteripakke er nødvendig, for at sikre optimal op- og afladning. 
+
+\subsection{Kortslutningsbeskyttelse}
+I tilfælde af fejl ved op- eller afladning, skal BMS'en kunne afbryde forbindelsen mellem opladeren eller belastningen. Det sker typisk ved hjælp af en cuttoff-FET. Opførelsen af cutoff-FET'en er typisk defineret ud fra parametre sat ud fra max værdier af cellespændinger, strøm målinger og realtids detektering. 
+
+Batteristyresystemer kan opdeles i tre topologier, og bliver gennemgået herunder.
 \section{Centraliseret system}
 
 \section{Decentraliseret system}

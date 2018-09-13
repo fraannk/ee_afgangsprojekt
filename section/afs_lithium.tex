@@ -1,11 +1,20 @@
 \section{Lithium teknologi}
 Lithium batterier har siden 1973 været under konstant udvikling. Gennem tiden er der opdaget mange forskellige typer for lithium batterier. Målet er, som ved så mange andre typer batterier, at få den højeste kapacitet på mindst mulig plads. Men da der ved lithium batterier er farlige konsekvenser ved dette, er man nødt til at finde det bedste kompromis. "Hovednavnet" \space /det mest brugte navn for de mange forskellige typer er bare "lithium-ion" \space men hvis man går lidt dybere ned i kemien ser man at der findes lithium-ion batterier med mange forskellige karakteristika. 
 
-\subsection{Lithium cobalt oxid}
-Den nok mest brugte er dog lithium cobalt oxid-typen ($LiCoO_2$) som bruges i f.eks. mobiltelefoner og moderne bærbare computere. Denne type er den mest fleksible i dens fysiske design, men også den farligste. Derfor er det vigtigt at denne type celle har et overvågningskredsløb, da der ellers kan forekomme katastrofale situationer. Disse celler er oftest formet som "bløde puder" \space \textemdash \space altså uden en hård kasse rundt om. Denne teknologi bruges også oftest i lithium ion polymer-varianten, som bliver brugt meget i RC-industrien pga. den høje afladekapacitet. 
+\subsection{Forskel på kemierne}
+Den nok mest brugte er dog lithium cobalt oxid-typen ($LiCoO_2$) som bruges i f.eks. mobiltelefoner og moderne bærbare computere. Denne type er den mest fleksible i dens fysiske design, men også den farligste. Derfor er det vigtigt at denne type celle har et overvågningskredsløb, da der ellers kan forekomme katastrofale situationer. Disse celler er oftest formet som "bløde puder" \space \textemdash \space altså uden en hård kasse rundt om. Denne teknologi bruges også oftest i lithium ion polymer-varianten, som bliver brugt meget i RC-industrien pga. den høje afladekapacitet og den kompakte form.
 
-\subsection{Lithium jern fosfat og lignende}
-Lithium jern fosfat ($LiFePO_4$) har sammen med lithium ion mangan oxid ($LMO$) og lithium nikkel mangan cobalt oxid ($NMC$) en lavere energidensitet men er mere sikker end lithium cobalt oxid. De har også en længere levetid og derfor er de meget brugte i f.eks. elektrisk værktøj eller medicinindustrien. Sidstnævnte ($NMC$) er især dominerende i elektriske biler. Disse celler findes oftest i 18650 varianten, som er en rund cylindrisk celle. Det er også denne type celle der er valgt til dette projekt, da det efterhånden er en ret standard celle, og da dens karakteristika er ganske veldokumenteret. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=12cm]{billeder/lithium-variants-comparison.png}
+	\caption{Sammenligning af de forskellige former for lithium ion celler\protect\footnotemark}
+	\label{fig:lithium_variants_comparison}
+\end{figure}
+\footnotetext{BCG Research forskning i de bedste batterier til el-biler. \url{https://www.bcg.com/documents/file36615.pdf}}
+
+Som der ses på figur \ref{fig:lithium_variants_comparison} har lithium jern fosfat ($LiFePO_4$) sammen med lithium ion mangan oxid ($LMO$) og lithium nikkel mangan cobalt oxid ($NMC$) en lavere energidensitet men er mere sikker end lithium cobalt oxid. De har også en længere levetid og derfor er de meget brugte i f.eks. elektrisk værktøj eller medicinindustrien. Sidstnævnte ($NMC$) er især dominerende i elektriske biler. Disse celler findes oftest i 18650 varianten, som er en rund cylindrisk celle. Det er også denne type celle der er valgt til dette projekt, da det efterhånden er en ret standard celle, og da dens karakteristika er ganske veldokumenteret. 
+
+\sbf{Indsæt tabel der sammenligner specifikke værdier for de forskellige kemier.}
 
 \section{Anvendelse}
 Den valgte type lithium-ion celle har en nominal spænding på $3.6\volt$. "Sikkerhedszonen" \space anses for at ligge mellem $3\volt$ og $4.2\volt$. Lades cellen til mere end $4.2\volt$ tager cellen skade og mister kapacitet. Det er også over dette niveau at de katastrofale situationer kan finde sted. Det samme gælder for afladningen. Aflades cellen under $3\volt$ går det også ud over kapaciteten men ikke i samme rate. Nogle typer kan også holde til afladning ned til $2.5\volt$, så denne grænse er en smule mere udefineret.\\
@@ -21,7 +30,9 @@ Kigges der på en typisk 18650 celle såsom Samsung 30Q modellen, har den en afl
 \end{figure}
 \footnotetext{Kurve fra celle-sammenligningsværktøj på Lygte Info's hjemmeside. \url{https://lygte-info.dk/review/batteries2012/Common18650comparator.php}}
 
-Op- og afladning - brugertilpasning (Storage mode etc..)
+Denne celle står oplyst til at have $3000\milli\ampere\hour$ men som der ses på kurven, er cellens spænding allerede på $2.8\volt$ når der er omkring $150\milli\ampere\hour$ tilbage. Derfor, hvis man holder sig inden for "sikkerhedszonen" \space udnytter man ikke batteriets fulde kapacitet, men derimod opnår man en længere levetid på cellen. \\
+
+Skal cellerne opbevares i længere tid, er det en god idé at opbevare dem i den såkaldte "storage mode". Her lades/aflades cellerne til $30-40\percent$ af deres fulde kapacitet, da der her er mindst slid, og man derfor opnår en længere levetid. 
 
 \section{Sikkerhed}
 

@@ -14,7 +14,7 @@ Den nok mest brugte er dog lithium cobalt oxid-typen ($LiCoO_2$) som bruges i f.
 
 Som der ses på figur \ref{fig:lithium_variants_comparison} har lithium jern fosfat ($LiFePO_4$) sammen med lithium ion mangan oxid ($LMO$) og lithium nikkel mangan cobalt oxid ($NMC$) en lavere energidensitet men er mere sikker end lithium cobalt oxid. De har også en længere levetid og derfor er de meget brugte i f.eks. elektrisk værktøj eller medicinindustrien. Sidstnævnte ($NMC$) er især dominerende i elektriske biler. Disse celler findes oftest i 18650 varianten, som er en rund cylindrisk celle. Det er også denne type celle der er valgt til dette projekt, da det efterhånden er en ret standard celle, og da dens karakteristika er ganske veldokumenteret. 
 
-\sbf{Indsæt tabel der sammenligner specifikke værdier for de forskellige kemier.}
+\sbf{Indsæt tabel der sammenligner specifikke værdier for de forskellige kemier. Gå mere i dybden med de forskellige kemier}
 
 \section{Anvendelse}
 Den valgte type lithium-ion celle har en nominal spænding på $3.6\volt$. "Sikkerhedszonen" \space anses for at ligge mellem $3\volt$ og $4.2\volt$. Lades cellen til mere end $4.2\volt$ tager cellen skade og mister kapacitet. Det er også over dette niveau at de katastrofale situationer kan finde sted. Det samme gælder for afladningen. Aflades cellen under $3\volt$ går det også ud over kapaciteten men ikke i samme rate. Nogle typer kan også holde til afladning ned til $2.5\volt$, så denne grænse er en smule mere udefineret.\\
@@ -35,5 +35,13 @@ Denne celle står oplyst til at have $3000\milli\ampere\hour$ men som der ses p�
 Skal cellerne opbevares i længere tid, er det en god idé at opbevare dem i den såkaldte "storage mode". Her lades/aflades cellerne til $30-40\percent$ af deres fulde kapacitet, da der her er mindst slid, og man derfor opnår en længere levetid. 
 
 \section{Sikkerhed}
+Da lithium batterier kan være farlige, er man nødt til at foretage de nødvendige sikkerhedsforanstaltninger. Derfor er der en del "regler":
+\begin{itemize}
+\item Oplad ikke på batteriet når omgivelsestemperaturen er under $0\degreeCelsius$
+\item Batteriet må ikke oplades til mere end $4.2\volt$ ($4.X\volt$ når det er $LiFePO_4$)
+\item Brug helst en balance oplader eller et batteristyresystem hvis der er flere celler i serie
+\item Flere punkter her
+\end{itemize}
+\sbf{Husk at rette lifepo4 max voltage}
 
-Kortslutning, overophedning, state of health, afladningsbeskyttelse
+Lidt om kortslutningsbeskyttelse, overophedning under opladning og afladning, måske state of health.

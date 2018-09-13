@@ -25,10 +25,14 @@ Ved hjælp af cellebalancering kan forskelle på cellerne mindskes og derved for
 \subsubsection{Aktiv balancering}
 
 \subsection{State of Charge (SoC)}
-En af de vigtigste funktionaliteter ved en BMS er at holde styr på batteripakkens kapacitet (State of Charge). Information omkring kapaciteten kan signalere til systemet om hvorvidt der er behov for opladning eller om afladning kan tillades. Informationen kan også bruges til at indikere behov tilslutning af oplader til brugeren gennem f.eks. en statusindikator.
+\klp{Mangler at få styr på denne sektion}
+En af de vigtigste funktionaliteter i et batteristyresystem er estimering af State of Charge, og er direkte defineret som den procentdel af maksimal ladning i en celle eller en batteripakke. SoC er vigtig da det afspejler batteripakkens ydeevne. Nøjagtig estimering af SoC er ikke kun vigtig til beskyttelse af cellerne, men også for at forhindre overopladning og underafladning, hvilket bidrager til forlængelse af batteripakkens levetid. Dertil muliggør informationen også at lade batteristyresystemet ligge rationelle strategier for at spare energi.
+\\
+Informationen kan også bruges til at indikere behov tilslutning af oplader til brugeren gennem f.eks. en statusindikator eller om afladning af systemet kan tillades. 
+Ved strømsvigt hvor f.eks et UPS-anlæg (Uninterruptible power supply) skal levere nødstrøm indtil normal drift genoprettes, vil SoC bidrage med information om hvorvidt anlægget overhovedet vil være i stand til at understøtte den tilkoblede belastning.
 \\
 
-SoC i en celle er defineres som forholdet mellem nuværende ladning $Q_{t}$ og $Q_{n}$, som er den nominelle kapacitet og er givet fra producenten, og er den maksimale ladning der kan opbevares i en celle, op opskrives som følgende:
+SoC i en celle defineres som forholdet mellem nuværende ladning $Q_{t}$ og $Q_{n}$, som er den nominelle ladning og er givet fra producenten, og er den maksimale ladning der kan opbevares i en celle.
 
 \begin {equation} 
 SoC(t) = \frac{Qt}{Q_n} \label{eq:soc}
@@ -46,11 +50,18 @@ Denne metode går ud på at måle afladningsstrømmen i en batteripakke og integ
 SoC(t) = SoC(t-1)+\frac{I(t)}{Q_n} \Delta t  \label{eq:coulomb-count}
 \end {equation}
 
+\begin {equation} 
+SoC(t) = SoC(0) - \frac{1}{C} \int_{0}^{t} idt  \label{eq:coulomb-count_1}
+\end {equation}
+
+
 \subsubsection{Kombination}
 
 
 \subsection{State of Health (SoH)}
-Safe Operating Area
+Formålet med SoH er at give en indikation af hvilken ydeevne der kan forventes af en celler eller batteripakke i den nuværende tilstand, eller indikere hvor den resterende levetid før der er behov for udskiftning.
+\\
+I nogle applikationer bliver SoH løbende gemt i en logbog for validere
 
 \subsection{Temperaturmåling}
 Måling af temperature i en batteripakke er nødvendig, for at sikre optimal op- og afladning. 

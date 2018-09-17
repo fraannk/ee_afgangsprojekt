@@ -16,13 +16,49 @@ Herunder vil de mest centrale funktionaliteter i projektet blive beskrevet.
 Battericeller bliver oftest skadet ved forkert op- og afladning. Derfor er netop disse to punkter en essentiel opgave for et batteristyresystem.
 
 \subsection{Cellebalancering}
-Ideelt set er alle battericeller produceret ens med samme egenskaber og opfører sig ens under hele cellens leve tid. Desværre er det langt fra virkeligheden, hvor der er produktionstolerancer, hvor nogle celler vil være stærkere end andre. I praksis betyder det forskelle på minimal, nominal og maksimal spænding samt forskelle i kapacitet. I batteripakker hvor flere celler indgår, vil forskellen på stærke og svage celler blive forstørret med hver lade-oplade cyklus. Under opladning kan en svag celle blive svagere indtil den fejler, hvilket kan forsage permanent skade på hele batteripakken.
+Ideelt set er alle battericeller produceret ens med samme egenskaber og opfører sig ens under hele cellens leve tid. Desværre er det langt fra virkeligheden, hvor der er produktionstolerancer, hvor nogle celler vil være stærkere end andre. I praksis betyder det varians på minimal, nominal og maksimal spænding, kapacitet, indre modstand og selvafladning.
+Temperaturforskelle i en batteripakke og dermed forskelle på celletemperature kan også medføre varians på selvafladning over tid.
 \\
-Ved hjælp af cellebalancering kan forskelle på cellerne mindskes og derved forøge en batteripakkes levetid.
+
+I batteripakker hvor flere celler indgår, vil forskellen på stærke og svage celler blive forstørret med hver cyklus. Under opladning kan en svag celle blive svagere indtil den fejler, hvilket kan forsage permanent skade på hele batteripakken. Da en batteripakkes levetid afhænger af den svageste celle, vil en forøgelse i levetid opnås ved hjælp af cellebalancering, da slid på den svageste celle vil minimeres.
+\\
+
+\klp{Fase 4 skal fjernes da vi ikke har det med}
+Opladning af en Li-Ion celle foregår i tre faser og er skitseret på figur  \ref{fig:opladning_liion}.
+\\
+Første fase lades cellen med en konstant strøm, hvortil spændingen stiger lineært. 
+\\
+Under anden fase har spændingen nået et niveau der er tæt på den ønskede spænding, og her påbegyndes balancering af cellerne. Fasen kan siges at være opladning ved konstant spænding (der er en rippelspænding grundet balancering).
+\\
+Tredje og sidste fase er når cellen har gennemført sin ladecyklus og den står på standby. På grund af cellens indre modstand, vil den langsomt blive afladet, hvilket ses på den nedadgående spænding.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=15cm]{billeder/liion_opladning.png}
+	\caption{Oplade forløb af Lithium-Ion celle}
+	\label{fig:opladning_liion}
+\end{figure}
+
+Blanceringsteknikkerne kan opdeles i to kategorier: passiv og aktiv balancering, og vil blive gennemgået herunder.
 
 \subsubsection{Passiv balancering}
+Passiv balancering går ud på at de omdanne overskudsenergi til varme fra fuldt opladte celler, modsat aktiv balancering som flytter overskudenergien til lavere opladte celler.
+\\
 
+Under passiv balancering holder systemet øje med spændingen på de enkelte celler. Når en eller flere celler opnår maks cellespænding og derved er fuldt opladet, aflades de igennem en modstand til de har samme spænding som den laveste celle i systemet eller en spændingsreference. Efterfølgende oplades cellerne igen, og denne proces fortsætter indtil alle celler er fuldt opladet. Afladningsmetoden hedder "controlled shunting resistor" og er vist på figur \ref{fig:passiv_balancering}. Metoden går ud på at systemet opdager en ubalance og fjerner energien ved kontrolleret at indkoble en modstand hvor der er behov. Fordelen ved denne metode er at den er simpel og pålidelig, men tilgengæld er den ineffektiv, da overskudsenergien bliver spildt i form af varme. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=5cm]{billeder/passiv_balancering.png}
+	\caption{Passiv balancering}
+	\label{fig:passiv_balancering}
+\end{figure}
+
+Der findes forskellige passive balanceringsteknikker 
 \subsubsection{Aktiv balancering}
+Fælles for de aktive balanceringsteknikker er at de redistribuerer energi fra celler med høj spænding til celler med lav spænding.
+\\
+Charge shuttles
 
 \subsection{State of Charge (SoC)}
 \klp{Mangler at få styr på denne sektion}
@@ -35,7 +71,7 @@ Ved strømsvigt hvor f.eks et UPS-anlæg (Uninterruptible power supply) skal lev
 SoC i en celle defineres som forholdet mellem nuværende ladning $Q_{t}$ og $Q_{n}$, som er den nominelle ladning og er givet fra producenten, og er den maksimale ladning der kan opbevares i en celle.
 
 \begin {equation} 
-SoC(t) = \frac{Qt}{Q_n} \label{eq:soc}
+SoC(t) = \frac{Q_t}{Q_n} \label{eq:soc}
 \end {equation}
 
 Der anvendes typisk tre metoder til at afgøre SoC, gennem en direkte måling af cellespænding, ved at tælle ladning, og en blanding af disse to.
@@ -46,12 +82,9 @@ Ved denne metode vil en simpel spændingsmåling henover hver cellerne kunne ind
 \subsubsection{Coulomb-tælle metode}
 Denne metode går ud på at måle afladningsstrømmen i en batteripakke og integrere strømmen over tid, for at estimere realtids-kapaciteten $SoC(t)$. 
 
-\begin {equation} 
-SoC(t) = SoC(t-1)+\frac{I(t)}{Q_n} \Delta t  \label{eq:coulomb-count}
-\end {equation}
 
 \begin {equation} 
-SoC(t) = SoC(0) - \frac{1}{C} \int_{0}^{t} idt  \label{eq:coulomb-count_1}
+SoC(t) = SoC(0) - \frac{1}{C} \int_{0}^{t} idt  \label{eq:coulomb-count}
 \end {equation}
 
 
@@ -62,6 +95,12 @@ SoC(t) = SoC(0) - \frac{1}{C} \int_{0}^{t} idt  \label{eq:coulomb-count_1}
 Formålet med SoH er at give en indikation af hvilken ydeevne der kan forventes af en celler eller batteripakke i den nuværende tilstand, eller indikere hvor den resterende levetid før der er behov for udskiftning.
 \\
 I nogle applikationer bliver SoH løbende gemt i en logbog for validere
+
+\begin {equation} 
+SoH = \frac{nominel \space kapacitet - nuværende  kapacitet}{nominel kapacitet} \label{eq:soh}
+\end {equation}
+%    05609223.pdf
+
 
 \subsection{Temperaturmåling}
 Måling af temperature i en batteripakke er nødvendig, for at sikre optimal op- og afladning. 

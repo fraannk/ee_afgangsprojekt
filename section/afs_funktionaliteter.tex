@@ -45,16 +45,23 @@ Blanceringsteknikkerne kan opdeles i to kategorier: passiv og aktiv balancering,
 Passiv balancering går ud på at de omdanne overskudsenergi til varme fra fuldt opladte celler, modsat aktiv balancering som flytter overskudenergien til lavere opladte celler.
 \\
 
-Under passiv balancering holder systemet øje med spændingen på de enkelte celler. Når en eller flere celler opnår maks cellespænding og derved er fuldt opladet, aflades de igennem en modstand til de har samme spænding som den laveste celle i systemet eller en spændingsreference. Efterfølgende oplades cellerne igen, og denne proces fortsætter indtil alle celler er fuldt opladet. Afladningsmetoden hedder "controlled shunting resistor" og er vist på figur \ref{fig:passiv_balancering}. Metoden går ud på at systemet opdager en ubalance og fjerner energien ved kontrolleret at indkoble en modstand hvor der er behov. Fordelen ved denne metode er at den er simpel og pålidelig, men tilgengæld er den ineffektiv, da overskudsenergien bliver spildt i form af varme. 
+Under passiv balancering holder systemet øje med spændingen på de enkelte celler. Når en eller flere celler opnår maks cellespænding og derved er fuldt opladet, aflades de igennem en modstand til de har samme spænding som den laveste celle i systemet eller en spændingsreference. Efterfølgende oplades cellerne igen, og denne proces fortsætter indtil alle celler er fuldt opladet. 
+\\
+
+Afladningsmetoden hedder "controlled shunting resistor" og er vist på figur \ref{fig:passiv_balancering}. Denne metode har MOSFET i parallel med hver enkelt celle og kan styres simpelt ved hjælp af en comparator som får MOSFET'en til at tænde for indkobling af en afladningsmodstand. Microcontrolleren vil samtidig overvåge samtlige cellespændinger, og vil derfor have styr på om hvorvidt der er behov for balancering.
+\\
+
+Fordelen ved denne metode er at den er simpel og pålidelig, men tilgengæld er den ineffektiv, da overskudsenergien bliver spildt i form af varme. En anden ulempe er, at passiv balancering er  begrænset af en lav balanceringsstrøm, typisk omkring $10\milli\ampere$, og derfor kan flere balanceringscycles være nødvendig for at cellerne er balanceret.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=5cm]{billeder/passiv_balancering.png}
-	\caption{Passiv balancering}
+	\includegraphics[width=10cm]{billeder/passiv_balancering.png}
+	\caption{Passiv balancering med IC - 2-9mA}
 	\label{fig:passiv_balancering}
 \end{figure}
 
-Der findes forskellige passive balanceringsteknikker 
+
+
 \subsubsection{Aktiv balancering}
 Fælles for de aktive balanceringsteknikker er at de redistribuerer energi fra celler med høj spænding til celler med lav spænding.
 \\
@@ -78,7 +85,7 @@ SoC(t) = \frac{Q_t}{Q_n} \label{eq:soc}
 Der anvendes typisk tre metoder til at afgøre SoC, gennem en direkte måling af cellespænding, ved at tælle ladning, og en blanding af disse to.
 
 \subsubsection{Direkte måling}
-Ved denne metode vil en simpel spændingsmåling henover hver cellerne kunne indikere kapaciteten, da spændingen en celle tilnærmelsesvis falder lineært under afladning i dette projekts valgte arbejdsområde.
+Ved denne metode vil en simpel spændingsmåling henover cellerne kunne indikere kapaciteten, da spændingen på en celle tilnærmelsesvis falder lineært under afladning i dette projekts valgte arbejdsområde.
 
 \subsubsection{Coulomb-tælle metode}
 Denne metode går ud på at måle afladningsstrømmen i en batteripakke og integrere strømmen over tid, for at estimere realtids-kapaciteten $SoC(t)$. 

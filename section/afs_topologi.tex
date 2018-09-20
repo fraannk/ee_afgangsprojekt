@@ -11,7 +11,9 @@ MMU'en styrer en gruppe af de førnævnte CMU'er, og dette modul gør det derfor
 Batteripakkestyringen er det overordnede modul. Her styres MMU'erne, men samtidig holdes der også styr på hele pakkens spænding og strøm. Det er også her at sikkerhedsforanstaltningerne sidder, såsom kortslutningsbeskyttelse samt over- og afladningsbeskyttelse. Kommunikation med andre eksterne systemer foregår også her. 
 
 \section{Centraliseret system}
-I et centraliseret system er alle tre slags moduler kombineret til én enhed. De
+I et centraliseret system er alle tre slags moduler kombineret til én enhed. Derfor er alle cellerne koblet direkte til systemet med ledninger, og alle BMS'ens funktioner er tilgængelige uden ekstra moduler. \\
+
+Et centraliseret system er den mest økonomiske, men mindst udvidelige måde at udvikle en BMS på. Der er også ret mange ledninger, da der skal gå ledninger ud til hver enkelt celle. En centraliseret BMS er også forholdsvis simpel at opbygge uden alt for mange kompromisser. På grund af dens simple opbygning er den mest egnet til batteripakker med få antal celler. Derfor gør det den ideel til f.eks. el-cykler eller andre mindre elektriske "gadgets", og mindre ideel til f.eks. el-biler. På figur \ref{fig:centralized_BMS} ses opbygningen af en centraliseret BMS.
 
 \begin{figure}[h]
 	\centering

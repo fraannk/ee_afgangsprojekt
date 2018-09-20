@@ -9,13 +9,13 @@ De primære formål med en BMS er derfor som følgende:
 \end{itemize}
 
 
-\section{Funktionaliteter i et batteristyresystem}
-Herunder vil de mest centrale funktionaliteter i projektet blive beskrevet.
+%\section{Funktionaliteter i et batteristyresystem}
+%Herunder vil de mest centrale funktionaliteter i projektet blive beskrevet.
 
-\subsection{Op- og afladningskontrol}
+\section{Op- og afladningskontrol}
 Battericeller bliver oftest skadet ved forkert op- og afladning. Derfor er netop disse to punkter en essentiel opgave for et batteristyresystem.
 
-\subsection{Cellebalancering}
+\section{Cellebalancering}
 Ideelt set er alle battericeller produceret ens med samme egenskaber og opfører sig ens under hele cellens leve tid. Desværre er det langt fra virkeligheden, hvor der er produktionstolerancer, hvor nogle celler vil være stærkere end andre. I praksis betyder det varians på minimal, nominal og maksimal spænding, kapacitet, indre modstand og selvafladning.
 Temperaturforskelle i en batteripakke og dermed forskelle på celletemperature kan også medføre varians på selvafladning over tid.
 \\
@@ -41,7 +41,7 @@ Tredje og sidste fase er når cellen har gennemført sin ladecyklus og den står
 
 Blanceringsteknikkerne kan opdeles i to kategorier: passiv og aktiv balancering, og vil blive gennemgået herunder.
 
-\subsubsection{Passiv balancering}
+\subsection{Passiv balancering}
 Passiv balancering går ud på at de omdanne overskudsenergi til varme fra fuldt opladte celler, modsat aktiv balancering som flytter overskudenergien til lavere opladte celler.
 \\
 
@@ -62,13 +62,13 @@ Fordelen ved denne metode er at den er simpel og pålidelig, men tilgengæld er 
 
 
 
-\subsubsection{Aktiv balancering}
+\subsection{Aktiv balancering}
 Fælles for de aktive balanceringsteknikker er at de redistribuerer energi fra celler med høj spænding til celler med lav spænding.
 \\
 
 Charge shuttles
 
-\subsection{State of Charge (SoC)}
+\section{State of Charge (SoC)}
 \klp{Mangler at få styr på denne sektion}
 En af de vigtigste funktionaliteter i et batteristyresystem er estimering af State of Charge, og er direkte defineret som den procentdel af maksimal ladning i en celle eller en batteripakke. SoC er vigtig da det afspejler batteripakkens ydeevne. Nøjagtig estimering af SoC er ikke kun vigtig til beskyttelse af cellerne, men også for at forhindre overopladning og underafladning, hvilket bidrager til forlængelse af batteripakkens levetid. Dertil muliggør informationen også at lade batteristyresystemet ligge rationelle strategier for at spare energi.
 \\
@@ -84,10 +84,10 @@ SoC(t) = \frac{Q_t}{Q_n} \label{eq:soc}
 
 Der anvendes typisk tre metoder til at afgøre SoC, gennem en direkte måling af cellespænding, ved at tælle ladning, og en blanding af disse to.
 
-\subsubsection{Direkte måling}
+\subsection{Direkte måling}
 Ved denne metode vil en simpel spændingsmåling henover cellerne kunne indikere kapaciteten, da spændingen på en celle tilnærmelsesvis falder lineært under afladning i dette projekts valgte arbejdsområde.
 
-\subsubsection{Coulomb-tælle metode}
+\subsection{Coulomb-tælle metode}
 Denne metode går ud på at måle afladningsstrømmen i en batteripakke og integrere strømmen over tid, for at estimere realtids-kapaciteten $SoC(t)$. 
 
 
@@ -96,10 +96,10 @@ SoC(t) = SoC(0) - \frac{1}{C} \int_{0}^{t} idt  \label{eq:coulomb-count}
 \end {equation}
 
 
-\subsubsection{Kombination}
+\subsection{Kombination}
 
 
-\subsection{State of Health (SoH)}
+\section{State of Health (SoH)}
 Formålet med SoH er at give en indikation af hvilken ydeevne der kan forventes af en celler eller batteripakke i den nuværende tilstand, eller indikere hvor den resterende levetid før der er behov for udskiftning.
 \\
 I nogle applikationer bliver SoH løbende gemt i en logbog for validere
@@ -110,10 +110,10 @@ SoH = \frac{nominel \space kapacitet - nuværende  kapacitet}{nominel kapacitet}
 %    05609223.pdf
 
 
-\subsection{Temperaturmåling}
+\section{Temperaturmåling}
 Måling af temperature i en batteripakke er nødvendig, for at sikre optimal op- og afladning. 
 
-\subsection{Kortslutningsbeskyttelse}
+\section{Kortslutningsbeskyttelse}
 I tilfælde af fejl ved op- eller afladning, skal BMS'en kunne afbryde forbindelsen mellem opladeren eller belastningen. Det sker typisk ved hjælp af en cuttoff-FET. Opførelsen af cutoff-FET'en er typisk defineret ud fra parametre sat ud fra max værdier af cellespændinger, strøm målinger og realtids detektering. 
 
 Batteristyresystemer kan opdeles i tre topologier, og bliver gennemgået herunder.

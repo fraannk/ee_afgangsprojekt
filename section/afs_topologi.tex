@@ -21,14 +21,21 @@ I et centraliseret system er alle tre slags moduler kombineret til én enhed. De
 \end{figure}
 
 \section{Distribueret system}
-I et distribueret system foretages alle målinger på den enkelte celle og kommunikerer sin status til en master enhed. Hver celle er udstyret med sin egen dedikerede CMU, MMU og PMU. De enkelte PMU'er kan kommunikere med hinanden alt afhængig af behov.
+I et distribueret system foretages alle målinger på den enkelte celle og kommunikerer sin status til en master enhed. Hver celle er udstyret med sin egen dedikerede CMU, MMU og PMU. De enkelte MMU'er kan kommunikere med hinanden afhængig af behov.
 \\
 
 Fordelen ved denne topologi er at designet er simpel og pålidelig. Ulempen er dog, at den kræver et højt antal slave enheder, som kan give problemer rent monteringsmæssigt.
 
-
-
 \section{Modulær system}
+Den modulære topologi er en blanding af den centraliserede og distribuerede. Her er opdeles MMU'en i flere blokke der hver har ansvaret for flere celler. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=6cm]{billeder/modular.png}
+	\caption{En modulær BMS}
+	\label{fig:modular_BMS}
+\end{figure}
+
 
 \section{Valg af topologi}
 En sammenligning mellem de 3 systemer efterfulgt af en vægtning i forhold til vores krav - 4 celler fx

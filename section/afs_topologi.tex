@@ -29,7 +29,8 @@ I et distribueret system foretages alle målinger på den enkelte celle og kommu
 Fordelen ved denne topologi er at designet er simpel og pålidelig. Ulempen er dog, at den kræver et højt antal slave enheder, som kan give problemer rent monteringsmæssigt.
 
 \section{Modulær system}
-Den modulære topologi er en blanding af den centraliserede og distribuerede. Her er opdeles MMU'en i flere blokke der hver har ansvaret for flere celler. 
+Den modulære topologi er en blanding af den centraliserede og distribuerede. Her er opdeles MMU'en i flere blokke der hver har ansvaret for flere celler. Har man derfor en stor batteripakke på 48 celler, kan én MMU f.eks. holde styr på 12 celler og CMU'er, og så har man 4 MMU'er. Disse MMU'er er så stadig forbundet til én PMU, som holder styr på det hele og sørger for kommunikation i mellem modulerne. Denne topologi egner sig til systemer hvor cellerne nødvendigvis ikke kan være lige ved siden af hinanden, men opbevares i grupper. 
+\sbf{Omformuler lidt ang. mumummmucmumu}
 
 \begin{figure}[h]
 	\centering

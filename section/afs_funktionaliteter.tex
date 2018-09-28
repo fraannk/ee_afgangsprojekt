@@ -2,10 +2,19 @@
 Et batteristyresystem er et elektronisk system, der styrer de enkelte battericeller eller hele batteripakken. Den overvåger og holder styr på cellens tilstand herunder spænding, kapacitet, ladning og temperatur. Dertil søger systemet for at holde cellerne beskyttet i et sikkert operation område (Safe Operating Area). Systemet sørger for at batteripakkens celler er i balance med hinanden, hvilket praktisk betyder at cellespændingerne er tilnærmelsesvis ens. I tilfælde af at parametre skulle overstige deres max værdi, skal systemet søge for at afbryde batteriet fra belastningen eller opladeren.
 \\
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=12cm]{billeder/battery_management_block.png}
+	\caption{Oplade forløb af Lithium-Ion celle}
+	\label{fig:battery_management_block}
+\end{figure}
+
 De primære formål med en BMS er derfor som følgende:
 \begin{itemize}[noitemsep]
-	\item Den minimere risikoen for beskadigelse af cellerne
-	\item Den skal overvåge og kontrollere batteripakkens op- og afladningsprocess
+	\item Minimere risikoen for beskadigelse af cellerne
+	\item Estimere kapacitet
+	\item Logge information
+	\item Overvåge og kontrollere batteripakkens op- og afladningsprocess
 \end{itemize}
 
 

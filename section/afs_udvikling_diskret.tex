@@ -1,6 +1,7 @@
 \section{Fremgangsmetode}
 
 \section{Måling af cellespændinger}
+\klp{Har vi en oversigt over funktionerne der er afhængig af disse målinger?}
 Systemet er til hver en tid nødt til at kende den samlede cellespænding, for at vide hvornår opladning er nødvendig. Da systemet samtidig skal være i stand til at måle de individuelle cellespændinger under opladning, er det derfor smart, at sætte en spændingsmåler hen over hver celle. På den måde kan de enkelte celler måles og batteripakkens udgangsspænding kan fås ved addition af alle celler.
 \\
 
@@ -8,13 +9,19 @@ Måling af cellespænding kan opnås ved brug af en differensforstærker, for at
 \\
 
 
-
 \section{Strømmåling}
 For at overvåge udgangsstrømmen skal en strømmåler realiseres. Dette kan gøres ved hjælp af en shunt modstand, $R_{s}$, som yder en meget lille og veldefineret ohmsk belastning og kan holde til hele udgangsstrømmen. Når belastningen trækker en strøm, vil et lille spændingsfald forekomme over shunt modstanden, som en differensforstærker vil detektere. 
 
 
-Shunt modstanden kan både placeres på høj- og lavsiden, som illustreret på figur XXX
+En shunt modstand kan både placeres på høj- og lav-siden, som illustreret på figur XXX
 \klp{Illustration af shunt placering}
+
+
+Da den maksimale aflade- og opladestrøm  er $I_{out} = 6\ampere$  $I_{} = 1\ampere$, skal microen kunne skelne mellem om den er igang med at blive opladt eller afladt, er en retningsbestemmelse på strømtrækket nødvendig. En differensforstærker med et offset
+eller med negativ forsyning
+
+
+For optimal anvendelse af microens opløsning er der i projektet valgt at lave to differensforstærkere, en for afladning og opladning.
 
 
 

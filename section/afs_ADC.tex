@@ -1,3 +1,10 @@
-\section{Analog til Digital Converter}
+\section{Analog til Digital Converter (ADC)}
+I den diskrete version af BMS'en er der en del analoge værdier som skal læses. Dette er lige fra cellespændinger til strømmåleren. Derfor bruges en ADC (Analog til Digital Converter) til at konvertere disse spændingsværdier til data som microcontrolleren kan behandle. \\
 
-I den diskrete version af BMS'en er der en del analoge værdier som skal læses. Dette er lige fra cellespændinger til strømmåleren. Derfor bruges en ADC (Analog til Digital Converter) til at konvertere disse spændingsværdier til data som microcontrolleren kan behandle. 
+I den integrerede kreds sidder der en 14-bit's ADC som tager målinger af både cellespændinger, strømforbrug, thermistorer, og interne temperaturer. Cellespændingerne bliver læst i 2-komplement formatet og i $\milli\volt$. Formlen for at omregne disse værdier er således: 
+\begin {equation} 
+V_{cell} = GAIN \times ADC(cell) + OFFSET
+\end {equation}
+Ifølge databladet\footnote{http://www.ti.com/lit/ds/symlink/bq76920.pdf} er $GAIN$ på $380\micro\volt/LSB$ og $OFFSET$ er på $30\milli\volt$. \\
+
+Derfor, hvis der læses $0x1F10$ fra registrene $VC1_{HI}$ og $VC1_{LO}$ ($0x0C$ og $0x0D$) giver det en cellespænding på $3052\milli\volt$ eller $3,052\volt$.

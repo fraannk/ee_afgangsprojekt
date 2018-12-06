@@ -1,3 +1,19 @@
 \section{Fremgangsmetode}
 
-For at...
+Da den integrerede kreds, BQ76920, nærmest var valgt på forhånd, var næste skridt at finde en microcontroller der kunne styre kredsen. Derefter blev softwaren udviklet, og de tilhørende komponenter dimensioneret. 
+
+\section{Valg af microcontroller}\label{afs:valg_af_uc}
+Der blev besluttet at bruge microcontrolleren LPC804 til denne BMS. Den blev valgt af flere årsager:
+\begin{itemize}
+	\item Lavt strømforbrug i deep sleep.
+	\item ADC i 12-bits opløsning.
+	\item De ønskede interfaces er tilgængelige. ($I^2C$, $UART$)
+	\item Microcontrolleren er NXP's billigere serie. 
+	\item Fås i både relativt små pakker samt store pakker.
+	\item Evaluationboard er tilgængeligt.
+\end{itemize}
+
+Evaluationsboardet ved navn UM40001UL bliver brugt til udvikling af software. Dette board har onboard CMSIS-DAP som er en debugger, således det ikke er nødvendigt med en ekstern debugger. 
+
+
+

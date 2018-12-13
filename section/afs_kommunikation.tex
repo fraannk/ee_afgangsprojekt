@@ -1,0 +1,18 @@
+\section{Kommunikationsprotokoller}
+
+\subsection{Inter-Integrated Circuit (I2C)}
+Kredsen, $BQ76920$, som bliver brugt i den integrerede version af BMS'en, kommunikerer med microcontrolleren vha. I2C. Her sendes kommandoer til IC'en som bestemmer dens instillinger, og for f.eks. at læse cellespændingerne, sendes registernummeret til IC'en, og den svarer dermed med de relevante data. Disse data skal dog så behandles for at kunne bruges. \\
+
+Displayet som viser BMS'ens status, er også forbundet via I2C. Her sendes kommandoer til display, hver gang noget skal ændres. Displayet indeholder sit egen character bibliotek. \sbf{mere}
+
+\subsection{Universal Asynchronous Receiver/Transmitter (UART)}
+Da kommunikation med en host (computer f.eks.) ønskes, er UART kommunikation den foretrukne metode. Her kan der både læses statusmeddelelser fra computeren, samtidig med at der kan sendes kommandoer til ændring af BMS'ens indstillinger. \\
+
+På host-siden bruges et terminal program (her PuTTY) til at overvåge BMS'en. Cellernes spændinger og aktuelt strømforbrug bliver regelmæssigt overvåget og sendt til host. Her har brugeren også mulighed for at ændre indstillinger såsom low-voltage cutoff og balanceringspunkt. 
+
+\subsection{JTAG}
+For at programmere kredsen er der implementeret en variant af en JTAG connector. Denne connector er valgt for at spare plads på boardet, samt at den er billigere i materialer. Igennem denne connector bliver microcontrolleren programmeret vha. SWD. Her tildeles $\overline{RESET}$, $TDO$, $TDI$, og $TRST$-benene til connectoren. 
+
+\subsection{ALERT pin}
+På BMS'en med den integrerede version, sender IC'en et signal til microcontrolleren hver gang der er en status opdatering. Dette signal er et seperat ben som bliver enten logisk højt eller lavt efter hvilken meddelelse der er. Her kan micro'en så gå ind at læse de respektive status-registre for at se hvad status er. 
+

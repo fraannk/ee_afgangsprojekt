@@ -1,6 +1,19 @@
 \section{Analog til Digital Converter (ADC)}
+I dette afsnit vil de forskellige former for analoge til digitale konvertere, som er anvendt, blive beskrevet. 
+
+\subsection{Diskret BMS}
 I den diskrete version af BMS'en er der en del analoge værdier som skal læses. Dette er lige fra cellespændinger til strømmåleren. Derfor bruges en ADC (Analog til Digital Converter) til at konvertere disse spændingsværdier til data som microcontrolleren kan behandle. \\
 
+Som tidligere nævnt bliver cellespændingen læst vha. operationsforstærkere med negativt gain. Da cellerne kan lades op til $4.2\volt$ går de over microcontrollerens niveau på $3.3\volt$ og derfor skal det konverteres ned. \sbf{Tilpas HVORFOR det er 600mv} Dette giver et arbejdspunkt på 600mv. Her laves en simpel analog til digital konvertering på hvert enkelt indgang som cellerne er sluttet til. Denne værdi ganges med en faktor for at give den præcise spænding, som er kalibreret vha. måling. 
+\begin {equation}
+V_{cell} = ADC(cell) \times 7
+\end {equation}
+hvor 7 er fundet vha. måling og sammenligning af de to værdier. \\
+
+Til strømmåleren bliver der også brugt analog til digital konvertering. Her bliver der brugt en kanal til hhv. positiv strøm (altså hvad der trækkes ud af systemet), og en kanal til at måle hvor meget der oplades med. 
+\sbf{Måske noget om sucessiv approximering og billeder til det?}
+
+\subsection{Integreret BMS}
 I den integrerede kreds sidder der en 14-bit's ADC som tager målinger af både cellespændinger, strømforbrug, thermistorer, og interne temperaturer. Cellespændingerne bliver læst i 2-komplement formatet og i $\milli\volt$. Formlen for at omregne disse værdier er således: 
 \begin {equation} 
 V_{cell} = GAIN \times ADC(cell) + OFFSET

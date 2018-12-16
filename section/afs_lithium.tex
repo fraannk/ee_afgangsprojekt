@@ -12,8 +12,6 @@ Den nok mest brugte er dog lithium cobalt oxid-typen ($LiCoO_2$, også kaldt $LC
 \end{figure}
 \footnotetext{BCG Research forskning i de bedste batterier til el-biler. \url{https://www.bcg.com/documents/file36615.pdf}}
 
-\sbf{Skal måske rettes til større tekst}
-
 Som der ses på figur \ref{fig:lithium_variants_comparison} sammenlignes de forskellige typer litium-ion kemier. Her sammenlignes energitæthed, altså hvor meget "køretid" \space cellen har; afladningskapacitet som beskriver hvor meget batteriet kan aflade med i øjeblikket; sikkerhed; ydeevne i både kolde og varme omgivelsestemperaturer; celletypens levetid/antal ladecyklusser; og pris. \\
 
 Lithium jern fosfat ($LiFePO_4$ også kaldt $LFP$) har sammen med lithium mangan oxid ($LiMn_2O_4$ også kaldt $LMO$) og lithium nikkel mangan cobalt oxid ($LiNiMnCoO_2$ også kaldt $NMC$) en lavere energidensitet men er mere sikker end lithium cobalt oxid. De har også en længere levetid og derfor er de meget brugte i f.eks. elektrisk værktøj eller medicinindustrien. Sidstnævnte ($NMC$) er især dominerende i elektriske biler. Disse celler findes oftest i 18650 varianten, som er en rund cylindrisk celle. Det er også denne type celle der er valgt til dette projekt, da det efterhånden er en ret standard celle, og da dens karakteristika er ganske veldokumenteret. 
@@ -26,17 +24,20 @@ Lithium jern fosfat ($LiFePO_4$ også kaldt $LFP$) har sammen med lithium mangan
 		Spændinger & $3.6\volt$ nominal, typisk $3.0-4.2\volt$  & $3.2-3.3\volt$ nominal, typisk $2.5-3.65\volt$ & $3.7-3.8\volt$ nominal, typisk $3.0-4.2\volt$ & $3.6-3.7\volt$ nominal, typisk $3.0-4.2\volt$ \\ \hline
 		Energitæthed & $150-250\watt\hour/\kilogram$ & $90-120\watt\hour/\kilogram$ & $100-150\watt\hour/\kilogram$ & $150-220\watt\hour/\kilogram$ \\ \hline
 		Opladning & $0.7-1C$ op til $4.2\volt$ & $1C$ op til $3.65\volt$ & $0.7-1C$ (fast \space \space charge ved $3C$) op til $4.2\volt$ & $0.7-1C$ op til $4.2\volt$ \\ \hline		
-		Afladning & $1C$, cut-off ved $2.5\volt$ & $1C$, nogle $25C$, cut-off ved $2.5\volt$ & $1C$, nogle $10C$, cut-off ved $2.5\volt$ & $1C$, nogle $2C$, cut-off ved $2.5\volt$ \\ \hline
+		Afladning & $1C$, cut-off ved $2.5\volt$ & $1C$, nogle $25C$, cut-off ved $2.5\volt$ & $1C$, nogle $10C$, cut-off ved $2.5\volt$ & $1C$, mange $4C$ eller over, cut-off ved $2.5\volt$ \\ \hline
 		Levetid & 500-1000 cycles & 1000-2000 cycles & 300-700 cycles & 1000-2000 cycles \\ \hline
 		Kritisk temperatur & $150\degreeCelsius$ & $270\degreeCelsius$ & $250\degreeCelsius$ & $210\degreeCelsius$ \\ \hline
 	\end{tabular}
 \end{center}
 
-\sbf{Skriv hvilken kemi vi har valgt}
+Der blev valgt kemien $LiNiMnCoO_2$ (NMC/INR) da den ramte de fleste punkter som var vigtige i dette projekt. Her havde levetiden især en stor rolle, da batteripakken som helhed kommer til at være installeret i et produkt hvor det ikke ønskes at skifte batterier ofte. Der var også nok afladekapacitet. Da BMS'en skal kunne aflade med 6A, er 3C nok\footnote{Datablad i appendix X}. De valgte celler har en kapacitet på $2600\milli\ampere\hour$, og for at udregne den maksimale afladningskapacitet gøres følgende: 
+
+\begin {equation}
+2.6\ampere\hour \times 3C = 7,8\ampere
+\end {equation}
 
 \section{Anvendelse}
-Den valgte type lithium-ion celle har en nominal spænding på $3.6\volt$. "Sikkerhedszonen" \space anses for at ligge mellem $3\volt$ og $4.2\volt$. Lades cellen til mere end $4.2\volt$ tager cellen skade og mister kapacitet. Det er også over dette niveau at de katastrofale situationer kan finde sted. Det samme gælder for afladningen. Aflades cellen under $3\volt$ går det også ud over kapaciteten men ikke i samme rate. Nogle typer kan også holde til afladning ned til $2.5\volt$, så denne grænse er en smule mere udefineret.\\
-\sbf{Redefiner lidt af formuleringen her}
+Den valgte type lithium-ion celle har en nominal spænding på $3.6\volt$. "Sikkerhedszonen" \space anses for at ligge mellem $3\volt$ og $4.2\volt$. Lades cellen til mere end $4.2\volt$ tager cellen skade og mister kapacitet. Det er også over dette niveau at de katastrofale situationer kan finde sted. Det samme gælder for afladningen. Aflades cellen under $3\volt$ går det også ud over kapaciteten men ikke i samme rate. Nogle typer kan også holde til afladning ned til $2.5\volt$, så denne grænse er en smule mere "blød".\\
 
 Kigges der på en typisk 18650 celle såsom Samsung 30Q modellen, har den en afladningskurve (ved $5\ampere$) der ser ud som følgende: 
 

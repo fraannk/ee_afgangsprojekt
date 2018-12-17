@@ -1,14 +1,14 @@
 \section{Fremgangsmetode}
-Der skal udvikles en BMS uden en færdig kreds til styring og servicering af de centrale funktioner.
+Der skal udvikles en BMS uden en færdig kreds til styring og servicering af de centrale funktioner. Temperaturmåleren er beskrevet i kapitel 
 
 \klp{Referere til temp måler}
 
 \section{Måling af cellespændinger}
-\klp{Har vi en oversigt over funktionerne der er afhængig af disse målinger?}
+\klp{Har vi en oversigt over funktionerne der er afhængig af disse målinger? Kan indsættes som tabel?}
 Systemet er til hver en tid nødt til at kende den samlede cellespænding, for at vide hvornår opladning er nødvendig - og derfor ikke tillade underafladning. Da systemet samtidig skal være i stand til at måle de individuelle cellespændinger under opladning, er det derfor smart, at sætte en spændingsmåler hen over hver celle. På den måde kan de enkelte celler måles og batteripakkens udgangsspænding kan fås ved addition af alle celler.
 \\
 
-Måling af cellespænding kan opnås ved brug af en differensforstærker, for at få spændingsforskellen mellem hver celle. Outputtet af forstærkeren kan efterfølgende sendes ind i microens ADC. Da en celle kan variere mellem $3.2\volt$ og $4.2\volt$, samtidig med at microen er forsynet med $3.3\volt$, skal differensforstærkeren dimensioneres derefter. I praksis kan dette løses ved at have en forstærkning på mindre end 1, for at få outputtet til at svinge til microens forsyningsspænding ved maksimal cellespænding.
+Måling af cellespænding kan opnås ved brug af en differensforstærker, for at få spændingsforskellen mellem hver celle. Outputtet af forstærkeren kan efterfølgende sendes ind i microens ADC. Da en celle kan variere mellem $3.2\volt$ og $4.2\volt$, samtidig med at microen er forsynet med $3.3\volt$, skal differensforstærkeren dimensioneres derefter. I praksis kan dette løses ved at have en forstærkning på mindre end 1, for at få outputtet til at svinge til microens forsyningsspænding ved maksimal cellespænding. Differensforstærkeren kan ses på figur \ref{fig:cell_voltage}.
 \\
 
 \begin{figure}[h]
@@ -18,14 +18,18 @@ Måling af cellespænding kan opnås ved brug af en differensforstærker, for at
 	\label{fig:cell_voltage}
 \end{figure}
 
-På figur \ref{fig:cell_voltage} ses en operationsforstærker
-
 Operationsforstærkerens forstærkning udregnes,
 \begin {equation} 
 A_{v} = \frac{15\kilo\ohm}{22\kilo\ohm} = 0.68
 \end {equation}
 
-Da en celle kan svinge mellem $3.2\volt$ og $4.15\volt$, vil microens ADC svinge mellem $A_{v} * 3.2\volt = 2.176\volt$ og $A_{v} * 4.15\volt = 2.822\volt$.
+Udgangsspændingen på operationsforstærkeren er givet ved,
+
+\begin {equation} 
+V_{o} = V_{cell3} * \frac{R58}{R56+R58} * (1+\frac{R59}{R57}) - V_{cell2} * \frac{R59}{R57}
+\end {equation}
+
+Da en celle kan svinge mellem $3.2\volt$ og $4.15\volt$, vil microens ADC svinge mellem $2.176\volt$ og $2.822\volt$.
 Med en spændingsændring på $\Delta V_{ADC} = 0.646\volt$ og en ADC opløsning på 12 bit, vil det give en præcision på,
 \klp{Regne opløsning ud for VADC}
 
@@ -34,18 +38,15 @@ Med en spændingsændring på $\Delta V_{ADC} = 0.646\volt$ og en ADC opløsning
 \end {equation}
 
 \section{Strømmåling}
-For at overvåge udgangsstrømmen skal en strømmåler realiseres. Dette kan gøres ved hjælp af en shunt modstand, $R_{s}$, som yder en meget lille og veldefineret ohmsk belastning og kan holde til hele udgangsstrømmen. Når belastningen trækker en strøm, vil et lille spændingsfald forekomme over shunt modstanden, som en differensforstærker vil detektere. Det er i dette projekt valgt, at placere shuntmodstanden på lav-siden mellem den nedeste celle og aflade MOSFET'en.
+For at overvåge udgangsstrømmen skal en strømmåler realiseres. Dette kan gøres ved hjælp af en shunt modstand, $R_{s}$, som yder en meget lille og veldefineret ohmsk belastning og kan holde til hele udgangsstrømmen. Når belastningen trækker en strøm, vil et lille spændingsfald forekomme over shuntmodstanden, som en differensforstærker vil detektere og forstærker til et passende niveau. Der er i dette projekt valgt, at placere shuntmodstanden på lav-siden mellem den nedeste celle og aflade MOSFET'en.
 \\
 
-\klp{Omskrives}
-Da den maksimale aflade- og opladestrøm  er $I_{out} = 6\ampere$ og $I_{In} = 1\ampere$, skal microen kunne skelne mellem om den er igang med at blive opladt eller afladt, er en retningsbestemmelse på strømtrækket nødvendig. En differensforstærker med et offset
-eller med negativ forsyning
+Da den maksimale aflade- og opladestrøm  er $I_{out} = 6\ampere$ og $I_{In} = 1\ampere$, skal microen kunne skelne mellem om den er igang med at blive opladt eller afladt, er en retningsbestemmelse på strømtrækket nødvendig.
+\\
+Der er i dette projekt undersøgt flere muligheder til detektering af strømmen. En af iterationerne var en enkelt differensforstærker til begge målinger, med at offsette spænding ved $0\volt$ til enten $1.65\volt$ eller $6\volt$ alt afhængig af forsyningsspændingen.
 \\
 
-For optimal anvendelse af microens opløsning er der i projektet valgt at lave to differensforstærkere, en for afladning og opladning.
-\\
-
-Både strømåling til op- og afladning sker hen over den samme shuntmodstand og kan ses på figur \ref{fig:current_sense}.
+For optimal anvendelse af microens opløsning er der i projektet valgt at opbygge to differensforstærkere, en for afladning og opladning. Både strømåling til op- og afladning sker hen over den samme shuntmodstand og kan ses på figur \ref{fig:current_sense}.
 
 \begin{figure}[h]
 	\centering
@@ -54,12 +55,15 @@ Både strømåling til op- og afladning sker hen over den samme shuntmodstand og
 	\label{fig:current_sense}
 \end{figure}
 
-En vigtig parameter under dimensionering af en strømmåler er valg af shunt modstandens værdi. Ud fra den maksimale afladestrøm $I_{out} = 6\ampere$ vælges shunt modstanden $R_{s} = 10\milli\ohm$. Det maksimale spændingsfald, $V_{s}$ over shunt modstanden bliver 
+En vigtig parameter under dimensionering af en strømmåler er valg af shunt modstandens værdi. Ud fra den maksimale afladestrøm $I_{out} = 6\ampere$ vælges shunt modstanden $R_{s} = 10\milli\ohm$. Det maksimale spændingsfald, $V_{s}$ over shuntmodstanden bliver,
+
 \begin {equation} 
-V_{s} = R_{s} * I_{out} = 10\milli\ohm * 6\ampere = -60\milli\volt
+V_{s} = I_{out} * R_{s}  = -6\ampere * 10\milli\ohm = -60\milli\volt
 \end {equation}
 
-Afladestrømmen kan variere mellem $0\ampere$ og $6\ampere$, så spændingsfaldet vil ligge mellem $0\milli\volt$ og $-60\milli\volt$ (grundet strømmens retning). Da microcontrolleren kører med en logik på $3.3\volt$ og har en ADC med en opløsning på 12 Bit, skal signalet dimensioneres efter dette. Med en shuntmodstand på $10\milli\ohm$ vil den er opladning have et spændingsfald på $10\milli\volt$, hvilket og grundet retningsskift af strømmen, skal strømmåleren tage hensyn til dette.
+Spændingsfaldet vil ligge mellem $0\milli\volt$ og $-60\milli\volt$ (grundet strømmens retning). Da microcontrolleren kører med en logik på $3.3\volt$ og har en ADC med en opløsning på 12 Bit, skal signalet dimensioneres efter dette. Med en shuntmodstand på $10\milli\ohm$ vil den er opladning have et spændingsfald på $10\milli\volt$, hvilket og grundet retningsskift af strømmen, skal strømmåleren tage hensyn til dette.
+\\
+For valg af shuntmodstand skal der tages højde for den maksimale effektafsættelse i den og udregnes $60\milli\volt * 6\ampere = 360\milli\watt$. Den valgte shuntmodstand kan klare $3\watt$.
 \\
 
 Ved hjælp af en to differensforstærkere kan et brugbart indgangssignal til ADC'en realiseres for både opladning og afladning. Forstærkerne er opbygget med en operationsforstærkere koblet med negativ feedback.
@@ -70,10 +74,15 @@ Den nødvendige forstærkning $A_{v}$ af signalet for måling af afladestrømmen
 A_{v} = \frac{V_{o}}{V_{s}} = \frac{3.3\volt}{60\milli\volt} = 55
 \end {equation}
 
-For at opnå denne forstærkning anvendes en indgangsmodstand ($R37$) på $1\kilo\ohm$ og en $56\kilo\ohm$ modstand på feedbacken ($R47$), for at blive på $E12$-serien. For at overskueliggøre beregningen vælges $R41 = R37$ og $R47 = R48$.
+For at opnå denne forstærkning anvendes en indgangsmodstand ($R37$) på $1\kilo\ohm$ og en $56\kilo\ohm$ modstand på feedbacken ($R47$), for at blive på $E12$-serien,
+\klp{Samme ligning mangler som cellespænding. }
+For at overskueliggøre beregningen vælges $R41 = R37$ og $R47 = R48$.
 \\
-\klp{Lige en omskrivning}
-Som tidligere nævnt vil et retningsskifte af strømmen forekomme under opladning, så forstærkeren skal kunne trigge på et positivt spændingsfald. 
+
+Som tidligere nævnt vil et retningsskifte af strømmen forekomme under opladning, så forstærkeren skal kunne trigge på et positivt spændingsfald. Ved at vende operationsforstærkeren om, kan måling af strømmen ved opladning ske uden brug af en negativ forsyning.
+\\ 
+
+Da opladestrømmen er $1\ampere$ kan en væsentlig højere forstærkning anvendes, hvilket giver en højere præcission på ADC'en. Ved brug af formlen XXXXXXX udregnes forstærkning til 220 gange, hvilket giver en spænding varierende $0\volt$ og $2.2\volt$. Forstærkningen er ikke højere i tilfælde af, at en større opladningsstrøm på senere tidspunkt bliver nødvendig.  
 
 \subsubsection{Realisering af shunt modstand}
 For at gøre målingen så 
@@ -96,21 +105,18 @@ Balanceringskredsen kan ses på figur \ref{fig:passiv_balancering} består af tr
 	\label{fig:passiv_balancering}
 \end{figure}
 
-Basen på $Q6$ er forspændt med $3.3\volt$ og under afladning vil microcontrolleren sætte benet højt på emitteren, hvilket holder $Q6$ slukket. For at aktivere balancering, skal potentialet på basen af $Q5$ være en base-emitter strækning lavere end dens emitter. Dette kan gøre ved at sætte microcollerens ben lav, hvilket vil tænde $Q6$, trække potentiale på basen af $Q6$ ned og derved lede strømmen igennem $R21$.
-\\
-\klp{Spændingsfald i BJT when ON?}
-Balanceringsstrømmen 
+Basen på $Q6$ er forspændt med $3.3\volt$ og under afladning vil microcontrolleren sætte benet højt på emitteren, hvilket holder $Q6$ slukket. For at aktivere balancering, skal potentialet på basen af $Q5$ være en base-emitter strækning lavere end dens emitter. Dette kan gøre ved at sætte microcollerens ben lav, hvilket vil tænde $Q6$, trække potentiale på basen af $Q6$ ned og derved lede strømmen igennem $R21$. Balanceringstrømmen igennem $R21$ bliver maksimalt $61.8\milli\ampere$.
 
 \section{MOSFET driverkreds}
-\klp{CHG og DSG overstrømsdetektor vender forkert}
-Batteripakken skal kunne afbrydes fra en belastning i tilfælde af fejlsituationer. For at kunne opnå dette, er to MOSFET'er i en fælles drain konfiguration valgt. De kan både være placeret på $V_{pack+}$ og $V_{pack-}$. Hvis en N-kanal MOSFET er på $V_{pack+}$ skal gaten tændes med $V_{out} + V_{gs}$, hvilket i denne applikation giver en spænding på $V_{gs} = 28.8\volt$. For at kunne opnå denne spænding vil en charge pumpe være nødvendig. For at undgå brug af en charge pumpe kan en P-kanal MOSFET anvendes. Udvalget på P-kanal MOSFET'er er dog begrænset og de har en væsentlig hører ledemodstand, $R_{ds-ON}$. 
+Batteripakken skal kunne afbrydes fra en belastning i tilfælde af fejlsituationer. For at kunne opnå dette, er to MOSFET'er i en fælles drain konfiguration valgt og virker som en to tovejs kontakt. De kan både være placeret på $V_{pack+}$ og $V_{pack-}$. Hvis en N-kanal MOSFET er på $V_{pack+}$ skal gaten tændes med $V_{out} + V_{gs}$, hvilket i denne applikation giver en spænding på $V_{gs} = 28.8\volt$. For at kunne opnå denne spænding vil en charge pumpe være nødvendig. For at undgå brug af en charge pumpe kan en P-kanal MOSFET anvendes. Udvalget på P-kanal MOSFET'er er dog begrænset og de har en væsentlig hører ledemodstand, $R_{ds-ON}$. 
 \\
-En anden mulig placering af MOSFET'erne er på $V_{pack-}$. Fordelen ved denne placering er, at de skal tændes i forhold til stel. Ulempen er at stelplanet kan påvirkes, da .. 
+
+En anden mulig placering af MOSFET'erne er på $V_{pack-}$. Fordelen ved denne placering er, at de skal tændes i forhold til stel. Ulempen er at stelplanet kan påvirkes, da 
 \klp{Noget om de negative aspekter}
 
-I dette projekt vælges der at MOSFET'erne placeres på $V_{pack-}$, for nemmere at kunne tænde dem. Aflade-MOSFET'en skal altid tændes i forhold til stel, hvorimod et problem kan opstå ved oplade-MOSFET'en, hvor den ikke kan tændes. Det drejer sig om en fejlsituation hvor de begge er slukkede, men en belastning er koblet på. Spændingen på oplade-MOSFET'ens source kan derfor drive op til terminalspænding gennem belastningen og kan derfor ikke tændes før den anden MOSFET er tændt, da den skal trække potentialet ned igen. Når den anden MOSFET skal trække potentialet ned, kan det kun ske igennem oplade-MOSFET'ens bodydiode, hvilket med et spændingsfald på omkring $1\volt$ og et maksimalt strømtræk på $6\ampere$ medfører en kortvarig effektafsættele i MOSFET'en på $6\watt$.
+I dette projekt vælges der at MOSFET'erne placeres på $V_{pack-}$, for nemmere at kunne tænde dem. Aflade-MOSFET'en skal altid tændes i forhold til stel, hvorimod et problem kan opstå ved oplade-MOSFET'en, hvor den ikke kan tændes. Det drejer sig om en fejlsituation hvor de begge er slukkede, men en belastning er koblet på. Spændingen på oplade-MOSFET'ens source kan derfor drive op til terminalspænding gennem belastningen og kan derfor ikke tændes før den anden MOSFET er tændt, da den skal trække potentialet ned igen. Når den anden MOSFET skal trække potentialet ned, kan det kun ske igennem oplade-MOSFET'ens bodydiode, hvilket med et spændingsfald på omkring $1\volt$ og et maksimalt strømtræk på $6\ampere$ medfører en kortvarig effektafsættelse i MOSFET'en på $6\watt$.
 \klp{Kigge på IC-løsningen}
-En måde at omgå dette problem er ved brug af en P-kanal MOSFET..................
+En måde at omgå dette problem er ved brug af en P-kanal MOSFET ...
 
 
 \begin{figure}[h]
@@ -120,12 +126,7 @@ En måde at omgå dette problem er ved brug af en P-kanal MOSFET................
 	\label{fig:mosfet_driver}
 \end{figure}
 
-Driveren til begge MOSFET'er er ens og kan ses på figur \ref{fig:mosfet_driver}. Driveren består af en NPN ($Q28$) og PNP ($Q27$) BJT koblet i en push-pull konfiguration. For at kunne tænde og slukke driveren gøres der brug af en NPN BJT. 
-\\
-\klp{Lidt omskrivning}
-De to MOSFET'er er altid tændte, og slukker kun i tilfælde af fejlsituationer.
-
-
+Driveren til begge MOSFET'er er ens og kan ses på figur \ref{fig:mosfet_driver}. Driveren består af en NPN ($Q28$) og PNP ($Q27$) BJT koblet i en push-pull konfiguration. For at kunne tænde og slukke driveren gøres der brug af en NPN BJT. De to MOSFET'er er altid tændte, og slukker kun i tilfælde af fejlsituationer.
 
 
 \section{Sikkerhed ved overstrøm}
@@ -167,11 +168,10 @@ V_{-} = V_{PWM-DSG} + V_{CELL1-GND} = 60\milli\volt + V_{PWM-DSG}
 Under afladning antager $V_{PWM-DSG}$ negativ værdi. Når bidraget fra  strømtrækket overstiger grænsen, vil potentialet på $V-$ blive negativ og dermed blive lavere end $V+$, som vil få operationsforstærkerens udgang til at gå høj. Da den er forsynet med $3.3\volt$ vil den udgangen ideelt set antage samme potentiale. Som tidligere nævnt er operationsforstærkerens udgang forbundet med basen på $Q12$ som dermed tændes og slukker driveren.
 \\
 Samtidig med at driveren slukkes leder dioden $D1$ og forspænder $V+$ gennem en spændingsdeling af $R12$ og $R13$. Potentiale på $V+$ vil efter en overstrøms situation være,
-
+\klp{R12 skal ændres til 390k}
 \begin {equation} 
 V_{+} = (V_{High} - V_{diode} ) * \frac{R_{13}}{R_{12}+R_{13}} = (3.3\volt - 0.5\volt ) * \frac{10\kilo\ohm}{390\kilo\ohm + 10\kilo\ohm} =  70\milli\volt
 \end {equation}
-\klp{R12 skal ændres til 390k}
 
 Når kredsen har trigget og slukket driveren, vil MOSFET'en, $Q25_B$, forblive slukket selvom belastningen kan være frakoblet. Når MOSFET'en er slukket vil den ikke lede og bodydioden vil blokere strømmen.
 Hvis intet er koblet på udgangsterminalerne eller en belastning der trækker under $6\ampere$ er tilkoblet vil potentialet på $V-$ være positiv og maksimalt $60\milli\volt$. Operationsforstærkeren vil forblive høj på udgangen da,
@@ -202,11 +202,20 @@ For at resette operationsforstærkerens hysterese sendes en puls fra $PWM-CHG$ p
 
 
 \section{Spændingsnet}
-\klp{Lave lidt mere research}
-Forsyningsspændingen til hele BMS'en kommer fra batteripakkens terminalspænding, som kan variere mellem $12.4\volt - 16.8\volt$. For at generere to nødvendige netspændinger på $12\volt$ og $3.3\volt$, skal to spændingsregulatorer realiseres.
+Forsyningsspændingen til hele BMS'en kommer fra batteripakkens terminalspænding, som kan variere mellem $12.8\volt - 16.6\volt$. For at generere to nødvendige netspændinger på $12\volt$ og $3.3\volt$, skal to spændingsregulatorer realiseres.
 \\
 
-Til at nedtrappe spændingen fra terminalspænding som maksimalt kan være $16.8\volt$ ned til $12\volt$ er en N-kanal spændingsregulator valgt. MOSFET'en der anvendes er 2N7002 og er godkendt op til $60\volt$. 
+Til at nedtrappe spændingen fra terminalspænding som maksimalt kan være $16.8\volt$ ned til $12\volt$ er en N-kanal zener spændingsregulator valgt. MOSFET'en der anvendes er 2N7002 og er godkendt op til $60\volt$. Valget af netop denne MOSFET er også grundet dens lave threshold spænding $V_{GS(th)}$ på omkring  $1.5\volt$.
+\\
+
+
+Udgangen af $12\volt$-spændingsregulatoren er MOSFET'ens source. For at finde zener diodens zener-spænding anvendes følgende formel,
+
+\begin {equation} 
+V_{z} = V_{o} + V_{GS(th)} = 13.5\volt
+\end {equation}
+
+For at nedtrappe spændingen fra $12\volt$ til $3.3\volt$ anvendes LDO'en TS9011SCX. Den har en absolut maksimum indgangsspænding på $12\volt$, hvilket medfører at zenerdioden vælges til $V_{z}=12\volt$. Med denne værdi bliver $12\volt$-nettet nærmere $10.5\volt$, hvilket i dette projekt er acceptabelt - nettet kaldes dog fortsat $12\volt$-nettet.
 
 \begin{figure}[h]
 	\centering
@@ -215,14 +224,24 @@ Til at nedtrappe spændingen fra terminalspænding som maksimalt kan være $16.8
 	\label{fig:voltage_nets}
 \end{figure}
 
+Kredsløbet kan ses på figur \ref{fig:voltage_nets}. Det virker på den måde, at $R10$ lader noget strøm gå igennem zener dioden, så spændingen på MOSFET'ens gate bliver diodens zener-spænding. Når MOSFET'ens gate-source spænding $V_{GS(th)}$ rammer sit arbejdspunkt, vil MOSFET'en fungere som en variabel modstand, og have et spændingsfald over drain-source så den stadig kan holde gaten tændt.
+\\
+
+For at minimere strømforbruget i batteripakken er $3.3\volt$ forsyningen valgt til at være TS9011SCX, da dette er af typen "Low Quiescent Current CMOS", hvilket betyder den kun bruger $2\micro\ampere$ til at regulere udgangspændingen.
+
 \section{Standby tilstand}
 Indledning
 
 \subsection{Hardware}
-Mulighederne (vi gør intet hardwaremæssigt pt)
+I den diskret udviklede batteripakke, indgår der ikke nogle tiltag hvori en standby tilstand kan opnås. Der er blevet undersøgt forskellige muligheder såsom at forsyne operationsforstærkerne fra microcontrolleren til måling af cellespænding og strømtræk. Disse tiltag er dog ikke blevet realiseret da batteripakken som standard tilstand altid tillader op- og afladning, så hvis batteripakken skal kunne detektere noget på udgangen, skal operationsforstærkerne også være tændte.
+
+
 \subsection{Software}
 Måske vågne op?
 \sbf{Evt lidt gøgl her}
 
 \section{Delkonklusion}
-Noget bla bla her
+Igennem udviklingen af batteripakken ud brug af en integreret styringskreds, er alle funktionaliteter blevet realiseret. Batteripakken at aflades med $6\ampere$ og oplades med omkring $1\ampere$. Der er ikke udvikles en buck converter til at begrænse opladestrømmen, så for at oplade batteripakken, skal opladeren stå for strømbegrænsningen.
+\\
+
+Batteripakken kan til hver en tid lave målinger på cellespænding og strømtræk, hvor den også kan detektere om en belastning eller oplader er koblet på udgangen. Der er derudover også realiseret en løsning til passiv balancering.

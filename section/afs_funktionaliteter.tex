@@ -55,20 +55,18 @@ Blanceringsteknikkerne kan opdeles i to kategorier: passiv og aktiv balancering,
 Passiv balancering går ud på at de omdanne overskudsenergi til varme fra fuldt opladte celler, modsat aktiv balancering som flytter overskudenergien til lavere opladte celler.
 \\
 
-Under passiv balancering holder systemet øje med spændingen på de enkelte celler. Når en eller flere celler opnår maks cellespænding $V_{EOC}$ og derved er fuldt opladet, aflades de igennem en modstand til de har samme spænding som den laveste celle i systemet eller en spændingsreference. Efterfølgende oplades alle celler igen, og denne proces vil forsætte indtil alle celler er fuldt opladet. Afladningsmetoden hedder controlled shunting resistor og er vist på figur \ref{fig:passiv_balancering}. 
+Under passiv balancering holder systemet øje med spændingen på de enkelte celler. Når en eller flere celler opnår maks cellespænding $V_{EOC}$ og derved er fuldt opladet, aflades de igennem en modstand til de har samme spænding som den laveste celle i systemet eller en spændingsreference. Efterfølgende oplades alle celler igen, og denne proces vil forsætte indtil alle celler er fuldt opladet. Afladningsmetoden hedder controlled shunting resistor og er vist på figur \ref{fig:passiv_balancering_teknik}. 
 
 
 %Denne metode har MOSFET i parallel med hver enkelt celle og kan styres simpelt ved hjælp af en comparator som får en MOSFET til at tænde for indkobling af en afladningsmodstand. Microcontrolleren vil samtidig overvåge samtlige cellespændinger, og vil derfor have styr på om hvorvidt der er behov for balancering.
 
-Fordelen ved denne metode er at den er simpel og pålidelig, men tilgengæld er den ineffektiv, da al overskudsenergi omdannes til varme.
-%En anden ulempe er, at passiv balancering er begrænset af en lav balanceringsstrøm, typisk omkring $10\milli\ampere$, og derfor kan flere balanceringscycles være nødvendig for at cellerne er balanceret.
-\klp{Skal omskrives}
+Fordelen ved denne metode er at den er simpel og pålidelig, men tilgengæld er den ineffektiv, da al overskudsenergi omdannes til varme og dermed er spildt.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=10cm]{billeder/passiv_balancering.png}
-	\caption{Passiv balancering styret med IC}
-	\label{fig:passiv_balancering}
+	\caption{Passiv balancering gennem en færdig BMS chip.}
+	\label{fig:passiv_balancering_teknik}
 \end{figure}
 \klp{Billede og tekst skal fikses. Balancering på IC er 70mA intern, så det bliver kravet. Med IC er ekstern balancerings FET ikke nødvendig. Vi matcher den diskret opbyggede til 50mA. Muligvis nyt billede da der er en modstand for meget.}
 
@@ -100,7 +98,7 @@ Informationen kan også bruges til at indikere behov tilslutning af oplader til 
 Ved strømsvigt hvor f.eks et UPS-anlæg (Uninterruptible power supply) skal levere nødstrøm indtil normal drift genoprettes, vil SoC bidrage med information om hvorvidt anlægget overhovedet vil være i stand til at understøtte den tilkoblede belastning.
 \\
 
-SoC i en celle defineres som forholdet mellem nuværende ladning $Q_{t}$ og $Q_{n}$, som er den nominelle ladning og er givet fra producenten, og er den maksimale ladning der kan opbevares i en celle.
+SoC i en celle defineres som forholdet mellem nuværende ladning $Q_{t}$ og $Q_{n}$, hvilket er den nominelle ladning og er givet fra producenten, og er den maksimale ladning der kan opbevares i en celle.
 
 \begin {equation} 
 SoC(t) = \frac{Q_t}{Q_n} \label{eq:soc}
@@ -108,43 +106,24 @@ SoC(t) = \frac{Q_t}{Q_n} \label{eq:soc}
 
 Der anvendes typisk tre metoder til at afgøre SoC, gennem en direkte måling af cellespænding, ved at tælle ladning, og en blanding af disse to.
 
-
-
-
-
-
 \subsection{Måling af terminalspænding}
-Ved denne metode vil en simpel spændingsmåling henover cellerne kunne indikere kapaciteten, da spændingen på en celle tilnærmelsesvis falder lineært under afladning i dette projekts valgte arbejdsområde.
-
-
-
-Bliver den vi bruger
-
-
+Ved denne metode vil en simpel spændingsmåling henover cellerne kunne indikere kapaciteten, da spændingen på en celle tilnærmelsesvis falder lineært under afladning i dette projekts valgte arbejdsområde. Den er dog ikke så præcis, da det reelle afladningskurve ikke er lineær.
 
 
 \subsection{Coulomb-tælle metode}
 Denne metode går ud på at måle afladningsstrømmen i en batteripakke og integrere strømmen over tid, for at estimere realtids-kapaciteten $SoC(t)$. 
 
+\begin {equation} 
+SoC(t) = SoC(0) - \frac{1}{C} \int_{0}^{t} idt  \label{eq:coulomb-count}
+\end {equation}
+
+Overstående ligning kan forenkles,
 
 \begin {equation} 
 SoC(t) = SoC(0) - \frac{1}{C} \int_{0}^{t} idt  \label{eq:coulomb-count}
 \end {equation}
 
-
-
-
-
-
-\subsection{Impedans tracking}
-Skal læses op på - muligvis fjernes
-
-\subsection{Kombination}
-
-
-
-
-
+Disse to teknikker kan også kombineres for at give et mere nøjagtigt estimat af batteripakkens kapacitet.
 
 \section{State of Health (SoH)}
 Formålet med SoH er at give en indikation af hvilken ydeevne der kan forventes af en celle eller batteripakke i den nuværende tilstand, eller fortælle noget omkring den resterende levetid før der er behov for udskiftning.
@@ -156,21 +135,19 @@ SoH = \frac{nominel \space kapacitet - nuværende  kapacitet}{nominel kapacitet}
 \end {equation}
 %    05609223.pdf
 
-
+\begin {equation} 
+SOH(t) = SOH(0) - \frac{1}{2N*E_{0}(0)}d \int_{0}^{t} P_{i}(t)dt
+\end {equation}
 
 
 
 
 \section{Temperaturmåling}
-Måling af temperature i en batteripakke er nødvendig, for at sikre optimal op- og afladningsforhold. 
-
-Tilladte temperature - nedsat tilladt strømtræk - parameter til SoC estimering
-
-
-\section{Op- og afladningskontrol samt kortslutningsbeskyttelse}
-For at isolere batteripakken mellem belastning og oplader, eller i tilfælde af fejl ved op- og afladning, skal BMS'en kunne afbryde forbindelsen mellem opladeren eller belastningen. Det kan realiseres ved hjælp af en oplade og aflade MOSFET som begge agerer cuttoff-FET i fejlsituationer. Opførelsen af cutoff-FET'en er typisk defineret ud fra parametre sat ud fra max værdier af cellespændinger, strøm målinger og realtids detektering. 
+Måling af temperature i en batteripakke er nødvendig, for at sikre optimal op- og afladningsforhold. Alt afhængig vigtigheden af kendskab til temperaturene forskellige steder, kan der være flere temperaturmålere. Placeringerne er typisk på PCB'et og cellerne.
 \\
 
-om den skal være på high eller lowside -> fordel og ulemper
-Load / charge detektion - noget med spændingsniveauer
+Temperaturmålingen kan blive brugt flere steder i en batteripakke. Værdien kan indgå som en parameter til udregning af cellernes helbredsmæssige tilstand og til at sikre, at cellerne ikke blive op- og afladt under for kølige eller varme temperaturer. Når temperaturen næsten er for høj eller for lav, kan en batteripakke designes således at den kun tillader en begrænset indadgående eller udadgående strøm.
 
+\section{Op- og afladningskontrol samt kortslutningsbeskyttelse}
+For at isolere batteripakken fra belastning og oplader i tilfælde af fejl ved op- og afladning, skal BMS'en kunne afbryde forbindelsen mellem opladeren eller belastningen. Det kan realiseres ved hjælp af en oplade og aflade MOSFET som sammen virker som en to vejs kontakt kontakt i fejlsituationer, også kaldet cutott-MOSFETs. Opførelsen af cutoff-MOSFEN'en er typisk defineret ud fra parametre som maksimums værdier af cellespændinger, strømtræk og temperatur. 
+\

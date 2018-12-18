@@ -1,42 +1,59 @@
 \section{Fremgangsmetode}
 
-Da den integrerede kreds, BQ76920, nærmest var valgt på forhånd, var næste skridt at finde en microcontroller der kunne styre kredsen. Derefter blev softwaren udviklet, og de tilhørende komponenter dimensioneret. 
-\klp{Hvorfor var den valgt på forhånd? Hvad kan den?}
+Der blev fra Linak's side foreslået at bruge kredsen BQ76920 til udvilking af den integrerede version, og da den havde de funktioner der skulle bruges (balancering, FET kontrol, temperatursensor, strøm- og spændingsmåling), var næste skridt at finde en microcontroller der kunne styre kredsen. Derefter blev softwaren udviklet, og de tilhørende komponenter dimensioneret. \\
 
-\sbf{kom ind under spændingsnet 20mah vs 200mah}
+Der er også tilføjet et spændingsnet som beskrevet i afsnit \ref{afs:voltagenet}, da den integrerede kreds kun kan levere omkring $20\milli\ampere$. Her er der behov for mere strøm da et display ønskes tilkoblet, og spændingsnettet kan levere $250\milli\ampere$. \\
 
+Strømmålingen og balanceringskredsløbet vil ikke blive beskrevet her, da princippet er det samme som i henholdsvis afsnit \ref{afs:current_meas} og afsnit \ref{afs:balancing}. Transistorerne til balancering sidder internt i kredsen. 
 \section{Valg af microcontroller}\label{afs:valg_af_uc}
 Der blev besluttet at bruge microcontrolleren LPC804 til denne BMS. Den blev valgt af flere årsager:
 
 \begin{itemize}[noitemsep]
 	\item Lavt strømforbrug i deep sleep.
 	\item ADC i 12-bits opløsning.
-	\item De ønskede interfaces er tilgængelige. ($I^2C$, $UART$)
-	\item Microcontrolleren er NXP's billigere serie. 
+	\item De ønskede kommunikationsprotokoller er tilgængelige. ($I^2C$, $UART$)
+	\item Microcontrolleren er NXP's billigere serie.
 	\item Fås i både relativt små pakker samt store pakker.
 	\item Evaluationboard er tilgængeligt.
 \end{itemize}
 
 Evaluationsboardet ved navn UM40001UL bliver brugt til udvikling af software. Dette board har onboard CMSIS-DAP som er en debugger, således det ikke er nødvendigt med en ekstern debugger. 
 
-\section{Batteriovervågningskreds}
-Den integrerede kreds der er valgt klarer nærmest alle opgaver. Den står for overvågning af cellespændinger, balancering, styring af MOSFET's (charge og discharge), mulighed for ekstra temperaturstyring samt coloumb counting (strømmåling). \\
+\section{Batteriovervågningskreds}\label{afs:bms_ic_desc}
+Den integrerede kreds der er valgt klarer nærmest alle opgaver. Den står for overvågning af cellespændinger, balancering, styring af MOSFET's (charge og discharge), mulighed for ekstra temperaturmåling samt coloumb counting (strømmåling). \\
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=15cm]{billeder/bms_ic_sch.png}
-	\caption{Schematics for balanceringskredsen}
+	\caption{Schematics for batteriovervågningskreds}
 	\label{fig:temp_sensor}
 \end{figure}
 
 Da kredsen fungerer vha. kommunikation over I2C, sættes den først og fremmest til I2C bus'en. SDA er datalinjen og SCL er clock linjen. \\
 
-\sbf{Andet navn for balanceringskreds}
-\sbf{Kom in under alert ben og deres transistorer }
-\sbf{Kom ind under FET's}
+Kredsen har et ALERT ben som kan rapportere om at der er eventuelle status- eller fejlmeddelelser tilgængelige, men da kredsen har $2.5\volt$ logik på dette ben, er der indsat et kredsløb til at "konvertere" \space dette til $3.3\volt$ logik. Dette er realiseret med 2 npn-transistorer som ses på figur \ref{fig:bq_npn_conv}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=11cm]{billeder/bq_npn_conv.png}
+	\caption{Transistorkredsen til konvertering af 2.5V til 3.3V logik}
+	\label{fig:bq_npn_conv}
+\end{figure}
+
+For at styre op- og afladnings MOSFET'erne, har BQ76920 indbygget MOSFET driver på CHG og DSG benene. Disse ben er internt drevet højt til $12\volt$ når de er slået til. Kredsløbet til dette er opbygget som i figur \ref{fig:bq_fets}. Her styrer Q5-A afladningne og Q5-B styrer opladningen. Der er indsat en P-kanal's MOSFET for at holde kredsens CHG ben væk fra negative spændinger.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=11cm]{billeder/bq_fets.png}
+	\caption{MOSFET's til styring af op- og afladning}
+	\label{fig:bq_fets}
+\end{figure}
+
+
 
 \section{Temperatursensor} \label{sec:temperatur}
-Som endnu en sikkerhedsforanstaltning bruges en temperatursensor til at overvåge temperaturen i batteripakken. Her blev der besluttet at bruge en I2C temperatursensor, da opsætning ville være nemt siden I2C allerede skulle benyttes. Den specifikke del hedder LM75BIM-3/NOPB. Denne model blev valgt da den var tilgængelig på evaluation-boardet af microcontrolleren som blev brugt under udvikling. Derfor kunne udviklingen af software ske før hardware delen var helt færdig, og dermed fremskynde processen en smule. \\
+Som endnu en sikkerhedsforanstaltning bruges en temperatursensor til at overvåge temperaturen i batteripakken. Her blev der besluttet at bruge en I2C temperatursensor, da opsætning ville være nemt siden I2C allerede skulle benyttes. Den specifikke del hedder LM75BIM-3/NOPB. Denne model blev valgt da den var tilgængelig på evaluation-boardet af microcontrolleren som blev brugt under udvikling. Derfor kunne udviklingen af software ske før hardware delen var helt færdig, og dermed fremskynde processen.
+\sbf{hysterese}
 
 \subsection{Tilslutning af sensor}
 Siden sensoren benytter I2C, er den relativt nemt at sætte til i hardware. SCL og SDA sættes til I2C bus'en på microcontrolleren, og OS benet sættes til et vilkårligt GPIO ben på microcontrolleren. 

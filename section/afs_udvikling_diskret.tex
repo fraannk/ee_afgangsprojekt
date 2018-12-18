@@ -28,7 +28,7 @@ V_{o} = V_{cell3} * \frac{R58}{R56+R58} * (1+\frac{R59}{R57}) - V_{cell2} * \fra
 
 Da en celle kan svinge mellem $3.2\volt$ og $4.15\volt$, vil microens ADC svinge mellem $2.176\volt$ og $2.822\volt$.
 
-\section{Strømmåling}
+\section{Strømmåling}\label{afs:current_meas}
 For at overvåge udgangsstrømmen skal en strømmåler realiseres. Dette kan gøres ved hjælp af en shunt modstand, $R_{s}$, som yder en meget lille og veldefineret ohmsk belastning og kan holde til hele udgangsstrømmen. Når belastningen trækker en strøm, vil et lille spændingsfald forekomme over shuntmodstanden, som en differensforstærker vil detektere og forstærker til et passende niveau. Der er i dette projekt valgt, at placere shuntmodstanden på lav-siden mellem den nedeste celle og aflade MOSFET'en.
 \\
 
@@ -76,7 +76,7 @@ Som tidligere nævnt vil et retningsskifte af strømmen forekomme under opladnin
 Da opladestrømmen er $1\ampere$ kan en væsentlig højere forstærkning anvendes, hvilket giver en højere præcission på ADC'en. Ved brug af samme formel som den anden differensforstærker beregnes $V_{o}$ for måling af opladestrøm. $R39 = R49 = 1\kilo\ohm$ og $R45 = R469 = 220\kilo\ohm$ og giver en forstærker på 20 gange. Spændingen vil derfor variere mellem $0\volt$ og $2.2\volt$. I tilfælde af en højere opladningsstrøm vælges, er forstærkningen ikke højere, for stadig at kunne måle strømmen.
 
 
-\section{Passiv balancering}
+\section{Passiv balancering}\label{afs:balancing}
 Når batteripakkens opladecyklus er ved at være færdig og den første celle er fuldt opladt, vil passiv balancering blive aktiveret. Batteripakken vil maksimalt balancere tre celler på en gang, da den er færdig med at oplade når den får signal om, at alle fire celle har behov for balancering, da de jo har nået den maksimale cellespænding.
 \\
 
@@ -183,7 +183,7 @@ Nettet $PWM-CHG$ genererer en spænding gennem PWM på $300\milli\volt$ hvilket 
 For at resette operationsforstærkerens hysterese sendes en puls fra $PWM-CHG$ på $3.3\volt$ igennem spændingsdeleren, så spændingen på $V-$ bliver $117.9\milli\volt$.
 
 
-\section{Spændingsnet}
+\section{Spændingsnet}\label{afs:voltagenet}
 Forsyningsspændingen til hele BMS'en kommer fra batteripakkens terminalspænding, som kan variere mellem $12.8\volt - 16.6\volt$. For at generere to nødvendige netspændinger på $12\volt$ og $3.3\volt$, skal to spændingsregulatorer realiseres.
 \\
 

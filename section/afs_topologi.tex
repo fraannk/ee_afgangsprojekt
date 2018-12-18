@@ -13,40 +13,38 @@ Batteripakkestyringen er det overordnede modul. Her styres MMU'erne, men samtidi
 \section{Centraliseret system}
 I et centraliseret system er alle tre slags moduler kombineret til én enhed. Derfor er alle cellerne koblet direkte til systemet med ledninger, og alle BMS'ens funktioner er tilgængelige uden ekstra moduler. \\
 
-Et centraliseret system er den mest økonomiske, men mindst udvidelige måde at udvikle en BMS på. Der er også ret mange ledninger, da der skal gå ledninger ud til hver enkelt celle. En centraliseret BMS er også forholdsvis simpel at opbygge uden alt for mange kompromisser. På grund af dens simple opbygning er den mest egnet til batteripakker med få antal celler. Derfor gør det den ideel til f.eks. el-cykler eller andre mindre elektriske "gadgets", og mindre ideel til f.eks. el-biler. På figur \ref{fig:centralized_BMS} ses opbygningen af en centraliseret BMS.
+Et centraliseret system er den mest økonomiske, men mindst udvidelige måde at udvikle en BMS på. Der er også ret mange ledninger, da der skal gå ledninger ud til hver enkelt celle. En centraliseret BMS er også forholdsvis simpel at opbygge uden alt for mange kompromisser. På grund af dens simple opbygning er den mest egnet til batteripakker med få antal celler. Derfor gør det den ideel til f.eks. el-cykler eller andre mindre elektriske "gadgets", og mindre ideel til f.eks. el-biler. På figur \ref{fig:centralized_BMS} ses opbygningen af en centraliseret BMS. \\
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=6cm]{billeder/centralized.png}
+	\includegraphics[width=8cm]{billeder/centralized.png}
 	\caption{En centraliseret BMS}
 	\label{fig:centralized_BMS}
 \end{figure}
 
 \section{Distribueret system}
-I et distribueret system foretages alle målinger på den enkelte celle og kommunikerer sin status til en master enhed. Hver celle er udstyret med sin egen dedikerede CMU, MMU og PMU. De enkelte MMU'er kan kommunikere med hinanden afhængig af behov.
-\\
-
-Fordelen ved denne topologi er at designet er simpel og pålidelig. Ulempen er dog, at den kræver et højt antal slave enheder, som kan give problemer rent monteringsmæssigt.
-
-\section{Modulær system}
-Den modulære topologi er en blanding af den centraliserede og distribuerede. Her er opdeles MMU'en i flere blokke der hver har ansvaret for flere celler. Har man derfor en stor batteripakke på 48 celler, kan én MMU f.eks. holde styr på 12 celler og CMU'er, og så har man 4 MMU'er. Disse MMU'er er så stadig forbundet til én PMU, som holder styr på det hele og sørger for kommunikation i mellem modulerne. Denne topologi egner sig til systemer hvor cellerne nødvendigvis ikke kan være lige ved siden af hinanden, men opbevares i grupper. 
-\sbf{Omformuler lidt ang. mumummmucmumu}
+I et distribueret system foretages alle målinger på den enkelte celle og kommunikerer sin status til en master enhed. Hver celle er udstyret med sin egen dedikerede CMU og MMU. De enkelte MMU'er kan kommunikere med hinanden afhængig af behov. \\
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=6cm]{billeder/modular.png}
+	\includegraphics[width=8cm]{billeder/distributed.png}
+	\caption{En distribueret BMS}
+	\label{fig:distributed_BMS}
+\end{figure}
+
+Fordelen ved denne topologi er at designet er "gentageligt" og pålideligt. Ulempen er dog, at den kræver et højt antal slave enheder, som kan give problemer rent monteringsmæssigt.
+
+\section{Modulær system}
+Den modulære topologi er en blanding af den centraliserede og distribuerede. Her er opdeles MMU'en i flere blokke der hver har ansvaret for flere celler. Har man derfor en stor batteripakke på 48 celler, kan én MMU f.eks. holde styr på 12 celler og CMU'er, og så har man 4 MMU'er. Disse MMU'er er så stadig forbundet til én PMU, som holder styr på det hele og sørger for kommunikation i mellem modulerne. \\
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=8cm]{billeder/modular.png}
 	\caption{En modulær BMS}
 	\label{fig:modular_BMS}
 \end{figure}
 
+Denne topologi egner sig til systemer hvor cellerne nødvendigvis ikke kan være lige ved siden af hinanden, men opbevares i grupper, som f.eks. forskellige steder i en el-bil.
 
 \section{Valg af topologi}
-En sammenligning mellem de 3 systemer efterfulgt af en vægtning i forhold til vores krav - 4 celler fx
-\subsection{Vægtningsskema}
-Vi fjerner skemaet og beskriver det i tekstform
-\begin{itemize}
-	\item Virkningsgrad
-	\item Sikkerhed
-	\item Modularitet
-	\item Brugertilpasning
-\end{itemize}
+Af de tre forskellige topologier er det blevet besluttet at vælge det centraliserede system hovedsageligt pga. dets enkelthed. Til projektets formål er det ikke nødvendigt at kunne dele batteripakken op i grupper, og det er heller ikke nødvendigt at styresystemet sidder langt væk fra cellerne. Her skal systemet monteres sammen med cellerne hvilket også giver fordele ved f.eks. temperaturmåling. Da batteripakken i dette system ikke har mere end 4 celler i serie er det også det oplagte valg. 

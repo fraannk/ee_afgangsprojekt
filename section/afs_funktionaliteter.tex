@@ -18,12 +18,18 @@ De primære formål med en BMS er som følgende:
 \end{itemize}
 
 
-
-
 \section{Cellebalancering}
 Ideelt set er alle battericeller produceret ens med samme egenskaber og opfører sig ens under hele cellens leve tid. Desværre er det langt fra virkeligheden, hvor der er produktionstolerancer, hvor nogle celler vil være stærkere end andre. I praksis betyder det varians på minimal, nominal og maksimal spænding, kapacitet, indre modstand og selvafladning.
 Temperaturforskelle i en batteripakke og dermed forskelle på celletemperature kan også medføre varians på selvafladning over tid.
 \\
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=15cm]{billeder/liion_opladning.png}
+	\caption{Oplade forløb af Lithium-Ion celle}
+	\label{fig:opladning_liion}
+\end{figure}
+\FloatBlock
 
 I batteripakker hvor flere celler indgår, vil forskelle på stærke og svage celler forstørres for hver cyklus. Under opladning kan en svag celle blive svagere indtil den fejler, hvilket kan forsage permanent skade på hele batteripakken. Da en batteripakkes levetid afhænger af den svageste celle, vil en forøgelse i levetid kunne opnås ved hjælp af cellebalancering, da slid på den svageste celle minimeres. Opladning af en Li-Ion celle foregår i tre faser og er skitseret på figur \ref{fig:opladning_liion}.
 \klp{Fase 4 skal fjernes da vi ikke har det med}
@@ -36,22 +42,9 @@ Fasen kan siges at være opladning ved konstant spænding (der er en dog rippel 
 
 Tredje og sidste fase er når cellerne har færdiggjort sin ladecyklus og går på standby. Grundet cellernes indre modstand, vil de langsomt aflades, hvilket ses på den nedadgående spændingsflanke.
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=15cm]{billeder/liion_opladning.png}
-	\caption{Oplade forløb af Lithium-Ion celle}
-	\label{fig:opladning_liion}
-\end{figure}
-\FloatBlock
-
-Blanceringsteknikkerne kan opdeles i to kategorier: passiv og aktiv balancering, og vil blive gennemgået herunder.
-
-
-
-
-
-
 \subsection{Passiv balancering}
+Blanceringsteknikkerne kan opdeles i to kategorier: passiv og aktiv balancering.
+\\
 Passiv balancering går ud på at de omdanne overskudsenergi til varme fra fuldt opladte celler, modsat aktiv balancering som flytter overskudenergien til lavere opladte celler.
 \\
 

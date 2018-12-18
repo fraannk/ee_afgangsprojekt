@@ -217,13 +217,11 @@ Indledning
 \subsection{Hardware}
 I den diskret udviklede batteripakke, indgår der ikke nogle tiltag hvori en standby tilstand kan opnås. Der er blevet undersøgt forskellige muligheder såsom at forsyne operationsforstærkerne fra microcontrolleren til måling af cellespænding og strømtræk. Disse tiltag er dog ikke blevet realiseret da batteripakken som standard tilstand altid tillader op- og afladning, så hvis batteripakken skal kunne detektere noget på udgangen, skal operationsforstærkerne også være tændte.
 
-
 \subsection{Software}
-Måske vågne op?
-\sbf{Evt lidt gøgl her}
+Microcontrolleren har flere stadier af power-down modes, men siden PWM output ikke er tilgængeligt under disse modes, og da PWM bliver brugt til at styre MOSFET's til op- og afladningskontrol, er det blevet fravalgt at implementere dette. 
 
 \section{Delkonklusion}
-Igennem udviklingen af batteripakken ud brug af en integreret styringskreds, er alle funktionaliteter blevet realiseret. Batteripakken at aflades med $6\ampere$ og oplades med omkring $1\ampere$. Der er ikke udvikles en buck converter til at begrænse opladestrømmen, så for at oplade batteripakken, skal opladeren stå for strømbegrænsningen.
+Igennem udviklingen af batteripakken uden brug af en integreret styringskreds, er alle funktionaliteter blevet realiseret. Batteripakken at aflades med $6\ampere$ og oplades med omkring $1\ampere$. Der er ikke udviklet en buck converter til at begrænse opladestrømmen, så for at oplade batteripakken, skal opladeren stå for strømbegrænsningen.
 \\
 
 Batteripakken kan til hver en tid lave målinger på cellespænding og strømtræk, hvor den også kan detektere om en belastning eller oplader er koblet på udgangen. Der er derudover også realiseret en løsning til passiv balancering.

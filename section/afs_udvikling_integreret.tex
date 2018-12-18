@@ -34,7 +34,7 @@ Da kredsen fungerer vha. kommunikation over I2C, sættes den først og fremmest 
 \sbf{Kom in under alert ben og deres transistorer }
 \sbf{Kom ind under FET's}
 
-\section{Temperatursensor}
+\section{Temperatursensor} \label{sec:temperatur}
 Som endnu en sikkerhedsforanstaltning bruges en temperatursensor til at overvåge temperaturen i batteripakken. Her blev der besluttet at bruge en I2C temperatursensor, da opsætning ville være nemt siden I2C allerede skulle benyttes. Den specifikke del hedder LM75BIM-3/NOPB. Denne model blev valgt da den var tilgængelig på evaluation-boardet af microcontrolleren som blev brugt under udvikling. Derfor kunne udviklingen af software ske før hardware delen var helt færdig, og dermed fremskynde processen en smule. \\
 
 \subsection{Tilslutning af sensor}

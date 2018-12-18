@@ -1,14 +1,48 @@
-\section{Sammenligning}\label{afs:sammenligning}
+\section{Sammenligning} \label{afs:sammenligning}
+For at overskueliggøre sammenligningen af de to versioner, er specifikationerne sat op side om side i afsnit \ref{sec:sammenligning_specifikation} og kostprisen for dem er sat op i tabeller i afsnit \ref{sec:sammenligning_kostpris}.
 
-\section{Specifikationer}
+\section{Specifikationer} \label{sec:sammenligning_specifikation}
 Hvorfor de har forskellige
+\begin{table}[h!]
+	\small
+	\centering
+	\begin{threeparttable}
+		\begin{tabular}{ l l l l l l l }
+			\toprule
+			\multicolumn{1}{l}{\textbf{Specifikation}}          &
+			\multicolumn{1}{l}{\textbf{Diskret}}           &
+			\multicolumn{1}{l}{\textbf{Integreret}}  &
+			\multicolumn{1}{l}{\textbf{Kommentar}}   \\ 
+			\hline
+			Opladestrøm $I_{in}$           &  $1\ampere$            & $1\ampere$            &    \\
+			Afladestrøm $I_{out}$          &   $6\ampere$           & $6\ampere$            &    \\
+			Balanceringsstrøm $I_{bal}$    & $100\milli\ampere$     & $41\milli\ampere$     &  Begrænsning på integreret  \\
+			Temperaturmåling               &   Ja                   &  Ja                   &    \\
+			Strømbeskyttelse op/afladning  &   Ja                   &  Ja                   &    \\
+			Display                        &   Ja                   &  Ja                   &    \\
+			 % &      &     &    \\
 
-\section{Pris}
+			\bottomrule
+		\end{tabular}
+		%\begin{tablenotes}
+		%	\item[a] \textit{Priser uden fragt.}
+		%\end{tablenotes}
+		\caption{Sammenligning af specifikationer.}
+		\label{tab:specifikationer}
+	\end{threeparttable}
+\end{table} 
+\FloatBlock
+
+
+
+
+\section{Kostpris} \label{sec:sammenligning_kostpris}
+
+Tabel \ref{tab:pris_diskret} og tabel \ref{tab:pris_ic}
 
 \begin{table}[h!]
 	\small
 	\centering
-	\label{tab:pris_ic}
 	\begin{threeparttable}
 		\begin{tabular}{ l l l l l l l }
 			\toprule
@@ -34,14 +68,15 @@ Hvorfor de har forskellige
   			1  &  2N7002                    &  0.30 DKK   &  0.30 DKK  \\
 	  	    1  &  BZX84-C12                 &  0.20 DKK   &  0.20 DKK  \\
 	        \hline
-	  	      &                             & Total       & 86.74 DKK  \\  
+	  	   116 &                            & Total       & 86.74 DKK  \\  
 			\hline
 			\bottomrule
 		\end{tabular}
 		\begin{tablenotes}
 		\item[a] \textit{Priser uden fragt.}
 		\end{tablenotes}
-		\caption{Kostpris på komponenter til den diskrete version}
+		\caption{Kostpris på komponenter til den diskrete version.}
+		\label{tab:pris_diskret}
 	\end{threeparttable}
 \end{table} 
 \FloatBlock
@@ -51,7 +86,6 @@ Hvorfor de har forskellige
 \begin{table}[h!]
 	\small
 	\centering
-	\label{tab:pris_ic}
 	\begin{threeparttable}
 		\begin{tabular}{ l l l l l l l }
 			\toprule
@@ -66,18 +100,18 @@ Hvorfor de har forskellige
 			3  &  SDTM-620-5MM              &  0.30 DKK   &  0.90 DKK  \\
 			2  &  LED-G-3MM                 &  1.03 DKK   &  2.06 DKK  \\
 			1  &  STL15DN4F5                & 23.27 DKK   & 23.27 DKK  \\
-			1  &  BQ7692003PWR              & 28.28 DKK   & 18.28 DKK  \\
+			1  &  BQ7692003PWR              & 18.28 DKK   & 18.28 DKK  \\
 			1  &  LM75BIM3                  & 16.28 DKK   & 16.28 DKK  \\
 			1  &  LPC804M101JDH20           &  9.81 DKK   &  9.81 DKK  \\
 			1  &  Shunt modstand            &  4.68 DKK   &  4.68 DKK  \\
 			1  &  TS9011SCX                 &  0.90 DKK   &  0.90 DKK  \\
 			1  &  BSS84                     &  0.80 DKK   &  0.80 DKK  \\
-			1  &  BC846B                    &  0.60 DKK   &  0.60 DKK  \\
+			2  &  BC846B                    &  0.60 DKK   &  0.60 DKK  \\
 			1  &  D-1N5819HW                &  0.43 DKK   &  0.43 DKK  \\
 			1  &  2N7002                    &  0.30 DKK   &  0.30 DKK  \\
 			1  &  BZX84-C12                 &  0.20 DKK   &  0.20 DKK  \\  
 			\hline
-			   &                            & Total       & 96.41 DKK  \\  
+		   77  &                            & Total       & 96.41 DKK  \\  
 			\hline
 			\bottomrule
 		\end{tabular}
@@ -85,8 +119,18 @@ Hvorfor de har forskellige
 			\item[a] \textit{Priser uden fragt.}
 		\end{tablenotes}
 		\caption{Kostpris på komponenter til batteriovervågningskredsen.}
+		\label{tab:pris_ic}
 	\end{threeparttable}
 \end{table} 
 \FloatBlock
 
 \section{Delkonklusion}
+Der kan ud fra tabel \ref{tab:specifikationer} ses, at de to versioner kan det samme. Dog er den integrerede version begrænset på modularitet, da den ikke kan balancere celler der er placeret ved siden af hinanden. Dertil er dens maksimale balanceringsstrøm ikke særlig stor og antallet af tilkoblede celler er fem. På trods af den integrerede versions begrænsninger kræver den mindre plads, da den klarer mange opgaver internt som den anden version har ekstra komponenter til.
+\\
+Større version fx
+Mindre micro (har dog intet at sige)
+Mindre plads
+
+
+
+Den diskrete version giver mulighed for viderebygning, da...

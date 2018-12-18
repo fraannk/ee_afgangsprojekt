@@ -16,6 +16,7 @@ Som der ses på figur \ref{fig:lithium_variants_comparison} sammenlignes de fors
 
 Lithium jern fosfat ($LiFePO_4$ også kaldt $LFP$) har sammen med lithium mangan oxid ($LiMn_2O_4$ også kaldt $LMO$) og lithium nikkel mangan cobalt oxid ($LiNiMnCoO_2$ også kaldt $NMC$) en lavere energidensitet men er mere sikker end lithium cobalt oxid. De har også en længere levetid og derfor er de meget brugte i f.eks. elektrisk værktøj eller medicinindustrien. Sidstnævnte ($NMC$) er især dominerende i elektriske biler. Disse celler findes oftest i 18650 varianten, som er en rund cylindrisk celle. Det er også denne type celle der er valgt til dette projekt, da det efterhånden er en ret standard celle, og da dens karakteristika er ganske veldokumenteret. 
 
+\begin{table}[h]
 \begin{center}
 	\setlength{\tabcolsep}{5pt}
 	\begin{tabular}{| p{2.3cm} | p{2.71cm} | p{2.71cm} | p{2.71cm} | p{2.71cm} |}
@@ -24,59 +25,63 @@ Lithium jern fosfat ($LiFePO_4$ også kaldt $LFP$) har sammen med lithium mangan
 		Spændinger & $3.6\volt$ nominal, typisk $3.0-4.2\volt$  & $3.2-3.3\volt$ nominal, typisk $2.5-3.65\volt$ & $3.7-3.8\volt$ nominal, typisk $3.0-4.2\volt$ & $3.6-3.7\volt$ nominal, typisk $3.0-4.2\volt$ \\ \hline
 		Energitæthed & $150-250\watt\hour/\kilogram$ & $90-120\watt\hour/\kilogram$ & $100-150\watt\hour/\kilogram$ & $150-220\watt\hour/\kilogram$ \\ \hline
 		Opladning & $0.7-1C$ op til $4.2\volt$ & $1C$ op til $3.65\volt$ & $0.7-1C$ (fast \space \space charge ved $3C$) op til $4.2\volt$ & $0.7-1C$ op til $4.2\volt$ \\ \hline		
-		Afladning & $1C$, cut-off ved $2.5\volt$ & $1C$, nogle $25C$, cut-off ved $2.5\volt$ & $1C$, nogle $10C$, cut-off ved $2.5\volt$ & $1C$, mange $4C$ eller over, cut-off ved $2.5\volt$ \\ \hline
+		Afladning & $1C$, cut-off ved $2.5\volt$ & $1C$, nogle omkring $15C$, cut-off ved $2.5\volt$ & $1C$, nogle omkring $10C$, cut-off ved $2.5\volt$ & $1C$, nogle omkring $5C$, cut-off ved $2.5\volt$ \\ \hline
 		Levetid & 500-1000 cycles & 1000-2000 cycles & 300-700 cycles & 1000-2000 cycles \\ \hline
 		Kritisk temperatur & $150\degreeCelsius$ & $270\degreeCelsius$ & $250\degreeCelsius$ & $210\degreeCelsius$ \\ \hline
 	\end{tabular}
 \end{center}
+\caption{Genereliseret tabel der sammenligner de forskellige typer celler}
+\end{table}
 
-Der blev valgt kemien $LiNiMnCoO_2$ (NMC/INR) da den ramte de fleste punkter som var vigtige i dette projekt. Her havde levetiden især en stor rolle, da batteripakken som helhed kommer til at være installeret i et produkt hvor det ikke ønskes at skifte batterier ofte. Der var også nok afladekapacitet. Da BMS'en skal kunne aflade med 6A, er 3C nok\footnote{Datablad i appendix X}. De valgte celler har en kapacitet på $2600\milli\ampere\hour$, og for at udregne den maksimale afladningskapacitet gøres følgende: 
+Der blev valgt kemien $LiNiMnCoO_2$ (NMC/INR) da den ramte de fleste punkter som var vigtige i dette projekt. Linak havde også nogle celler tilgængelige med denne kemi. Et af grundlagene for valg af kemien var især levetiden, da batteripakken som helhed kommer til at være installeret i et produkt hvor det ikke ønskes at skifte batterier ofte. Der var også nok energitæthed og afladekapacitet. De valgte celler har en kapacitet på $2600\milli\ampere\hour$ og en afladekapacitet på $3C$\footnote{Datablad i appendix X}, og for at udregne den maksimale afladningskapacitet gøres følgende: 
 
 \begin {equation}
 2.6\ampere\hour \times 3C = 7,8\ampere
 \end {equation}
 
-\section{Anvendelse}
-Den valgte type lithium-ion celle har en nominal spænding på $3.6\volt$. "Sikkerhedszonen" \space anses for at ligge mellem $3\volt$ og $4.2\volt$. Lades cellen til mere end $4.2\volt$ tager cellen skade og mister kapacitet. Det er også over dette niveau at de katastrofale situationer kan finde sted. Det samme gælder for afladningen. Aflades cellen under $3\volt$ går det også ud over kapaciteten men ikke i samme rate. Nogle typer kan også holde til afladning ned til $2.5\volt$, så denne grænse er en smule mere "blød".\\
+Da BMS'en skal kunne aflade med 6A, er $3C$ nok.
 
-Kigges der på en typisk 18650 celle såsom Samsung 30Q modellen, har den en afladningskurve (ved $5\ampere$) der ser ud som følgende: 
+\section{Anvendelse}
+Den valgte type lithium-ion celle har en nominal spænding på $3.7\volt$. "Sikkerhedszonen" \space anses for at ligge mellem $3.2\volt$ og $4.2\volt$. Lades cellen til mere end $4.2\volt$ tager cellen skade og mister kapacitet. Det er også over dette niveau at de katastrofale situationer kan finde sted. Det samme gælder for afladningen. Aflades cellen under $3.2\volt$ går det også ud over kapaciteten men ikke i samme rate. Nogle typer kan også holde til afladning ned til $2.5\volt$, så denne grænse er en smule mere "blød". Den absolutte laveste grænse for cellerne i dette projekt er $2.75\volt$. \\
+
+Kigges der på en typisk lithium-ion celle, har den en afladningskurve der ser ud som følgende: 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=15cm]{billeder/samsung-inr18650-discharge.png}
-\caption{Afladekurven for en Samsung INR18650 30Q celle\protect\footnotemark}
-\label{fig:30q_discharge}
+\includegraphics[width=11cm]{billeder/discharge_curve.png}
+\caption{Genereliseret afladningskurve for en lithium-ion celle}
+\label{fig:discharge_curve}
 \end{figure}
-\footnotetext{Kurve fra celle-sammenligningsværktøj på Lygte Info's hjemmeside. \url{https://lygte-info.dk/review/batteries2012/Common18650comparator.php}}
 
-Denne celle står oplyst til at have $3000\milli\ampere\hour$ men som der ses på kurven, er cellens spænding allerede på $2.8\volt$ når der er omkring $150\milli\ampere\hour$ tilbage. Derfor, hvis man holder sig inden for "sikkerhedszonen" \space udnytter man ikke batteriets fulde kapacitet, men derimod opnår man en længere levetid på cellen. \\
+Her kan det ses at spændingen på batterierne falder i takt med at man aflader dem. Denne kurve er dog ikke lineær og varierer fra celle til celle, og specielt mellem forskellige kemier. Der ses også at jo hårdere man aflader dem, jo mindre kapacitet får man ud af dem. På denne specifikke graf får man optimalt udbytte af cellen hvis man aflader med 1C, uden at gå på kompromis med hverken afladekapacitet eller samlet energiudbytte. \\
+
+"Sikkerhedszonen" \space er også i spil her. Hvis man aflader med for eksempel $0.2C$, og stopper afladningen ved omkring de $3.2\volt$, får man udbytte af det meste af cellens kapacitet, mens man sørger for at cellen har så lang en levetid som muligt. Her er man dog nødt til at gå lidt på kompromis med afladekapaciteten, for hvis man aflader med f.eks. $2C$, er der teoretisk set stadig omkring $88-90\percent$ kapacitet tilbage som man ikke kan bruge uden at cellen tager skade i det lange forløb. \\
 
 Skal cellerne opbevares i længere tid, er det en god idé at opbevare dem i den såkaldte "storage mode". Her lades/aflades cellerne til $30-40\percent$ af deres fulde kapacitet, da der her er mindst slid, og man derfor opnår en længere levetid. 
-
-\sbf{Sammenlign reel kurve og lineær kurve}
 
 \section{Sikkerhed}
 Da lithium batterier kan være farlige, er man nødt til at foretage de nødvendige sikkerhedsforanstaltninger. Derfor er der en del "regler":
 
 \begin{itemize}[noitemsep]
-\item Oplad ikke på batteriet når omgivelsestemperaturen er under $0\degreeCelsius$
-\item Batteriet må ikke oplades til mere end $4.2\volt$ ($4.X\volt$ når det er $LiFePO_4$)
-\item Brug helst en balance oplader eller et batteristyresystem hvis der er flere celler i serie
-\item Flere punkter her
+\item Oplad ikke på batteriet når omgivelsestemperaturen er under $0\degreeCelsius$ eller over $45\degreeCelsius$. 
+\item Aflad ikke batteriet når omgivelsestemperaturen er under $-20\degreeCelsius$ eller over $60\degreeCelsius$.
+\item Batteriet må ikke oplades til mere end $4.2\volt$ ($3.65\volt$ når det er $LiFePO_4$).
+\item Brug helst en balance oplader eller et batteristyresystem, hvis der er flere celler i serie.
 \end{itemize}
-\sbf{Husk at rette lifepo4 max voltage}
 
-Lidt om kortslutningsbeskyttelse, overophedning under opladning og afladning, måske state of health.
+Når man udvilkler systemer med lithium-ion batterier er det en god ide at batteristyresystemet indeholder kortslutningsbeskyttelse og op- og afladningskontrol. Med dette kan man undgå at aflade cellerne for hårdt og/eller en direkte kortslutning af cellerne. Det er også en god idé at have temperatursensorer i systemet for at overvåge cellernes temperatur samt omgivelsestemperaturerne (se ovenstående punkter). Dette er med til at forøge cellernes levetid. 
 
-\section{Elektrisk model af en celle}
-For at kunne udvikle et batteristyresystem er det nødvendigt, at have en model for en celle i form at et elektrisk ækvivalensdiagram. Alt afhængig af modellens kompleksitet vil databehandling af State of Charge og State of Health blive mere præcis.
-\\
-
-Den mest simple model kan tilnærme sig op- og afladningskarakteristikken for en superkondensator, hvor kurven er lineær gennem hele arbejdsområdet.
-
-\sbf{Kom ind under den simple model og hvorfor vi har valgt den. Kenneth skriver kort om den avancerede model og dens formel, men ikke mere end det.}
-
-
+%\section{Ækvivalent kredsløbs model af en celle (ECM)}
+%For at kunne udvikle et batteristyresystem er det nødvendigt, at have en model for en celle i form at et elektrisk ækvivalensdiagram. Alt afhængig af modellens kompleksitet vil databehandling af State of Charge og State of Health blive mere præcis. \\
+%
+%Den mest simple model kan tilnærme sig op- og afladningskarakteristikken for en superkondensator, hvor kurven er lineær gennem hele arbejdsområdet. \\
+%
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=9cm]{billeder/ecm.png}
+%	\caption{Elektrisk ækvivalensdiagram for en lithium-ion celle}
+%	\label{fig:ecm}
+%\end{figure}
 
 
 

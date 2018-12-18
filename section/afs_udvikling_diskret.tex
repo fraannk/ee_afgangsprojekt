@@ -46,7 +46,7 @@ For optimal anvendelse af microens opløsning er der i projektet valgt at opbygg
 	\label{fig:current_sense}
 \end{figure}
 
-En vigtig parameter under dimensionering af en strømmåler er valg af shunt modstandens værdi. Ud fra den maksimale afladestrøm $I_{out} = 6\ampere$ vælges shunt modstanden $R_{s} = 10\milli\ohm$. Det maksimale spændingsfald, $V_{s}$ over shuntmodstanden bliver,
+En vigtig parameter under dimensionering af en strømmåler er valg af shunt modstandens værdi. Ud fra den maksimale afladestrøm $I_{out} = 6\ampere$ vælges shunt modstanden $R_{s} = 10\milli\ohm$. Det maksimale spændingsfald $V_{s}$ over shuntmodstanden bliver,
 
 \begin {equation} 
 V_{s} = I_{out} * R_{s}  = -6\ampere * 10\milli\ohm = -60\milli\volt
@@ -212,7 +212,7 @@ Kredsløbet kan ses på figur \ref{fig:voltage_nets}. Det virker på den måde, 
 For at minimere strømforbruget i batteripakken er $3.3\volt$ forsyningen valgt til at være TS9011SCX, da dette er af typen "Low Quiescent Current CMOS", hvilket betyder den kun bruger $2\micro\ampere$ til at regulere udgangspændingen.
 
 \section{Standby tilstand}
-Indledning
+En standby tilstand kan både indeholde tiltag i hardwaren men også i softwaren.
 
 \subsection{Hardware}
 I den diskret udviklede batteripakke, indgår der ikke nogle tiltag hvori en standby tilstand kan opnås. Der er blevet undersøgt forskellige muligheder såsom at forsyne operationsforstærkerne fra microcontrolleren til måling af cellespænding og strømtræk. Disse tiltag er dog ikke blevet realiseret da batteripakken som standard tilstand altid tillader op- og afladning, så hvis batteripakken skal kunne detektere noget på udgangen, skal operationsforstærkerne også være tændte.

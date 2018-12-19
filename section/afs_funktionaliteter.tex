@@ -4,7 +4,7 @@ Et batteristyresystem er et elektrisk system, der styrer de enkelte battericelle
 \klp{Billede skal ændres}
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=12cm]{billeder/battery_management_block.png}
+	\includegraphics[width=11cm]{billeder/battery_management_block.png}
 	\caption{Blokdiagram over batteristyresystem}
 	\label{fig:battery_management_block}
 \end{figure}
@@ -77,31 +77,24 @@ Fordele og ulemper
 Charge shuttles
 \\
 
-Aktiv balancering tillader større balanceringsstrømme end passiv balancering, meget af energien bliver redistribueret i stedet for omdannet til varme. 
-
-
-
-
+Aktiv balancering tillader større balanceringsstrømme end passiv balancering, meget af energien bliver redistribueret i stedet for omdannet til varme.
 
 \section{Estimering af kapacitet}
-\klp{Mangler at få styr på denne sektion}
-En af de vigtigste funktionaliteter i et batteristyresystem er estimering af kapacitet, State of Charge (SoC), og er direkte defineret som den procentdel af maksimal ladning i en celle eller en batteripakke. SoC er vigtig da det afspejler batteripakkens ydeevne. Nøjagtig estimering af SoC er ikke kun vigtig til beskyttelse af cellerne, men også for at forhindre overopladning og underafladning, hvilket bidrager til forlængelse af batteripakkens levetid. Dertil muliggør informationen også at lade batteristyresystemet ligge rationelle strategier for at spare energi.
-\\
-Informationen kan også bruges til at indikere behov tilslutning af oplader til brugeren gennem f.eks. en statusindikator eller om afladning af systemet kan tillades. 
-Ved strømsvigt hvor f.eks et UPS-anlæg (Uninterruptible power supply) skal levere nødstrøm indtil normal drift genoprettes, vil SoC bidrage med information om hvorvidt anlægget overhovedet vil være i stand til at understøtte den tilkoblede belastning.
-\\
+En af de vigtigste funktionaliteter i et batteristyresystem er estimering af kapacitet, State of Charge (SoC), og er direkte defineret som den procentdel af maksimal ladning i en celle eller en batteripakke. SoC er vigtig da det afspejler batteripakkens ydeevne. Nøjagtig estimering af SoC er ikke kun vigtig til beskyttelse af cellerne, men også for at forhindre overopladning og underafladning, hvilket bidrager til forlængelse af batteripakkens levetid. Dertil muliggør informationen også at lade batteristyresystemet ligge rationelle strategier for at spare energi. \\
 
-SoC i en celle defineres som forholdet mellem nuværende ladning $Q_{t}$ og $Q_{n}$, hvilket er den nominelle ladning og er givet fra producenten, og er den maksimale ladning der kan opbevares i en celle.
+Informationen kan også bruges til at indikere behov tilslutning af oplader til brugeren gennem f.eks. en statusindikator eller om afladning af systemet kan tillades. 
+Ved strømsvigt hvor f.eks et UPS-anlæg (Uninterruptible power supply) skal levere nødstrøm indtil normal drift genoprettes, vil SoC bidrage med information om hvorvidt anlægget overhovedet vil være i stand til at understøtte den tilkoblede belastning. \\
+
+Den simpleste definition er baseret på den maximalt mulige kapacitet der kan opnås ved meget langsom afladning (for eksempel $C/20$) indtil den absolut minimale spænding for cellen er nået. Derfor for at finde $Q_{max}$, oplades batteriet helt, og denne afladning finder sted. Derefter er SoC defineret som: 
 
 \begin {equation} 
-SoC(t) = \frac{Q_t}{Q_n} \label{eq:soc}
+SoC = (Q_{max}-Q_{passed})\times 100/Q_{max} \label{eq:soc}
 \end {equation}
 
 Der anvendes typisk tre metoder til at afgøre SoC, gennem en direkte måling af cellespænding, ved at tælle ladning, og en blanding af disse to.
 
 \subsection{Måling af terminalspænding}
-Ved denne metode vil en simpel spændingsmåling henover cellerne kunne indikere kapaciteten, da spændingen på en celle tilnærmelsesvis falder lineært under afladning i dette projekts valgte arbejdsområde. Den er dog ikke så præcis, da det reelle afladningskurve ikke er lineær.
-
+Ved denne metode vil en simpel spændingsmåling henover cellerne kunne indikere kapaciteten, da spændingen på en celle tilnærmelsesvis falder lineært under afladning i dette projekts valgte arbejdsområde. Den er dog ikke så præcis, da den reelle afladningskurve ikke er lineær, men det er i nogen situationer heller ikke nødvendigt med en meget præcis kapacitetsmåling. Det kræver også en meget præcis spændingsmåler da det kan være svært at se forskelle i afladekurvens flade region. Derudover er der parametre som cellens indre modstand, da udgangsspændingen ændrer sig afhægigt af hvor hårdt man aflader pga. dette, og derfor gør afladekurven anderledes. 
 
 \subsection{Coulomb-tælle metode}
 Denne metode går ud på at måle afladningsstrømmen i en batteripakke og integrere strømmen over tid, for at estimere realtids-kapaciteten $SoC(t)$. 
@@ -109,31 +102,32 @@ Denne metode går ud på at måle afladningsstrømmen i en batteripakke og integ
 \begin {equation} 
 SoC(t) = SoC(0) - \frac{1}{C} \int_{0}^{t} idt  \label{eq:coulomb-count}
 \end {equation}
+\klp{Måske skal formlen forklares lidt bedre?}
 
-Overstående ligning kan forenkles,
-
-\begin {equation} 
-SoC(t) = SoC(0) - \frac{1}{C} \int_{0}^{t} idt  \label{eq:coulomb-count}
-\end {equation}
-
-Disse to teknikker kan også kombineres for at give et mere nøjagtigt estimat af batteripakkens kapacitet.
+Disse to teknikker kan også kombineres for at give et mere nøjagtigt estimat af batteripakkens kapacitet. I dette projekt benyttes måling af cellespændingerne, da man ikke har behov for en præcis kapacitetsmåling, men nærmere kun hvornår der skal oplades. Da batteripakken er integreret i reclinerstolen og dermed gemt af vejen for brugeren, så der er ikke nem mulighed for aflæsning af kapacitet i forvejen. 
 
 \section{State of Health (SoH)}
-Formålet med SoH er at give en indikation af hvilken ydeevne der kan forventes af en celle eller batteripakke i den nuværende tilstand, eller fortælle noget omkring den resterende levetid før der er behov for udskiftning.
-\\
-I nogle applikationer bliver SoH løbende gemt i en logbog for validere
+Formålet med SoH er at give en indikation af hvilken ydeevne der kan forventes af en celle eller batteripakke i den nuværende tilstand, eller fortælle noget omkring den resterende levetid før der er behov for udskiftning. Der findes dog her, lige som ved state of charge, også flere metoder med hensyn til præcisionen. 
+
+\subsection{Cycle count}
+Den mest simple måde at definere levetiden på cellerne er at tælle antal cycles. Som forklaret i kapitel \ref{kap:lithium}, har de forskellige kemier et estimeret antal cycles. Her kan man sammenligne de nuværende cycles med det estimerede for at give en nogenlunde representation af hvor meget af cellernes levetid der er brugt og dermed om cellerne snart skal udskiftes. Dette kan stilles op som en formel: 
 
 \begin {equation} 
-SoH = \frac{nominel \space kapacitet - nuværende  kapacitet}{nominel kapacitet} \label{eq:soh}
+SoH = \frac{antal \; lade \; cycles}{estimerede \; cycles}\times 100\percent \label{eq:soh_cycles}
 \end {equation}
-%    05609223.pdf
+
+hvor resultatet angiver den brugte levetid i procent. Denne metode er dog ikke særlig præcis, da levetiden ændres drastisk afhængigt af brug og temperatur. 
+
+\subsection{Kapacitetsmåling}
+En anden måde at beregne state of health på, er ved at holde øje med kapaciteten. Over tid, bliver cellens fulde kapacitet degraderet, og derfor kan man holde den aktuelle maksimum kapacitet op mod kapaciteten som den var da cellen var fabriksny. Derfor: 
 
 \begin {equation} 
-SOH(t) = SOH(0) - \frac{1}{2N*E_{0}(0)}d \int_{0}^{t} P_{i}(t)dt
+SoH = \frac{C_{max}}{C_{rated}}\times 100\percent \label{eq:soh_capacity}
 \end {equation}
 
+hvor resultatet angiver cellens restende maksimum kapacitet i procent. Denne metode er en del mere præcis, da den jo viser hvor meget cellen fysisk stadig kan levere. Dog kan man ikke særlig præcist estimere hvornår cellerne skal skiftes, da man så skal have temperatur og fremtidigt forskelligt brug med i beregningerne.\\ 
 
-
+Som en "hovedregel" \space siger man at når cellen når $70\percent$ maksimum kapacitet, er den død og skal udskiftes. Årsagen til dette er, at efter de $70\percent$ begynder den brugbare kapacitet at falde meget hurtigt og upålideligt.\footnote{s. 170 i Battery Power Management for Portable Devices af Yevgen Barsukov}
 
 \section{Temperaturmåling}
 Måling af temperature i en batteripakke er nødvendig, for at sikre optimal op- og afladningsforhold. Alt afhængig vigtigheden af kendskab til temperaturene forskellige steder, kan der være flere temperaturmålere. Placeringerne er typisk på PCB'et og cellerne.

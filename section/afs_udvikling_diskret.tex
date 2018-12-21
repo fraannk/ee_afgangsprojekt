@@ -60,16 +60,14 @@ For valg af shuntmodstand skal der tages højde for den maksimale effektafsætte
 Ved hjælp af en to differensforstærkere kan et brugbart indgangssignal til ADC'en realiseres for både opladning og afladning. Forstærkerne er opbygget med en operationsforstærkere koblet med negativ feedback.
 \\
 
-Den nødvendige forstærkning $A_{v}$ af signalet for måling af afladestrømmen findes,
+Den maksimale forstærkning $A_{v}$ af signalet for måling af afladestrømmen findes,
 \begin {equation} 
 A_{v} = \frac{V_{o}}{V_{s}} = \frac{3.3\volt}{60\milli\volt} = 55
 \end {equation}
 
-For at opnå denne forstærkning anvendes en indgangsmodstand ($R37$) på $1\kilo\ohm$ og en $56\kilo\ohm$ modstand på feedbacken ($R47$), for at blive på $E12$-serien. Udgangsspændingen fås ved brug af ligning ligning \ref{eq:op_amp_gain}, hvor $V_{cell3} = V+$ og $V_{cell2} = V+$
-\klp{Gain skal være mindre. 1k2 og 56k = 2V8 @ 6A }
-For at overskueliggøre beregningen vælges $R41 = R37$ og $R47 = R48$.
+For at opnå denne forstærkning anvendes en indgangsmodstand ($R37$) på $1\kilo\ohm$ og en $47\kilo\ohm$ modstand på feedbacken ($R47$), for at blive på $E6$-serien. Udgangsspændingen fås ved brug af ligning ligning \ref{eq:op_amp_gain}, hvor $V_{cell3} = V+$ og $V_{cell2} = V+$. For at overskueliggøre beregningen vælges $R41 = R37$ og $R47 = R48$. Med disse modstandsværdier fås en forstærkning på $A_{v} = $
 \\
-
+\klp{Gain skal være mindre. 1k og 47k = 2V8 @ 6A }
 Som tidligere nævnt vil et retningsskifte af strømmen forekomme under opladning, så forstærkeren skal kunne trigge på et positivt spændingsfald. Ved at vende operationsforstærkeren om, kan måling af strømmen ved opladning ske uden brug af en negativ forsyning.
 \\
 
@@ -77,6 +75,7 @@ Da opladestrømmen er $1\ampere$ kan en væsentlig højere forstærkning anvende
 
 
 \section{Passiv balancering}\label{afs:balancing}
+\klp{balanceringsmodstand skal photoshoppes til 75ohm}
 Når batteripakkens opladecyklus er ved at være færdig og den første celle er fuldt opladt, vil passiv balancering blive aktiveret. Batteripakken vil maksimalt balancere tre celler på en gang, da den er færdig med at oplade når den får signal om, at alle fire celle har behov for balancering, da de jo har nået den maksimale cellespænding.
 \\
 
@@ -90,7 +89,7 @@ Balanceringskredsen kan ses på figur \ref{fig:passiv_balancering} består af tr
 	\label{fig:passiv_balancering}
 \end{figure}
 
-Basen på $Q6$ er forspændt med $3.3\volt$ og under afladning vil microcontrolleren sætte benet højt på emitteren, hvilket holder $Q6$ slukket. For at aktivere balancering, skal potentialet på basen af $Q5$ være en base-emitter strækning lavere end dens emitter. Dette kan gøre ved at sætte microcollerens ben lav, hvilket vil tænde $Q6$, trække potentiale på basen af $Q6$ ned og derved lede strømmen igennem $R21$. Balanceringstrømmen igennem $R21$ bliver maksimalt $55\milli\ampere$.
+Basen på $Q6$ er forspændt med $3.3\volt$ og under afladning vil microcontrolleren sætte benet højt på emitteren, hvilket holder $Q6$ slukket. For at aktivere balancering, skal potentialet på basen af $Q5$ være en base-emitter strækning lavere end dens emitter. Dette kan gøre ved at sætte microcollerens ben lav, hvilket vil tænde $Q6$, trække potentiale på basen af $Q6$ ned og derved lede strømmen igennem $R21$. $R21$ består af to 0805-$150\ohm$ modstande for at få en modstandsværdi på $75\ohm$ som kan klare $2 x 125\milli\watt = 250\milli\watt$. Med denne modstand vil balanceringsstrømmen maksimalt blive $50\milli\ampere$ og have en effektafsættelse på $190\milli\watt$.
 
 \section{MOSFET driverkreds}
 Batteripakken skal kunne afbrydes fra en belastning i tilfælde af fejlsituationer. For at kunne opnå dette, er to MOSFET'er i en fælles drain konfiguration valgt og virker som en to tovejs kontakt. De kan både være placeret på $V_{pack+}$ og $V_{pack-}$. Hvis en N-kanal MOSFET er på $V_{pack+}$ skal gaten tændes med $V_{out} + V_{gs}$, hvilket i denne applikation giver en spænding på $V_{gs} = 28.8\volt$. For at kunne opnå denne spænding vil en charge pumpe være nødvendig. For at undgå brug af en charge pumpe kan en P-kanal MOSFET anvendes. Udvalget på P-kanal MOSFET'er er dog begrænset og de har en væsentlig hører ledemodstand, $R_{ds-ON}$. 
@@ -149,17 +148,17 @@ V_{-} = V_{PWM-DSG} + V_{CELL1-GND} = 60\milli\volt + V_{PWM-DSG}
 
 Under afladning antager $V_{PWM-DSG}$ negativ værdi. Når bidraget fra  strømtrækket overstiger grænsen, vil potentialet på $V-$ blive negativ og dermed blive lavere end $V+$, som vil få operationsforstærkerens udgang til at gå høj. Da den er forsynet med $3.3\volt$ vil den udgangen ideelt set antage samme potentiale. Som tidligere nævnt er operationsforstærkerens udgang forbundet med basen på $Q12$ som dermed tændes og slukker driveren.
 \\
-Samtidig med at driveren slukkes leder dioden $D1$ og forspænder $V+$ gennem en spændingsdeling af $R12$ og $R13$. Diodernes opgave i både op- og afladning er dertil at levere et spændingsfald på $0.5\volt$, for at sikre at kredsen kan nulstilles. Potentialet på $V+$ vil efter en overstrøms situation være,
-\klp{R12 skal ændres til 390k}
+Samtidig med at driveren slukkes leder dioden $D1$ og forspænder $V+$ gennem en spændingsdeling af $R12$ og $R13$. Schottky diodernes opgave i både op- og afladning er dertil at levere et spændingsfald på $0.3\volt$, for at sikre at kredsen kan nulstilles. Potentialet på $V+$ vil efter en overstrøms situation være,
+\klp{R12 skal ændres til 330k}
 \begin {equation} 
-V_{+} = (V_{High} - V_{diode} ) * \frac{R_{13}}{R_{12}+R_{13}} = (3.3\volt - 0.5\volt ) * \frac{10\kilo\ohm}{390\kilo\ohm + 10\kilo\ohm} =  70\milli\volt
+V_{+} = (V_{High} - V_{diode} ) * \frac{R_{13}}{R_{12}+R_{13}} = (3.3\volt - 0.3\volt ) * \frac{10\kilo\ohm}{330\kilo\ohm + 10\kilo\ohm} =  88\milli\volt
 \end {equation}
 
 Når kredsen har trigget og slukket driveren, vil MOSFET'en, $Q25_B$, forblive slukket selvom belastningen kan være frakoblet. Når MOSFET'en er slukket vil den ikke lede og bodydioden vil blokere strømmen.
 Hvis intet er koblet på udgangsterminalerne eller en belastning der trækker under $6\ampere$ er tilkoblet vil potentialet på $V-$ være positiv og maksimalt $60\milli\volt$. Operationsforstærkeren vil forblive høj på udgangen da,
 
 \begin {equation} 
-V+ > V- \quad = \quad 70\milli\volt > 60\milli\volt
+V+ > V- \quad = \quad 88\milli\volt > 60\milli\volt
 \end {equation}
 
 På den måde har operationsforstærkeren en indbygget hysterese.

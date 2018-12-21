@@ -33,7 +33,7 @@ Temperaturforskelle i en batteripakke og dermed forskelle på celletemperature k
 
 I batteripakker hvor flere celler indgår, vil forskelle på stærke og svage celler forstørres for hver cyklus. Under opladning kan en svag celle blive svagere indtil den fejler, hvilket kan forsage permanent skade på hele batteripakken. Da en batteripakkes levetid afhænger af den svageste celle, vil en forøgelse i levetid kunne opnås ved hjælp af cellebalancering, da slid på den svageste celle minimeres. Opladning af en Li-Ion celle foregår i tre faser og er skitseret på figur \ref{fig:opladning_liion}.
 \klp{Fase 4 skal fjernes da vi ikke har det med}
-Under den første fase oplades cellerne med en konstant strøm, hvor spændingen stiger lineært. Det er i denne fase hvor størstedelen af
+Under den første fase oplades cellerne med en konstant strøm, hvor spændingen stiger lineært. Det er i denne fase hvor størstedelen af cellen bliver ladt op.
 \\
 
 I anden fase påbegyndes når den første celle er fuldt opladet, hvilket kan ses ved at cellespændingen når $V_{EOC}$ (End Of Charge) som typisk ligger på $V_{EOC} = 4.2 \volt$. Herefter påbegyndes balancering af cellerne, hvor den opladte celle aflades for efterfølgende at blive opladt sammen med de andre celler indtil de alle antager samme spænding.
@@ -51,7 +51,7 @@ Under passiv balancering holder systemet øje med spændingen på de enkelte cel
 
 %Denne metode har MOSFET i parallel med hver enkelt celle og kan styres simpelt ved hjælp af en comparator som får en MOSFET til at tænde for indkobling af en afladningsmodstand. Microcontrolleren vil samtidig overvåge samtlige cellespændinger, og vil derfor have styr på om hvorvidt der er behov for balancering.
 
-Fordelen ved denne metode er at den er simpel og pålidelig, men tilgengæld er den ineffektiv, da al overskudsenergi omdannes til varme og dermed er spildt.
+Fordelen ved denne metode er at den er simpel og pålidelig, men tilgengæld er den ineffektiv, da al overskudsenergi omdannes til varme og dermed er spildt. Da der afsættes meget effekt i balanceringsmodstanden, skal der under designfasen tages højde derefter.
 
 \begin{figure}[h]
 	\centering
@@ -65,17 +65,13 @@ Fordelen ved denne metode er at den er simpel og pålidelig, men tilgengæld er 
 
 
 \subsection{Aktiv balancering}
-Fælles for de aktive balanceringsteknikker er at de redistribuerer energi fra celler med høj ladning til celler med lav. På den måde mindskes tabet i forhold til passiv balancering hvor overskuds energi er ren tab. Da der i visse applikationer kan forekomme mange celler kan der være langt fra en celle der skal afgive energi til en der skal modtage, hvilket vil medføre et energi tab i transport.
-
-Aktiv balancering kan opdeles i XXX topologier:
-
-Fordele og ulemper
+Fælles for de aktive balanceringsteknikker er at de redistribuerer energi fra celler med høj ladning til celler med lav. På den måde mindskes tabet i forhold til passiv balancering hvor overskuds energi er ren tab. Da der i visse applikationer kan forekomme mange celler kan der være langt fra en celle der skal afgive energi til en der skal modtage, hvilket vil medføre et energi tab i transport. Aktiv balancering tillader større balanceringsstrømme end passiv balancering, meget af energien bliver redistribueret i stedet for omdannet til varme.
 \\
 
-Charge shuttles
+Der findes mange former for aktiv balancering. "Controlled shunting" er en af dem, og går ud på at omdirigere fuldt opladte celler, og derved kun lade på de resterende i batteripakken.
 \\
 
-Aktiv balancering tillader større balanceringsstrømme end passiv balancering, meget af energien bliver redistribueret i stedet for omdannet til varme.
+En anden aktiv balanceringsteknik hedder "Switched capacitor". Her sidder en kondensator mellem naboceller og kan aktiveres for at flytte energi fra den ene celle til den anden.
 
 \section{Estimering af kapacitet}
 En af de vigtigste funktionaliteter i et batteristyresystem er estimering af kapacitet, State of Charge (SoC), og er direkte defineret som den procentdel af maksimal ladning i en celle eller en batteripakke. SoC er vigtig da det afspejler batteripakkens ydeevne. Nøjagtig estimering af SoC er ikke kun vigtig til beskyttelse af cellerne, men også for at forhindre overopladning og underafladning, hvilket bidrager til forlængelse af batteripakkens levetid. Dertil muliggør informationen også at lade batteristyresystemet ligge rationelle strategier for at spare energi. \\
@@ -92,7 +88,12 @@ SoC = (Q_{max}-Q_{passed})\times 100/Q_{max} \label{eq:soc}
 Der anvendes typisk tre metoder til at afgøre SoC, gennem en direkte måling af cellespænding, ved at tælle ladning, og en blanding af disse to.
 
 \subsection{Måling af terminalspænding}
-Ved denne metode vil en simpel spændingsmåling henover cellerne kunne indikere kapaciteten, da spændingen på en celle tilnærmelsesvis falder lineært under afladning i dette projekts valgte arbejdsområde. Den er dog ikke så præcis, da den reelle afladningskurve ikke er lineær, men det er i nogen situationer heller ikke nødvendigt med en meget præcis kapacitetsmåling. Det kræver også en meget præcis spændingsmåler da det kan være svært at se forskelle i afladekurvens flade region. Derudover er der parametre som cellens indre modstand, da udgangsspændingen ændrer sig afhægigt af hvor hårdt man aflader pga. dette, og derfor gør afladekurven anderledes. 
+Ved denne metode vil en simpel spændingsmåling henover cellerne kunne indikere kapaciteten, da spændingen på en celle tilnærmelsesvis falder lineært under afladning i dette projekts valgte arbejdsområde. Den er dog ikke så præcis, da den reelle afladningskurve ikke er lineær, men det er i nogen situationer heller ikke nødvendigt med en meget præcis kapacitetsmåling, så længe op- og afladningspunkterne er veldefinerede.
+\\
+
+Det kræver en meget præcis spændingsmåler, da den skal kunne måle meget små forskelle på afladningskurvens flade region. Derudover er der parametre som cellens indre modstand, der kan have stor betydning for kapacitetsmålingen, da den bliver mere betydende under stigende strømtræk. Hvis realtidsmåling (med stor) ikke er nødvendig, kan et mere nøjagtigt estimat opnås ved at måle spændingen $1000 - 2000 \sec$ efter et strømtræk.
+\klp{finde kilde på sekunderne}
+
 
 \subsection{Coulomb-tælle metode}
 Denne metode går ud på at måle afladningsstrømmen i en batteripakke og integrere strømmen over tid, for at estimere realtids-kapaciteten $SoC(t)$. 
@@ -100,7 +101,10 @@ Denne metode går ud på at måle afladningsstrømmen i en batteripakke og integ
 \begin {equation} 
 SoC(t) = SoC(0) - \frac{1}{C} \int_{0}^{t} idt  \label{eq:coulomb-count}
 \end {equation}
-\klp{Måske skal formlen forklares lidt bedre?}
+\klp{Måske skal formlen forklares lidt bedre? - hvor er den fundet?}
+
+Strømmåling kan give et mere nøjagtig realtidsbillede af hvordan kapaciteten ser ud i batteripakken i forhold til at måle terminalspændingen.
+\\
 
 Disse to teknikker kan også kombineres for at give et mere nøjagtigt estimat af batteripakkens kapacitet. I dette projekt benyttes måling af cellespændingerne, da man ikke har behov for en præcis kapacitetsmåling, men nærmere kun hvornår der skal oplades. Da batteripakken er integreret i reclinerstolen og dermed gemt af vejen for brugeren, så der er ikke nem mulighed for aflæsning af kapacitet i forvejen. 
 

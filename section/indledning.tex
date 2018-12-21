@@ -42,8 +42,8 @@ I dette afsnit fremstår de opsatte krav til projektet. Kravene er en sammenfatn
 \begin{itemize}[noitemsep]
 	\item Max afladestrøm, $I_{out} = 6\ampere$
 	\item Max opladestrøm, $I_{in} = 1\ampere$
-	\item Balancering under opladning ved flere celler i serie. Balanceringsspændingen skal have en opløsning på  $V_{bal} = 50\milli\volt$
-	\item Når batteripakken er igang med at oplade, skal den kunne skifte til at aflade, hvis der skal bruges strøm. Derefter skal den selv kunne skifte tilbage til opladning
+	\item Balancering under opladning ved flere celler i serie. Balanceringsstrømmen skal minimum være på $V_{bal} = 50\milli\ampere$
+	\item Batteripakken skal kunne detektere om den er oplade eller aflade tilstand
 	\item Afladnings- og kortslutningsbeskyttelse
 	\item I tilfælde af software fejl skal hardwaren ikke kunne tage skade
 \end{itemize}
@@ -51,8 +51,8 @@ I dette afsnit fremstår de opsatte krav til projektet. Kravene er en sammenfatn
 \subsubsection{Krav til software}
 \begin{itemize}[noitemsep]
 	\item "Låsning"\space af yderpunkter på batteriernes afladekurve (Brug af f.eks. 80\% af fuld kapacitet)
-	\item Temperaturmålinger af celler for sikker drift \textemdash \space funktionsområde $\SI{-20}{\celsius}$ til $\SI{50}{\celsius}$
-	\item Systemet skal have en brugerflade.
+	\item Temperaturmålinger af celler for sikker drift \textemdash \space funktionsområde $\SI{5}{\celsius}$ til $\SI{45}{\celsius}$
+	\item Systemet skal have en brugerflade
 	\item State of charge (SoC) \textemdash \space Information om cellernes kapacitet skal gemmes og være tilgængelig for brugeren
 	\item State of health (SoH) \textemdash \space Information om antallet af fulde lade cycles skal gemmes og være tilgængelig for brugeren
 	\item Softwaren er en del af produktet og skal overholde ANSI-C (C90) standarden
@@ -60,7 +60,7 @@ I dette afsnit fremstår de opsatte krav til projektet. Kravene er en sammenfatn
 
 
 \section{Løsningsmodel}
-Bliver udarbejdet senere
+Der har under udvikling af begge prototyper taget udgangspunkt i en løsningsmodel. Den er dog løbende blevet ændret i takt med antallet af iterationer. Den endelige løsningsmodel ses på figur XXX
 
 \section{Læsevejledning}
 Bliver udarbejdet senere

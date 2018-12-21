@@ -40,15 +40,13 @@ I anden fase påbegyndes når den første celle er fuldt opladet, hvilket kan se
 Fasen kan siges at være opladning ved konstant spænding.
 \\
 
-Tredje og sidste fase er når cellerne har færdiggjort sin ladecyklus og går på standby. Grundet cellernes indre modstand, vil de langsomt aflades, hvilket ses på den nedadgående spændingsflanke.
+Tredje og sidste fase er når cellerne har færdiggjort deres ladecyklus og går på standby. Grundet cellernes indre modstand, vil de langsomt aflades, hvilket ses på den nedadgående spændingsflanke.
 
 \subsection{Passiv balancering}
-Blanceringsteknikkerne kan opdeles i to kategorier: passiv og aktiv balancering.
-\\
-Passiv balancering går ud på at de omdanne overskudsenergi til varme fra fuldt opladte celler, modsat aktiv balancering som flytter overskudenergien til lavere opladte celler.
+Blanceringsteknikkerne kan opdeles i to kategorier: passiv og aktiv balancering. Passiv balancering går ud på at de omdanne overskudsenergi til varme fra fuldt opladte celler, modsat aktiv balancering som flytter overskudenergien til lavere opladte celler.
 \\
 
-Under passiv balancering holder systemet øje med spændingen på de enkelte celler. Når en eller flere celler opnår maks cellespænding $V_{EOC}$ og derved er fuldt opladet, aflades de igennem en modstand til de har samme spænding som den laveste celle i systemet eller en spændingsreference. Efterfølgende oplades alle celler igen, og denne proces vil forsætte indtil alle celler er fuldt opladet. Afladningsmetoden hedder controlled shunting resistor og er vist på figur \ref{fig:passiv_balancering_teknik}. 
+Under passiv balancering holder systemet øje med spændingen på de enkelte celler. Når en eller flere celler opnår maks cellespænding $V_{EOC}$ og derved er fuldt opladet, aflades de igennem en modstand til de har samme spænding som den laveste celle i systemet eller til en spændingsreference. Efterfølgende oplades alle celler igen, og denne proces vil forsætte indtil alle celler er fuldt opladet. Afladningsmetoden hedder "controlled shunting resistor" og er vist på figur \ref{fig:passiv_balancering_teknik}. 
 
 
 %Denne metode har MOSFET i parallel med hver enkelt celle og kan styres simpelt ved hjælp af en comparator som får en MOSFET til at tænde for indkobling af en afladningsmodstand. Microcontrolleren vil samtidig overvåge samtlige cellespændinger, og vil derfor have styr på om hvorvidt der er behov for balancering.

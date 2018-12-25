@@ -1,0 +1,132 @@
+\chapter{Stykliste} \label{bilag:styklister}
+\begin{table}[h!]
+	\small
+	%\centering
+	\label{tab:stykliste_ic}
+	\begin{threeparttable}
+		\begin{tabular}{p{0.25\linewidth}p{0.2\linewidth}p{0.25\linewidth}p{0.15\linewidth}p{0.05\linewidth}}
+			%\begin{tabular}{ l l l l l l l }
+			\toprule
+			\multicolumn{1}{l}{\textbf{Komponent}}  &
+			\multicolumn{1}{l}{\textbf{Værdi}}      &
+			\multicolumn{1}{l}{\textbf{Type}}       &
+			\multicolumn{1}{l}{\textbf{Bemærkning}} &  \\ 
+			\hline
+			C7                   & $\SI{1}{\nano\farad}$   & SMD 0603 &   \\
+			C12, C13             & $\SI{2.2}{\nano\farad}$   & SMD 0603 &   \\
+			C5, C10, C27         & $\SI{10}{\nano\farad}$  & SMD 0603 &   \\
+			C3, C8, C9, C11, C16 & $\SI{100}{\nano\farad}$ & SMD 0603  &   \\
+			C26                  & $\SI{100}{\nano\farad}$ & SMD 0805 &  $\SI{50}{\volt}$  \\
+			C1, C2, C18, C19, C21, C22 & $\SI{1}{\micro\farad}$  & SMD 0603 &   \\
+			C15, C24 & $\SI{1}{\micro\farad}$  & SMD 0805 &   \\
+			C14 & $\SI{1}{\micro\farad}$  & SMD ELECTROLYT  & $\SI{50}{\volt}$  \\
+			C20 & $\SI{4.7}{\micro\farad}$ & SMD 0603 &   \\
+			C23, C25 & $\SI{10}{\micro\farad}$  & SMD ELECTROLYT  & $\SI{16}{\volt}$  \\
+			C17 & $\SI{10}{\micro\farad}$  & SMD ELECTROLYT  & $\SI{35}{\volt}$  \\
+			\midrule
+			RS & $\SI{10}{\milli\ohm}$ & SMD 2512 &  $\SI{3}{\watt}$    \\
+			R13, R14, R15, R28, R29, R30, R31& $\SI{22}{\ohm}$  & SMD 0603 &  $\SI{100}{\milli\watt}$ \\
+			R19, R24, R25, R26, R32 & $\SI{100}{\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+			R4, R5, R6, R7, R9 & $\SI{220}{\ohm}$ & SMD 0805 & $\SI{125}{\milli\watt}$ (a) \\
+			R18, R20 & $\SI{1}{\kilo\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+			R10 & $\SI{3.3}{\kilo\ohm}$ & SMD 0805 & $\SI{125}{\milli\watt}$  \\
+			R8, R11, R112, R16, R21, R22, R23, R27, R33, R34 & $\SI{10}{\kilo\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+			R17 & $\SI{22}{\kilo\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+			R1, R2, R3 & $\SI{1}{\mega\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+			R35 & $\SI{10}{\mega\ohm}$ & SMD 0805 & $\SI{125}{\milli\watt}$  \\
+			\midrule
+			Q1     & BSS84 & P-CH MOSFET &   \\
+			Q3, Q4 & BC846B & BJT NPN &   \\
+			Q5     & STL15DN4F5 & Dual N-ch MOSFET &   \\
+			Q10    & 2N7002 & Logic level MOSFET &   \\
+			\midrule
+			S1, S3, S4 & SDTM-620-5mm  & TACT switch 5mm &   \\
+			U1 & LM75BIM3 & $I^{2}C$ Temperatur måler &   \\
+			U3 & BQ7692003PWR & BATTERY MONITOR &   \\
+			MICROCONTROLLER & LPC804M101JDH22 & MICROCONTROLLER & \\
+			U10 & TS9011SCX & $\SI{250}{\milli\volt}$ Low Quiescent &   \\
+			Z10 & BZX84-C12 & $\SI{12}{\volt}$ zener diode&   \\
+			D3, D4 & LED-G-3mm  & Grøn LED &   \\
+			D5 & 1N5819 & Schottky diode &   \\
+			PACK & CON-2X1-POLET & 2x1 polet stik - vinklet &   \\
+			JP1, JP2 & HEADER03 & 3 pins - male &   \\
+			UART, DISPLAY & HEADER04 & 4 pins - female &   \\
+			CELL & HEADER05 & 5 pins - female &   \\
+			\hline
+			\bottomrule
+		\end{tabular}
+		\begin{tablenotes}
+			\item[a] 2 stk $220\ohm$ 0805 i parallel som balanceringsmodstand.
+		\end{tablenotes}
+	\end{threeparttable}
+	\caption{Stykliste for versionen med batteriovervågningskreds.}
+\end{table} 
+
+
+\begin{table}[h!]
+\small
+%\centering
+\label{tab:stykliste_diskret}
+\begin{threeparttable}
+\begin{tabular}{p{0.25\linewidth}p{0.2\linewidth}p{0.25\linewidth}p{0.15\linewidth}p{0.05\linewidth}}
+%\begin{tabular}{ l l l l l l l }
+\toprule
+\multicolumn{1}{l}{\textbf{Komponent}}  &
+\multicolumn{1}{l}{\textbf{Værdi}}      &
+\multicolumn{1}{l}{\textbf{Type}}       &
+\multicolumn{1}{l}{\textbf{Bemærkning}} &  \\ 
+\hline
+C18, C19                  & $\SI{100}{\pico\farad}$ & SMD 0603       &   \\
+C3                        & $\SI{1}{\nano\farad}$   & SMD 0603       &   \\
+C2, C4, C7, C11           & $\SI{10}{\nano\farad}$  & SMD 0603       &   \\
+C1, C5, C9, C10, C16, C17 & $\SI{100}{\nano\farad}$ & SMD 0603       &   \\
+C12, C14                  & $\SI{1}{\micro\farad}$  & SMD 0805       &   \\
+C13, C15                          & $\SI{10}{\micro\farad}$ & SMD ELECTROLYT &   \\
+\midrule
+RS                                & $\SI{10}{\milli\ohm}$ & SMD 2512 &  $\SI{3}{\watt}$    \\
+R6, R35                           & $\SI{10}{\ohm}$  & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+R64, R65, R66, R68, R69, R70, R71 & $\SI{22}{\ohm}$  & SMD 0603 &  $\SI{100}{\milli\watt}$ \\
+R31, R32                          & $\SI{100}{\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+R17, R21, R24, R27                & $\SI{150}{\ohm}$ & SMD 0805 & $\SI{125}{\milli\watt}$ (a) \\
+R4, R30, R36, R37, R39, R41, R43  & $\SI{1}{\kilo\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+R18, R20, R23, R26 & $\SI{3.3}{\kilo\ohm}$ & SMD 0805 & $\SI{125}{\milli\watt}$  \\
+R1, R2, R5, R7, R8, R11, R13, R15, R33, R34, R67, R72, R73, R74 & $\SI{10}{\kilo\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+R50, R51, R54, R55, R58, R59, R62, R63 & $\SI{15}{\kilo\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+R28, R29, R49, R52, R53, R56, R57, R60, R61 & $\SI{22}{\kilo\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+R47, R48 & $\SI{47}{\kilo\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+R16, R19, R22, R25 & $\SI{100}{\kilo\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+R45, R46 & $\SI{220}{\kilo\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+R3, R14 & $\SI{270}{\kilo\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+R12 & $\SI{330}{\kilo\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+R9 & $\SI{470}{\kilo\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+R10 & $\SI{10}{\mega\ohm}$ & SMD 0603 & $\SI{100}{\milli\watt}$  \\
+\midrule
+
+Q1, Q3, Q6, Q8, Q11, Q12, Q13, Q28 & BC846B & BJT NPN &   \\
+Q2, Q4, Q5, Q7, Q9, Q27 & BC856B & BJT PNP &   \\
+Q10 & 2N7002 & Logic level MOSFET &   \\
+Q25 & STL15DN4F5 & Dual N-ch MOSFET &   \\
+
+\midrule
+D1, D2 & 1N5819 & Schottky diode &   \\
+D3, D4 & LED-G-3mm  & Grøn LED &   \\
+Z10 & BZX84-C12 & $\SI{12}{\volt}$ zener diode&   \\
+S1, S2 & SDTM-620-5mm  & TACT switch 5mm &   \\
+U1 & LPC804M101JHI33 & Microcontroller &   \\
+U4, U5 & LM324-SMD-5GATES & Quad Op-Amp &   \\
+U10 & TS9011SCX & $\SI{250}{\milli\volt}$ Low Quiescent &   \\
+U12 & LM75BIM3 & $I^{2}C$ Temperatur måler &   \\
+PACK & CON-2X1-POLET & 2x1 polet stik - vinklet &   \\
+JP1, JP2 & HEADER03 & 3 pins - male &   \\
+UART, DISPLAY & HEADER04 & 4 pins - female &   \\
+CELL & HEADER05 & 5 pins - female &   \\
+
+\hline
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item[a] 2 stk $150\ohm$ i parallel som balanceringsmodstand.
+\end{tablenotes}
+\end{threeparttable}
+\caption{Stykliste for diskret version}
+\end{table} 

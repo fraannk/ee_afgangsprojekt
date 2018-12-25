@@ -1,1 +1,9 @@
-\chapter{Diskussion}\label{kap:diskussion}
+\chapter{Diskussion og vurdering}\label{kap:diskussion}
+Valg af topologi blev modulær, da det var den ideelle løsning til antallet af celle i systemet. Da mange funktionaliteter skulle implementeres blev passiv balancering valgt, grundet dens simplicitet og effektivitet for balancering af cellerne.
+\\
+
+Strømmålingen blev realiseret i begge versioner med en $10\milli\ohm$ shunt modstand. I versionen med battery monitor kredsen anbefales en $1\milli\ohm$ shunt modstand, da den skal kunne måle en meget større strøm end nødvendig i dette projekt. 
+\\
+
+Der blev fundet fejl i schematics da PCB var bestilt. Oplde MOSFET'en blev koblet til detektering af afladestrøm og omvendt. Dertil blev der valgt forkert footprint til microcontrolleren på den diskrete version, hvilket skabte store problemer. 
+\klp{Se om vi får det op at køre}

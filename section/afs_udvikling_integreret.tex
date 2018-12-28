@@ -75,6 +75,24 @@ Siden sensoren benytter $I^2C$, er den relativt nemt at tilslutte rent hardware 
 Dette ben (OS) er til eventuelle status meddelelser fra sensoren. Benet bliver ikke brugt i dette system, men er stadig tilføjet for eventuelt fremtidigt brug. Implementering af sensoren i software forklares i kapitel \ref{kap:softwareudvikling}.
 
 \section{Udvikling og realisering af PCB}
+For at skabe stabilitet til microcontolleren og systemet som helhed, og for at komprimere elektronikken er der valgt at designe et PCB. Det færdige PCB kan ses på figur \ref{fig:PCB_IC} og \ref{fig:PCB_IC_bagside}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=15cm]{billeder/IC_1.jpg}
+	\caption{Forsiden af PCB layout af BMS med batteriovervågningskreds.}
+	\label{fig:PCB_IC}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=15cm]{billeder/IC_2.jpg}
+	\caption{Bagsiden af PCB layout af BMS med batteriovervågningskreds.}
+	\label{fig:PCB_IC_bagside}
+\end{figure}
+
+Cellerne forbindes på venstre side af printet, hvor den enkelte celle er forbundet til et balanceringsben.
+
 Banetykkelse
 Balancering og connectors
 Programmerings stik

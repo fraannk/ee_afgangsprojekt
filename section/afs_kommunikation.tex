@@ -1,11 +1,11 @@
 \section{Kommunikationsprotokoller}
 
-I dette afsnit vil de implementerede kommunikationsprotokoller blive diskuteret. Der bliver redegjort for virkemåde og årsag til implementation. 
+I dette afsnit vil de implementerede kommunikationsprotokoller blive diskuteret. Der bliver redegjort for virkemåde og årsag til implementation. Disse protokoller er for det meste implementeret på begge systemer. 
 
 \subsection{Inter-Integrated Circuit (I2C)}
-Kredsen, $BQ76920$, som bliver brugt i den integrerede version af BMS'en, kommunikerer med microcontrolleren vha. I2C. Her sendes kommandoer til IC'en som bestemmer dens instillinger, og for f.eks. at læse cellespændingerne, sendes registernummeret til IC'en, og den svarer dermed med de relevante data. Disse data skal dog så behandles for at kunne bruges. \\
+Kredsen, $BQ76920$, som bliver brugt i den integrerede version af BMS'en, kommunikerer med microcontrolleren vha. I2C. Her sendes kommandoer til IC'en som bestemmer dens instillinger, og for at læse f.eks. cellespændingerne, sendes registernummeret til IC'en, og den svarer dermed med de relevante data. Disse data skal dog så behandles for at kunne bruges. \\
 
-Displayet som viser BMS'ens status, er også forbundet via I2C. Her sendes kommandoer til display, hver gang noget skal ændres. Displayet indeholder sit egen character bibliotek. \sbf{mere}
+%Displayet som viser BMS'ens status, er også forbundet via I2C. Her sendes kommandoer til display, hver %gang noget skal ændres. Displayet indeholder sit egen character bibliotek. \sbf{mere}
 
 \begin{figure}[h]
 	\centering
@@ -18,18 +18,21 @@ På figur \ref{fig:I2C_sm} ses state-machinen over I2C driveren. I2C driveren sk
 
 \verb|I2C_MasterWriteBlocking()| eksekveres når der skal sendes data til slaven. Skulle der ske en fejl på bus'en, vil driveren efter \verb|I2C_WAIT_TIMEOUT| automatisk sende start eller stop kommandoen igen, afhænigt af "fejlkoden". Samme funktionalitet har \verb|I2C_MasterReadBlocking()|, bortset fra at der her først bliver sendt en adresse samt hvilket register der skal læses fra, hvorefter slaven så svarer. \\
 
-\sbf{Ret diagram med Init kommando navn}
-
 \subsection{Universal Asynchronous Receiver/Transmitter (UART)}
-Da kommunikation med en host (computer f.eks.) ønskes, er UART kommunikation den foretrukne metode. Her kan der både læses statusmeddelelser fra computeren, samtidig med at der kan sendes kommandoer til ændring af BMS'ens indstillinger. \\
-
-\sbf{Indsæt screen af terminal med cellespændinger og status}
-
-På host-siden bruges et terminal program (her PuTTY) til at overvåge BMS'en. Cellernes spændinger og aktuelt strømforbrug bliver regelmæssigt overvåget og sendt til host. Her har brugeren også mulighed for at ændre indstillinger såsom low-voltage cutoff og balanceringspunkt.\sbf{Ikke helt sandt endnu...}
+Da kommunikation med en host (computer f.eks.) ønskes, er UART kommunikation den foretrukne metode. Her kan der læses statusmeddelelser fra computeren, såsom overstrøm, overtemperatur samt cellespændinger og strømforbrug.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=12cm]{billeder/UART_sm.png}
+	\includegraphics[width=10cm]{billeder/shell_screen.png}
+	\caption{Screenshot af Terminal forbundet til BMS'en via UART}
+	\label{fig:I2C_sm}
+\end{figure}
+
+På host-siden bruges et terminal program (her "Terminal") til at overvåge BMS'en. Cellernes spændinger og aktuelt strømforbrug og andet bliver regelmæssigt overvåget og sendt til host. Shell'en giver også besked hvis brugeren skal foretage sig noget, som f.eks. et reset ved overstrøm.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=11cm]{billeder/UART_sm.png}
 	\caption{State-machine over UART driveren}
 	\label{fig:UART_sm}
 \end{figure}

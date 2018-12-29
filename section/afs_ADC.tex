@@ -11,15 +11,21 @@ V_{cell} = ADC(cell) \times 7
 hvor 7 er fundet vha. måling og sammenligning af de to værdier. \\
 
 Til strømmåleren bliver der også brugt analog til digital konvertering. Her bliver der brugt en kanal til hhv. positiv strøm (altså hvad der trækkes ud af systemet), og en kanal til at måle hvor meget der oplades med. 
-\sbf{Måske noget om sucessiv approximering og billeder til det?}
 \sbf{Forklar hvordan det virker med opløsning. altså hvorfor en adc værdi på 1 er lig med 0,5mv, efter gain på 0,68 er ganget på.}
 \sbf{Strømmåler forklaring. samme princip med gain}
 
 \subsection{Integreret BMS}
-I den integrerede kreds sidder der en 14-bit's ADC som tager målinger af både cellespændinger, strømforbrug, thermistorer, og interne temperaturer. Cellespændingerne bliver læst i 2-komplement formatet og i $\milli\volt$. Formlen for at omregne disse værdier er således: 
+I den integrerede kreds sidder der en 14-bit's ADC som tager målinger af både cellespændinger, eventuelle eksterne thermistorer, og interne temperaturer. Cellespændingerne bliver læst i 2-komplement formatet og i $\milli\volt$. Formlen for at omregne disse værdier er således: 
 \begin {equation} 
 V_{cell} = GAIN \times ADC(cell) + OFFSET
 \end {equation}
-Ifølge databladet\footnote{http://www.ti.com/lit/ds/symlink/bq76920.pdf} er $GAIN$ på $380\micro\volt/LSB$ og $OFFSET$ er på $30\milli\volt$. \\
+Ifølge databladet\footnote{\url{http://www.ti.com/lit/ds/symlink/bq76920.pdf} side 22-23} er $GAIN$ på $380\micro\volt/LSB$ og $OFFSET$ er på $30\milli\volt$. \\
 
-Derfor, hvis der læses $0x1F10$ fra registrene $VC1_{HI}$ og $VC1_{LO}$ ($0x0C$ og $0x0D$) giver det en cellespænding på $3052\milli\volt$ eller $3,052\volt$.
+Derfor, hvis der læses $0x1F10$ fra registrene $VC1_{HI}$ og $VC1_{LO}$ ($0x0C$ og $0x0D$) giver det en cellespænding på $3052\milli\volt$ eller $3,052\volt$.\\
+
+For at lave strømmåling er der også en 16-bit's integrerende ADC som måler på shunt modstanden. Værdien udlæses fra IC'en i et 16-bit 2's complement format og da ADC'en måler spændingsfaldet over modstanden, angiver den resultatet i $\micro\volt$. Derfor, for at omregne til strømforbrug ganges der en faktor\footnote{\url{http://www.ti.com/lit/ds/symlink/bq76920.pdf} side 25} på: 
+\begin {equation} 
+I = ADC(Shunt) \times 8.44\micro\volt/LSB
+\end {equation}
+
+Derfor, hvis der læses $0x0C08$ fra registrene $CC_{HI}$ og $CC_{LO}$ ($0x32$ og $0x33$) giver det et aktuelt strømforbrug på $25995*10^{-4}\ampere$ eller $2.5995\ampere$.

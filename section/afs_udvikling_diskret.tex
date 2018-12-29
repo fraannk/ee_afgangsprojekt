@@ -117,7 +117,7 @@ For at beskytte batteripakken ved en overstrøm under op- eller afladning, skal 
 Formålet med at have dedikeret hardware til at trigge på overstrøm i stedet for lade det hele blive styret af microcontrolleren er, at den dedikerede hardware har væsentlig hurtigere reaktionshastighed end micro'en. Når micro'en detekterer en overstrøm har dedikerede hardware allerede slukket for MOSFET'erne og dermed undgået forøget risici for beskadigelse af batteripakken.
 \\
 
-\subsection{Overstrøm ved afladning}
+\subsection{Overstrøm ved afladning}\label{sec:overcurrent_dsg}
 For at kunne detektere for stort strømtræk under afladning, skal information omkring strømstørrelsen bruges som reference. Spændingsfaldet hen over shuntmodstanden bliver i denne konstruktion anvendt til at afbryde batteripakken fra belastningen.
 \\
 
@@ -165,7 +165,7 @@ På den måde har operationsforstærkeren en indbygget hysterese.
 Microcontrolleren vil opdage en overstrøms situation, men behøver ikke at slukke driveren, da det allerede sker før den opdager dette. For at tænde MOSFET'en skal operationsforstærkerens "hysterese" nulstilles, og dette gøres ved, at sende en puls på $3.3\volt$ fra $PWM_DSG$, hvilket får $V-$ til at op på $117.9\milli\volt$, og dermed overstiger $V+$.
 
 
-\subsection{Overstrøm ved opladning}
+\subsection{Overstrøm ved opladning}\label{sec:overcurrent_chg}
 For at beskytte batteripakken mod for stor strøm under opladning, skal der ligesom afladningsbeskyttelse udvikles noget dedikeret elektronik der reagere hurtigere en microcontrolleren. Den færdige kreds kan ses på figur \ref{fig:overcurrent_charge}. Den maksimale opladestrøm er i kravspecifikationen $I_{In}=1\ampere$, men vil i realiteten blive $1.07\ampere$, hvilket stadig er acceptabelt da cellerne i projektet er godkendt til opladning med 1C ($2300\milli\ampere$).
 \\
 

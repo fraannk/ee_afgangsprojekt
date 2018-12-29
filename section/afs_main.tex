@@ -1,0 +1,20 @@
+\section{Main loop}
+I dette afsnit beskrives programmets hovedloop i grove træk, for at give en forståelse af BMS's funktionalitet. Systemet har en del rutiner som skal gennemføres for at opnå alle ønskede funktionaliteter og beskyttelser. 
+
+\subsection{Diskret BMS}
+Den diskrete BMS bruger en del ADC'ere og GPIO pins til styring af alle funktionaliteterne, så derfor sættes disse op først. UART'en initialiseres også og en statup besked sendes. I2C initialiseres til display'et, men først til sidst da dette ikke er vigtigt for grund-funktionaliteten. \\
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=14cm]{billeder/UART_sm.png}
+	\caption{Flowchart over main loop}
+	\label{fig:main_loop}
+\end{figure}
+Ovenstående ses flowchartet for hovedloopet. Er
+
+\subsection{Integreret BMS}
+I den integrerede BMS initialiseres systemet med at klargøre alle protokoller, pins og interrupts. Som i den diskrete, sendes en startup-meddelelse til UART porten. Efter initialisation kører de fleste rutiner over I2C. BQ76920 skal initialiseres med de ønskede indstillinger i register 0x01 og 0x02. Register 0x09 skal overskrives med 0x9F under opstart ifølge databladet.\footnote{http://www.ti.com/lit/ds/symlink/bq76920.pdf} \\
+\sbf{Indsæt korrekt sideantal}
+
+\subsection{Temperaturmåling}
+\sbf{temp måler, undgå oscillation, lav hysterese, luk for mosfets, mål videre}

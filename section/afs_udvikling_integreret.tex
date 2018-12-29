@@ -53,7 +53,7 @@ For at styre op- og afladnings MOSFET'erne, har BQ76920 indbygget MOSFET driver 
 
 Q5-A styrer afladningen og Q5-B styrer opladningen. Som der ses på figur \ref{fig:bq_fets} er der indsat en p-kanal's MOSFET (Q1) for at holde kredsens CHG ben væk fra negative spændinger. Når CHG ikke er slået til og PACK-2 f.eks. bliver trukket under stel, vil det ikke blive set af CHG benet da Q5-A ikke tænder. Q1 sørger også for at R2 kan holde Q5-B slukket, siden alle spændinger under denne FET kan "følge" \space PACK-2 hvis den går under stel. \\
 
-Dioden (D5) sørger for at CHG kan trække Q5-B's gate høj. Modstanden i parallel (R2), får spændingen til at falde når PACK-2 er trukket høj, samtidig med den begrænser strømmen der går ind i CHG benet. Modstanden R1 holder Q5-B slukket når CHG er slukket.\footnote{Se datablad for BQ76920 på side 28; \url{http://www.ti.com/lit/ds/symlink/bq76920.pdf}}
+Dioden (D5) sørger for at CHG hurtigt kan trække Q5-B's gate høj. Modstanden i parallel (R2), får spændingen til at falde når PACK-2 er trukket høj, samtidig med den begrænser strømmen der går ind i CHG benet. Modstanden R1 holder Q5-B slukket når CHG er slukket.\footnote{Se datablad for BQ76920 på side 28; \url{http://www.ti.com/lit/ds/symlink/bq76920.pdf}}
 \sbf{Tjek det stykke her...}
 
 \section{Temperatursensor} \label{sec:temperatur}
@@ -75,7 +75,9 @@ Siden sensoren benytter $I^2C$, er den relativt nemt at tilslutte rent hardware 
 Dette ben (OS) er til eventuelle status meddelelser fra sensoren. Benet bliver ikke brugt i dette system, men er stadig tilføjet for eventuelt fremtidigt brug. Implementering af sensoren i software forklares i kapitel \ref{kap:softwareudvikling}.
 
 \section{Udvikling og realisering af PCB}
-For at skabe stabilitet til microcontolleren og systemet som helhed, og for at komprimere elektronikken er der valgt at designe et PCB. Det færdige PCB kan ses på figur \ref{fig:PCB_IC} og \ref{fig:PCB_IC_bagside}.
+Efter udvikling af de to versioner gennem simulering og testopstillinger, blev to PCB layout konstrueret. Målet med at samle elektronikken på et PCB var at skabe stabilitet til microcontolleren og systemet som helhed. For at minimere størrelsen af printpladen og skabe så små strækninger for strømme og signaler som muligt, blev PCB'erne ikke ætset på universitet.
+
+Det færdige PCB for den integrerede version kan ses på figur \ref{fig:PCB_IC} og \ref{fig:PCB_IC_bagside}, og den diskrete version ses på figur \ref{fig:PCB_diskret} og \ref{fig:PCB_diskret_bagside}.
 
 \begin{figure}[h]
 	\centering
@@ -91,9 +93,3 @@ For at skabe stabilitet til microcontolleren og systemet som helhed, og for at k
 	\label{fig:PCB_IC_bagside}
 \end{figure}
 
-Cellerne forbindes på venstre side af printet, hvor den enkelte celle er forbundet til et balanceringsben.
-
-Banetykkelse
-Balancering og connectors
-Programmerings stik
-Ind og udgange

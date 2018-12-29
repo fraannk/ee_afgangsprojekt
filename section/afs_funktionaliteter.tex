@@ -1,7 +1,7 @@
 \section{Om batteristyresystemer}
 Et batteristyresystem er et elektrisk system, der styrer de enkelte battericeller i en batteripakke. Den overvåger og holder styr på cellens tilstand herunder spænding, kapacitet, ladning og temperatur. Dertil søger systemet for at holde cellerne beskyttet i et sikkert operation område (Safe Operating Area). Systemet sørger for at batteripakkens celler er i balance med hinanden, hvilket praktisk betyder at cellespændingerne er tilnærmelsesvis ens. I tilfælde af at parametre skulle overstige deres max værdi, skal systemet sørge for at afbryde batteriet fra belastningen eller opladeren.
 \\
-\klp{Billede skal ændres}
+\sbf{Billede skal ændres}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=11cm]{billeder/battery_management_block.png}
@@ -32,7 +32,7 @@ Temperaturforskelle i en batteripakke og dermed forskelle på celletemperature k
 \FloatBlock
 
 I batteripakker hvor flere celler indgår, vil forskelle på stærke og svage celler forstørres for hver cyklus. Under opladning kan en svag celle blive svagere indtil den fejler, hvilket kan forsage permanent skade på hele batteripakken. Da en batteripakkes levetid afhænger af den svageste celle, vil en forøgelse i levetid kunne opnås ved hjælp af cellebalancering, da slid på den svageste celle minimeres. Opladning af en Li-Ion celle foregår i tre faser og er skitseret på figur \ref{fig:opladning_liion}.
-\klp{Fase 4 skal fjernes da vi ikke har det med}
+\sbf{Fase 4 skal fjernes da vi ikke har det med}
 Under den første fase oplades cellerne med en konstant strøm, hvor spændingen stiger lineært. Det er i denne fase hvor størstedelen af cellen bliver ladt op.
 \\
 
@@ -59,9 +59,6 @@ Fordelen ved denne metode er at den er simpel og pålidelig, men tilgengæld er 
 	\caption{Passiv balancering gennem en færdig BMS chip.}
 	\label{fig:passiv_balancering_teknik}
 \end{figure}
-\klp{Billede og tekst skal fikses. Balancering på IC er 70mA intern, så det bliver kravet. Med IC er ekstern balancerings FET ikke nødvendig. Vi matcher den diskret opbyggede til 50mA. Muligvis nyt billede da der er en modstand for meget.}
-
-
 
 
 \subsection{Aktiv balancering}
@@ -74,7 +71,7 @@ Der findes mange former for aktiv balancering. "Controlled shunting" er en af de
 En anden aktiv balanceringsteknik hedder "Switched capacitor". Her sidder en kondensator mellem naboceller og kan aktiveres for at flytte energi fra den ene celle til den anden.
 
 \section{Estimering af kapacitet}
-En af de vigtigste funktionaliteter i et batteristyresystem er estimering af kapacitet, State of Charge (SoC), og er direkte defineret som den procentdel af maksimal ladning i en celle eller en batteripakke. SoC er vigtig da det afspejler batteripakkens ydeevne. Nøjagtig estimering af SoC er ikke kun vigtig til beskyttelse af cellerne, men også for at forhindre overopladning og underafladning, hvilket bidrager til forlængelse af batteripakkens levetid. Dertil muliggør informationen også at lade batteristyresystemet ligge rationelle strategier for at spare energi. \\
+En af de vigtigste funktionaliteter i et batteristyresystem er estimering af kapacitet, State of Charge (SoC), og er direkte defineret som den procentdel af maksimal ladning i en celle eller batteripakke. SoC er vigtig da det afspejler batteripakkens ydeevne. Nøjagtig estimering af SoC er ikke kun vigtig til beskyttelse af cellerne, men også for at forhindre overopladning og underafladning, hvilket bidrager til forlængelse af batteripakkens levetid. Dertil muliggør informationen også at lade batteristyresystemet ligge rationelle strategier for at spare energi. \\
 
 Informationen kan også bruges til at indikere behov tilslutning af oplader til brugeren gennem f.eks. en statusindikator eller om afladning af systemet kan tillades. 
 Ved strømsvigt hvor f.eks et UPS-anlæg (Uninterruptible power supply) skal levere nødstrøm indtil normal drift genoprettes, vil SoC bidrage med information om hvorvidt anlægget overhovedet vil være i stand til at understøtte den tilkoblede belastning. \\
@@ -101,7 +98,10 @@ Denne metode går ud på at måle afladningsstrømmen i en batteripakke og integ
 \begin {equation} 
 SoC(t) = SoC(0) - \frac{1}{C} \int_{0}^{t} idt  \label{eq:coulomb-count}
 \end {equation}
-\klp{Måske skal formlen forklares lidt bedre? - hvor er den fundet?}
+
+Her er $SoC(0)$ start kapaciteten, hvor $SoC(t)$ er nuværende kapacitet. $C$ er den totale ladning i cellen og $int_{0}^{t} idt$ er integralet af strømmen under en afladningsproces.
+\\
+%energies-08-07854%20.pdf
 
 Strømmåling kan give et mere nøjagtig realtidsbillede af hvordan kapaciteten ser ud i batteripakken i forhold til at måle terminalspændingen.
 \\

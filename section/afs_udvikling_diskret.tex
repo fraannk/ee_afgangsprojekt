@@ -211,7 +211,13 @@ Kredsløbet kan ses på figur \ref{fig:voltage_nets}. Det virker på den måde, 
 For at minimere strømforbruget i batteripakken er $3.3\volt$ forsyningen valgt til at være TS9011SCX, da dette er af typen "Low Quiescent Current CMOS", hvilket betyder den kun bruger $2\micro\ampere$ til at regulere udgangspændingen.
 
 \section{Standby tilstand}
-En standby tilstand kan både indeholde tiltag i hardwaren men også i softwaren.
+En standby tilstand kan både indeholde tiltag i hardwaren og softwaren.
+
+\subsection{Hardware}
+I den diskret udviklede batteripakke, indgår der ikke nogle tiltag hvori en standby tilstand kan opnås. Der er blevet undersøgt forskellige muligheder såsom at forsyne operationsforstærkerne fra microcontrolleren til måling af cellespænding og strømtræk. Disse tiltag er dog ikke blevet realiseret da batteripakken som standard tilstand altid tillader op- og afladning, så hvis batteripakken skal kunne detektere noget på udgangen, skal operationsforstærkerne også være tændte.
+
+\subsection{Software}
+Microcontrolleren har flere stadier af power-down modes, men siden PWM output ikke er tilgængeligt under disse modes, og da PWM bliver brugt til at styre MOSFET's til op- og afladningskontrol, er det blevet fravalgt at implementere dette. 
 
 \section{Udvikling og realisering af PCB}
 Billede
@@ -219,13 +225,6 @@ Banetykkelse
 Balancering og connectors
 Programmerings stik
 Ind og udgange
-
-
-\subsection{Hardware}
-I den diskret udviklede batteripakke, indgår der ikke nogle tiltag hvori en standby tilstand kan opnås. Der er blevet undersøgt forskellige muligheder såsom at forsyne operationsforstærkerne fra microcontrolleren til måling af cellespænding og strømtræk. Disse tiltag er dog ikke blevet realiseret da batteripakken som standard tilstand altid tillader op- og afladning, så hvis batteripakken skal kunne detektere noget på udgangen, skal operationsforstærkerne også være tændte.
-
-\subsection{Software}
-Microcontrolleren har flere stadier af power-down modes, men siden PWM output ikke er tilgængeligt under disse modes, og da PWM bliver brugt til at styre MOSFET's til op- og afladningskontrol, er det blevet fravalgt at implementere dette. 
 
 \section{Delkonklusion}
 Igennem udviklingen af batteripakken uden brug af en integreret styringskreds, er alle funktionaliteter blevet realiseret. Batteripakken at aflades med $6\ampere$ og oplades med omkring $1\ampere$. Der er ikke udviklet en buck converter til at begrænse opladestrømmen, så for at oplade batteripakken, skal opladeren stå for strømbegrænsningen.

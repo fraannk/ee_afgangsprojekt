@@ -1,2 +1,8 @@
-\section{Temperaturkontrol}
-\sbf{temp måler, undgå oscillation, lav hysterese, luk for mosfets, mål videre}
+\section{Temperaturkontrol}\label{sec:temp_protect}
+Der er på begge BMS'er installeret en ekstra temperatursensor. Sensoren, LM75BIM, kommunikerer også over $I^2C$, og overvåger om printet og omgivelserne bliver for varme. Sensorens hardwareopsætning kan læses i afsnit \ref{sec:temperatur}. \\
+
+For at læse sensorværdien, anmoder man adresse $0x46$ og register $0x01$. Værdien modtages i 9-bits 2's complement format og skal derfor konverteres. MSB er sign-bit, så denne angiver om der er minus grader eller plus grader. LSB er lig med 0.5 grader, og sensoren kan derfor måle i steps af dette. \\
+
+For at læse temperaturen kaldes derfor \verb|readTemp(BMS)| som konverterer denne værdi og der returneres i hele grader Celcius. Da der reduceres til hele grader Celcius grundet simplificering til resten af systemet, og da halve grader alligevel ikke er nødvendige i dette system, er alt funktionen gør, at konvertere 9-bit variablen til 8-bit ved at fjerne MSB og LSB og bit-shifte variablen til højre. \\
+
+Sensorens temperatur bliver læst hver 500ms, og sammenlignes med \verb|TEMP_CUTOFF_HIGH|, som er den valgte værdi af $45\degreeCelsius$. Så snart denne værdi er nået, slukker systemet for begge MOSFET's, og går i et while loop der konstant tjekker temperaturen, og hopper først ud når den nedre grænse på \verb|TEMP_CUTOFF_LOW|, som er sat til $45\degreeCelsius$. Denne "hysterese" er for at undgå at systemet hele tiden tænder og slukker når temperaturen ligger lige på de $45\degreeCelsius$, og dermed giver det til til at køle af. 

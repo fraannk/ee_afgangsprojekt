@@ -1,18 +1,18 @@
 \section{Om batteristyresystemer}
-Et batteristyresystem er et elektrisk system, der styrer de enkelte battericeller i en batteripakke. Den overvåger og holder styr på cellens tilstand herunder spænding, kapacitet, ladning og temperatur. Dertil søger systemet for at holde cellerne beskyttet i et sikkert operation område (Safe Operating Area). Systemet sørger for at batteripakkens celler er i balance med hinanden, hvilket praktisk betyder at cellespændingerne er tilnærmelsesvis ens. I tilfælde af at parametre skulle overstige deres max værdi, skal systemet sørge for at afbryde batteriet fra belastningen eller opladeren.
-\\
-\sbf{Billede skal ændres}
+Et batteristyresystem er et elektrisk system, der styrer de enkelte battericeller i en batteripakke. Den overvåger og holder styr på cellens tilstand herunder spænding, kapacitet, ladning og temperatur. Dertil søger systemet for at holde cellerne beskyttet i et sikkert operation område (Safe Operating Area). Systemet sørger for at batteripakkens celler er i balance med hinanden, hvilket praktisk betyder at cellespændingerne er tilnærmelsesvis ens. I tilfælde af at parametre skulle overstige deres max værdi, skal systemet sørge for at afbryde batteriet fra belastningen eller opladeren. Figur \ref{fig:blokdiagram} viser et blokdiagram over et batteristyresystems opbygning. Efter flere iterationer er dette blokdiagram løsningsmodel for den diskret opbyggede version.
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=11cm]{billeder/battery_management_block.png}
+	\includegraphics[width=15cm]{billeder/blokdiagram.png}
 	\caption{Blokdiagram over batteristyresystem}
-	\label{fig:battery_management_block}
+	\label{fig:blokdiagram}
 \end{figure}
 
 De primære formål med en BMS er som følgende:
 \begin{itemize}[noitemsep]
 	\item Minimere risikoen for beskadigelse af celler
 	\item Overvåge og kontrollere en batteripakkes op- og afladningsprocess
+	\item Give feedback til brugeren for fuldført opladning eller at der er behov for at oplade
 	\item Estimere kapacitet
 	\item Logge information
 \end{itemize}
@@ -25,7 +25,7 @@ Temperaturforskelle i en batteripakke og dermed forskelle på celletemperature k
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=15cm]{billeder/liion_opladning.png}
+	\includegraphics[width=14cm]{billeder/liion_opladning.png}
 	\caption{Oplade forløb af Lithium-Ion celle}
 	\label{fig:opladning_liion}
 \end{figure}
@@ -89,8 +89,8 @@ Der anvendes typisk tre metoder til at afgøre SoC, gennem en direkte måling af
 Ved denne metode vil en simpel spændingsmåling henover cellerne kunne indikere kapaciteten, da spændingen på en celle tilnærmelsesvis falder lineært under afladning i dette projekts valgte arbejdsområde. Den er dog ikke så præcis, da den reelle afladningskurve ikke er lineær, men det er i nogen situationer heller ikke nødvendigt med en meget præcis kapacitetsmåling, så længe op- og afladningspunkterne er veldefinerede. Denne metode er nok den mest brugte grundet dens simplicitet, men er derimod nok også den mest upræcise. 
 \\
 
-Det kræver en meget præcis spændingsmåler, da den skal kunne måle meget små forskelle på afladningskurvens flade region. Derudover er der parametre som cellens indre modstand, der kan have stor betydning for kapacitetsmålingen, da den bliver mere betydende under stigende strømtræk. Hvis realtidsmåling (med stor) ikke er nødvendig, kan et mere nøjagtigt estimat opnås ved at måle spændingen $1000 - 2000 \sec$ efter et strømtræk.
-\klp{finde kilde på sekunderne}
+Det kræver en meget præcis spændingsmåler, da den skal kunne måle meget små forskelle på afladningskurvens flade region. Derudover er der parametre som cellens indre modstand, der kan have stor betydning for kapacitetsmålingen, da den bliver mere betydende under stigende strømtræk. Hvis realtidsmåling (med stor) ikke er nødvendig, kan et mere nøjagtigt estimat opnås ved at måle spændingen $2\min$ efter et strømtræk.
+
 
 
 \subsection{Coulomb-tælle metode}
@@ -119,7 +119,7 @@ Den mest simple måde at definere levetiden på cellerne er at tælle antal cycl
 SoH = \frac{antal \; lade \; cycles}{estimerede \; cycles}\times 100\percent \label{eq:soh_cycles}
 \end {equation}
 
-hvor resultatet angiver den brugte levetid i procent. Denne metode er dog ikke særlig præcis, da levetiden ændres drastisk afhængigt af brug og temperatur. 
+hvor resultatet angiver den brugte levetid i procent. Denne metode er dog ikke særlig præcis, da levetiden ændres drastisk afhængig af brug og temperatur. 
 
 \subsection{Kapacitetsmåling}
 En anden måde at beregne state of health på, er ved at holde øje med kapaciteten. Over tid, bliver cellens fulde kapacitet degraderet, og derfor kan man holde den aktuelle maksimum kapacitet op mod kapaciteten som den var da cellen var fabriksny. Derfor: 
@@ -128,9 +128,7 @@ En anden måde at beregne state of health på, er ved at holde øje med kapacite
 SoH = \frac{C_{max}}{C_{rated}}\times 100\percent \label{eq:soh_capacity}
 \end {equation}
 
-hvor resultatet angiver cellens restende maksimum kapacitet i procent. Denne metode er en del mere præcis, da den jo viser hvor meget cellen fysisk stadig kan levere. Dog kan man ikke særlig præcist estimere hvornår cellerne skal skiftes, da man så skal have temperatur og fremtidigt forskelligt brug med i beregningerne.\\ 
-
-Som en "hovedregel" \space siger man at når cellen når $70\percent$ maksimum kapacitet, er den død og skal udskiftes. Årsagen til dette er, at efter de $70\percent$ begynder den brugbare kapacitet at falde meget hurtigt og upålideligt.\footnote{s. 170 i Battery Power Management for Portable Devices af Yevgen Barsukov}
+Her angiver resultatet cellens restende maksimum kapacitet i procent. Denne metode er en del mere præcis, da den viser hvor meget cellen fysisk stadig kan levere. Der kan ikke særlig præcist estimeres hvornår cellerne skal skiftes, da information som temperatur og hvor hård op- og afladningen er i fremtiden, skal med i beregningerne. Som en "hovedregel" \space siges der at når cellen når $70\percent$ af dens maksimum kapacitet, anses den død og skal udskiftes. Årsagen til dette er efter de $70\percent$ begynder den brugbare kapacitet at falde meget hurtigt og upålideligt.\footnote{s. 170 i Battery Power Management for Portable Devices af Yevgen Barsukov}
 
 \section{Temperaturmåling}
 Måling af temperature i en batteripakke er nødvendig, for at sikre optimal op- og afladningsforhold. Alt afhængig vigtigheden af kendskab til temperaturene forskellige steder, kan der være flere temperaturmålere. Placeringerne er typisk på PCB'et og cellerne.

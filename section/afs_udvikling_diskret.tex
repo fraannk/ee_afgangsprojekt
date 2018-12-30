@@ -204,6 +204,9 @@ V_{z} = V_{o} + V_{GS(th)} = 13.5\volt
 \end {equation}
 
 For at nedtrappe spændingen fra $12\volt$ til $3.3\volt$ anvendes LDO'en TS9011SCX. Den har en absolut maksimum indgangsspænding på $12\volt$, hvilket medfører at zenerdioden vælges til $V_{z}=12\volt$. Med denne værdi bliver $12\volt$-nettet nærmere $10.5\volt$, hvilket i dette projekt er acceptabelt - nettet kaldes dog fortsat $12\volt$-nettet.
+\\
+
+Kredsløbet kan ses på figur \ref{fig:voltage_nets}, og virker på den måde, at zener dioden trækker strøm gennem $R10$, så spændingen på MOSFET'ens gate bliver diodens zener-spænding. Når MOSFET'ens gate-source spænding $V_{GS(th)}$ rammer sit arbejdspunkt, vil MOSFET'en fungere som en variabel modstand, og have et spændingsfald over drain-source så den stadig kan holde gaten tændt. For at minimere strømforbruget i batteripakken er $3.3\volt$ forsyningen valgt til at være TS9011SCX, da den er af typen "Low Quiescent Current CMOS", og kun bruger $2\micro\ampere$ til at regulere udgangspændingen.
 
 \begin{figure}[h]
 	\centering
@@ -211,8 +214,6 @@ For at nedtrappe spændingen fra $12\volt$ til $3.3\volt$ anvendes LDO'en TS9011
 	\caption{Generering af 3.3V og 12V}
 	\label{fig:voltage_nets}
 \end{figure}
-
-Kredsløbet kan ses på figur \ref{fig:voltage_nets}. Det virker på den måde, at $R10$ lader noget strøm gå igennem zener dioden, så spændingen på MOSFET'ens gate bliver diodens zener-spænding. Når MOSFET'ens gate-source spænding $V_{GS(th)}$ rammer sit arbejdspunkt, vil MOSFET'en fungere som en variabel modstand, og have et spændingsfald over drain-source så den stadig kan holde gaten tændt. For at minimere strømforbruget i batteripakken er $3.3\volt$ forsyningen valgt til at være TS9011SCX, da dette er af typen "Low Quiescent Current CMOS", hvilket betyder den kun bruger $2\micro\ampere$ til at regulere udgangspændingen.
 
 \section{Standby tilstand}
 En standby tilstand kan både indeholde tiltag i hardwaren og softwaren.

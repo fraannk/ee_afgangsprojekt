@@ -8,9 +8,11 @@ Der tages udgangspunkt i PWM signalet til kontrol af afladefetten, dvs. 1,7V. Du
 \begin {equation}
 D = \frac{1.7\volt}{3.3\volt} = 0.515
 \label{eq:duty}
-\end {equation}
+\end {equation}\\
 
-Da CTIMER'eren bruges til generering af PWM er opsætningen i grove træk det samme som beskrevet i afsnit \ref{afs:CTIMER}, dog med enkelte undtagelser. 
+Da CTIMER'eren bruges til generering af PWM er opsætningen i grove træk det samme som beskrevet i afsnit \ref{afs:CTIMER}, dog med enkelte undtagelser. Default CTIMER config sættes med driveres indbyggede funktion \verb|CTIMER_GetDefaultConfig|. Herefter initialiseres CTIMER'en, og PWM signalet's egenskaber sættes i \verb|CTIMER_GetPwmPeriodValue|. Her benyttes $20\kilo\hertz$ som frekvens da det er standard for CTIMER'en. Dutycyclen specificeres også her, men rundes op til 52 da der ikke kan sættes decimaler.\\ 
+
+PWM signalet sikres korrekt ved måling på oscilloskop, og der ses på figur \ref{fig:pwm_scope} at signalet er inden for fejlmargin, og at det giver en spænding på ca. $1.7\volt$. Grunden til at signalet ikke ligger helt præcist på $1.7\volt$ kan være at forsyningen til microen ikke er helt præcist på $3.3\volt$ men lidt under. \\
 
 \begin{figure}[h]
 	\centering
@@ -19,11 +21,5 @@ Da CTIMER'eren bruges til generering af PWM er opsætningen i grove træk det sa
 	\label{fig:pwm_scope}
 \end{figure}
 
-%\verb|MIN_PACK_VOLTAGE|
-
-\sbf{formel og kode}
-
-
-
-Da sikkerheden ved overstrøm har en hysterese, skal en reset mulighed realiseres. Dette gøres ved at sætte dutycyklen til 100\percent\space og derved sætte en puls på $3.3\volt$ ind på reference benet. I tilfælde af for høj eller for lav temperatur sættes dutycyklen til 0\percent, for at slukke for MOSFET'erne.
+Da sikkerheden ved overstrøm har en hysterese, skal en reset mulighed realiseres. Dette gøres ved at sætte dutycyklen til 100\percent\space og derved sætte en puls på $3.3\volt$ ind på reference benet. I tilfælde af for høj eller for lav temperatur, eller når cellerne er afladte, sættes dutycyklen til 0\percent, for at slukke for MOSFET'erne.
 

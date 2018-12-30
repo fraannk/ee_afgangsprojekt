@@ -1,5 +1,5 @@
 \section{Hovedrutine}
-I dette afsnit beskrives programmets hovedloop i grove træk, for at give en forståelse af BMS's funktionalitet. Systemet har en del funktioner som skal gennemføres for at opnå alle ønskede funktionaliteter og beskyttelser. Fælles for både den diskrete og den integrerede version af BMS'en, er at hovedrutinen, eller specifikt, de enkelte funktioners rækkefølge og funktionalitet, hovedsageligt er den samme. Derfor vil de ikke forklares hver for sig, hvis den eneste forskel f.eks. er at en I2C kommando på IC versionen erstattes med et GPIO signal på den diskrete. Er der markante ændringer forklares de i de to seperate underafsnit.
+I dette afsnit beskrives programmets hovedloop i grove træk, for at give en forståelse af BMS's funktionalitet. Systemet har en del funktioner som skal gennemføres for at opnå alle ønskede funktionaliteter og beskyttelser. Fælles for både den diskrete og den integrerede version af BMS'en, er at hovedrutinen, eller specifikt, de enkelte funktioners rækkefølge og funktionalitet, hovedsageligt er den samme. Derfor vil de ikke forklares hver for sig, hvis den eneste forskel f.eks. er at en I2C kommando på IC versionen erstattes med et GPIO signal på den diskrete. Er der markante ændringer forklares de i de to seperate underafsnit. \\
 
 \begin{figure}[h]
 	\centering
@@ -8,7 +8,7 @@ I dette afsnit beskrives programmets hovedloop i grove træk, for at give en for
 	\label{fig:main_loop}
 \end{figure}
 
-Ovenstående ses flowchartet for hovedrutinen. Der startes med at hente alle de tilgængelige informationer om batteripakken. Her udregnes de brugbare informationer som samlet pakkespænding, procent baseret på spænding, strømtræk, tilbageværende kapacitet baseret på strømtræk (coulomb counting) og temperatur. Disse værdier bruges så til balancerings- og sikkerhedsfunktionerne på BMS'en. \\
+På figur \ref{fig:main_loop} ses flowchartet for hovedrutinen. Der startes med at hente alle de tilgængelige informationer om batteripakken. Her udregnes de brugbare informationer som samlet pakkespænding, procent baseret på spænding, strømtræk, tilbageværende kapacitet baseret på strømtræk (coulomb counting) og temperatur. Mere om kapacitet og procentudregning i afsnit \ref{afs:SOC_realization}. Disse værdier bruges så til balancerings- og sikkerhedsfunktionerne på BMS'en. \\
 
 Først tjekkes balanceringen. Her sammenlignes cellespændingerne med de valgte spændings"lofte" \space og de andre cellespændinger. Er alle celler lig med \verb|BALANCE_VOLTAGE|, stoppes opladningen og der gives besked til brugeren. Hvis ikke, tjekkes de næste celler. Tages der udgangspunkt i celle 1 lyder rækkefølgen af checks som følger. Hvis celle 1 er over \verb|BALANCE_VOLTAGE| (som er den valgte spænding cellerne skal balanceres til), og samtidig er større end både celle 2, 3 og 4, skal denne balanceres ned først. Balanceringen stoppes når spændingen når ned på, eller under, celle 2, 3 og 4's spændinger. Det samme gøres for de resterende celler. Er ingen af disse kriterier opfyldt, tillades opladning på fuldt blus da cellerne er under det ønskede.\\
 

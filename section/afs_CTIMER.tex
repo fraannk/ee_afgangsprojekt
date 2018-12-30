@@ -1,5 +1,5 @@
-\section{Timer funktionalitet (CTIMER)}
-For at opnå præcise timingsmuligheder opsættes CTIMER'eren, som er en 32-bit timer. Denne del bliver dog for det meste brugt til at kunne holde øje med om systemet er i live, når der f.eks. ikke er tilsluttet en host. \\
+\section{Timer funktionalitet (CTIMER)}\label{afs:CTIMER}
+For at opnå præcise timingsmuligheder opsættes CTIMER'eren, som er en 32-bit timer. Denne del bliver dog i den integrerede for det meste brugt til at kunne holde øje med om systemet er i live, når der f.eks. ikke er tilsluttet en host. I den diskrete version bruges CTIMER til generering af PWM, hvilket er beskrevet i afsnit \ref{afs:PWM}. \\
 
 Timeren sættes op vha. \verb|TIMER_Init()| hvori de krævede parametre opsættes og derefter startes: 
 

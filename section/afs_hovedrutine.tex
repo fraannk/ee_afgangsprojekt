@@ -17,7 +17,10 @@ Dernest kommer beskyttelsesfunktionerne. Her tages der udgangspunkt i strømmål
 Temperaturmålingen forklares i nederst i afsnit \ref{sec:temp_protect}.
 
 \subsection{Diskret BMS}
-Den diskrete BMS bruger en del ADC'ere og GPIO pins til styring af alle funktionaliteterne, så derfor sættes disse op først. UART'en initialiseres også og en statup besked sendes. I2C initialiseres til display'et, men først til sidst da dette ikke er vigtigt for grund-funktionaliteten. \\
+Den diskrete BMS bruger en del ADC'ere og GPIO pins til styring af alle funktionaliteterne, så derfor sættes disse op først. UART'en initialiseres også og en statup besked sendes. Derefter skal alle relevante spændinger sættes for at styre BMS'en som ønsket. Forklaret nærmere i afsnittene \ref{afs:ADC} og \ref{afs:PWM}.
 
 \subsection{Integreret BMS}
-I den integrerede BMS initialiseres systemet med at klargøre alle protokoller, pins og interrupts. Som i den diskrete, sendes en startup-meddelelse til UART porten. Efter initialisation kører de fleste rutiner over I2C. BQ76920 skal initialiseres med de ønskede indstillinger i register 0x01 og 0x02. Register 0x09 skal overskrives med 0x9F under opstart ifølge databladet.\footnote{\url{http://www.ti.com/lit/ds/symlink/bq76920.pdf} side 41} \\
+I den integrerede BMS initialiseres systemet med at klargøre alle protokoller. Som i den diskrete, sendes en startup-meddelelse på UART porten. Efter initialisation kører de fleste rutiner over I2C. BQ76920 skal initialiseres med de ønskede indstillinger i register $0x04$ og $0x05$. Her sættes bit 4 i $0x04$ for at aktivere ADC'en, og bit 6 i $0x05$, for at aktivere strømmåleren i kredsen. Register $0x0B$ skal overskrives med $0x19$ under opstart ifølge databladet.\footnote{\url{http://www.ti.com/lit/ds/symlink/bq76920.pdf} side 41} \\
+
+Derudover er der 3 "PROTECT" \space registre der skal indstilles. I PROTECT1 ($0x06$) sættes bit 7 for at fordoble RSNS værdien. Dette gøres for at kunne måle op til (og faktisk over) $6\ampere$ med en shunt modstand på $0.01\ohm$. Bit 0-2 sættes til 1 for at tillade maksimum strøm ved kortslutning da det alligevel er noget microen står for. Det samme gøres i PROTECT2($0x07$) (bit 0-3) for at tillade maksimum strømtræk da dette også er begrænset med microen. PROTECT3($0x08$) ændres ikke, og der køres derfor med default værdier. Alle disse registre sættes i \verb|BMS_Init()|.
+

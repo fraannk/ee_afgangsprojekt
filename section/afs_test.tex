@@ -19,7 +19,7 @@ Ved brug af en elektrisk belastning (til venstre på figur \ref{fig:ic_testsetup
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=15cm]{billeder/IC_testsetup.png}
+	\includegraphics[width=15cm]{billeder/integreret_testsetup.png}
 	\caption{Testopsætning til IC versionen}
 	\label{fig:ic_testsetup}
 \end{figure}
@@ -65,19 +65,19 @@ Resultaterne fra testene kan ses i tabel \ref{tab:resultat_IC}.
 \FloatBlock
 
 \subsection{Delkonklusion}
-Som der ses i tabellen \ref{tab:resultat_IC} virker de fleste af funktionerne. Opladestrømmålingen fejler da der sker en fejl i konverteringen af 16-bit 2's complement tallet, og derfor returnerer et mærkeligt tal. Dette er så årsagen til at opladestrømbeskyttelsen ikke virker. Denne fejl er ikke rettet da det ikke ville være hensigtsmæssigt med hensyn til tiden. Dog er det også under afladning at beskyttelsen er mest vigtig, da man oftere kortslutter/aflader for hårdt, end man kommer til at sætte en for kraftig oplader til. 
+Som der ses i tabellen \ref{tab:resultat_IC} virker de fleste af funktionerne. Opladestrømmålingen fejler da der sker en fejl i konverteringen af 16-bit 2's complement tallet, og derfor returnerer et mærkeligt tal. Dette er så årsagen til at opladebeskyttelsen ikke virker. Denne fejl er ikke rettet da det ikke ville være hensigtsmæssigt med hensyn til tiden. Dog er det også under afladning at beskyttelsen er mest vigtig, da der oftest kortsluttes/aflades for hårdt, end at en for kraftig oplader tilsluttes.
 
 \section{Test af diskret version}\label{afs:test_diskret}
 I dette afsnit vil en komplet test opstilling af den diskrete version af BMS'en blive gennemgået og udført. Alle implementerede funktionaliteter beskrevet i kapitel \ref{kap:funktionaliteter} testes for ønsket og optimal funktion. 
 
 \subsection{Testopstilling}
-Da microen ikke monteres og derfor ikke testes på denne version, er testopstillingen lidt anderledes. 
+Da microen ikke kunne monteres og derfor ikke kan testes på denne version, er testopstillingen lidt anderledes. Her bruges en laboratoriestrømforsyning (til venstre på figur \ref{fig:diskret_testsetup}) til at sætte de spændinger som microcontrolleren skulle gøre vha. PWM. Hhv. $1,7\volt$ til afladefetten og $0,3\volt$ til opladefetten. Derudover er der en strømforsyning til test af opladning (midten, øverst), og en elektrisk belastning til test af afladning. (midten, nederst). Balanceringen er testet manuelt ved hvert enkelt ben. Oscilloskopet (til højre) bruges til aflæsning af de forskellige værdier. 
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=15cm]{billeder/IC_testsetup.png}
-	\caption{Testopsætning til IC versionen}
-	\label{fig:ic_testsetup}
+	\includegraphics[width=15cm]{billeder/diskret_testsetup.png}
+	\caption{Testopsætning til den diskrete version}
+	\label{fig:diskret_testsetup}
 \end{figure}
 
 \subsection{Resultat skema}
@@ -94,19 +94,19 @@ Resultaterne fra testene kan ses i tabel \ref{tab:resultat_diskret}.
 			\hline
 			Spændingsmålinger              & Virker                         \\
 			Afladestrømmåling                    		& Virker                         \\
-			Opladestrømmåling                    		& Virker ikke optimalt                         \\
-			Temperaturmåling                    		& Virker                       \\
-			Afladestrømsbeskyttelse		& Slår fra ved $6\ampere$        \\
-			Opladestrømsbeskyttelse   	& Slår ikke fra da målingen ikke virker optimalt      \\
-			Temperaturbeskyttelse          & BMS afbryder ved $\SI{45}{\celsius}$ og venter indtil nedkølet til $\SI{40}{\celsius}$           \\
-			Balancering af celle 1         & Virker                         \\
-			Balancering af celle 2        & Virker                         \\
-			Balancering af celle 3        & Virker                         \\			
-			Balancering af celle 4        & Virker                         \\
-			Balancering færdig             & BMS afbryder og informerer brugeren                  \\
-			Information om kapacitet       & Virker                          \\
-			Information om batteriprocent 							& Virker			 \\
-			Brugergrænseflade (Shell)                       & Virker                    \\
+			Opladestrømmåling                    		& Virker                         \\
+			Temperaturmåling                    		& Kan ikke testes, men er det samme som IC versionen    \\
+			Afladestrømsbeskyttelse		& Slår fra ved $x\ampere$        \\
+			Opladestrømsbeskyttelse   	& Slår fra ved $x\ampere$      \\
+			Temperaturbeskyttelse          & Kan ikke testes, men er det samme som IC versionen          \\
+			Balancering af celle 1         & Virker manuelt                         \\
+			Balancering af celle 2        & Virker manuelt                        \\
+			Balancering af celle 3        & Virker manuelt                        \\			
+			Balancering af celle 4        & Virker manuelt                        \\
+			Balancering færdig             & Stopper ikke, da der ikke er nogen microcontroller til kontrol.               \\
+			Information om kapacitet       & Ikke muligt                          \\
+			Information om batteriprocent 							& Ikke muligt			 \\
+			Brugergrænseflade (Shell)                       & Ikke muligt                    \\
 			%    &      &       \\
 			
 			\bottomrule

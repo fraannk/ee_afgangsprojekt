@@ -137,7 +137,9 @@ $PWM-DSG$ går til et ben på microcontrolleren. Benet generer et PWM signal og 
 V_{DSG} = V_{PWM-DSG} * \frac{R_{2}}{R_{3}+R_{2}} = 1.7\volt * \frac{10\kilo\ohm}{270\kilo\ohm + 10\kilo\ohm} = 60.7\milli\volt
 \end {equation}
 
-Når der ikke er noget koblet på udgangsterminalerne, vil der ligge $60\milli\volt$ på operationsforstærkerens inverterende indgang, og outputtet fra operationsforstærkeren er $0\volt$. Outpututet er forbundet gennem $10\kilo\ohm$ til basen på $Q12$ der kan tænde og slukke for MOSFET driveren til $Q25-B$.
+Når der ikke er noget koblet på udgangsterminalerne, vil der ligge $60\milli\volt$ på operationsforstærkerens inverterende indgang, og outputtet fra operationsforstærkeren er $0\volt$. 
+
+Outputtet er forbundet gennem $10\kilo\ohm$ til basen på $Q12$ der kan tænde og slukke for MOSFET driveren til $Q25-B$.
 \\
 
 Aflades batteripakken inden for specifikationerne, $0\ampere$ til $6\ampere$, vil spændingen på operationsforstærkerens inverterende indgang variere i knudepunktet ud fra bidraget,

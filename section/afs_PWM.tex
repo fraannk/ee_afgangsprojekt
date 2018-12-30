@@ -12,7 +12,18 @@ D = \frac{1.7\volt}{3.3\volt} = 0.515
 
 Da CTIMER'eren bruges til generering af PWM er opsætningen i grove træk det samme som beskrevet i afsnit \ref{afs:CTIMER}, dog med enkelte undtagelser. 
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=15cm]{billeder/pwm_scope.png}
+	\caption{Screenshot fra oscilloskop af PWM signalet}
+	\label{fig:pwm_scope}
+\end{figure}
+
+%\verb|MIN_PACK_VOLTAGE|
+
 \sbf{formel og kode}
+
+
 
 Da sikkerheden ved overstrøm har en hysterese, skal en reset mulighed realiseres. Dette gøres ved at sætte dutycyklen til 100\percent\space og derved sætte en puls på $3.3\volt$ ind på reference benet. I tilfælde af for høj eller for lav temperatur sættes dutycyklen til 0\percent, for at slukke for MOSFET'erne.
 

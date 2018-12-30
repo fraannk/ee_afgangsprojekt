@@ -34,6 +34,7 @@ For at overvåge udgangsstrømmen skal en strømmåler realiseres. Dette kan gø
 
 Da den maksimale aflade- og opladestrøm  er $I_{out} = 6\ampere$ og $I_{In} = 1\ampere$, skal microen kunne skelne mellem om den er igang med at blive opladt eller afladt, er en retningsbestemmelse på strømtrækket nødvendig.
 \\
+
 Der er i dette projekt undersøgt flere muligheder til detektering af strømmen. En af iterationerne var en enkelt differensforstærker til begge målinger, med at offsette spænding ved $0\volt$ til enten $1.65\volt$ eller $6\volt$ alt afhængig af forsyningsspændingen.
 \\
 
@@ -52,8 +53,10 @@ En vigtig parameter under dimensionering af en strømmåler er valg af shunt mod
 V_{s} = I_{out} * R_{s}  = -6\ampere * 10\milli\ohm = -60\milli\volt
 \end {equation}
 
-Spændingsfaldet vil ligge mellem $0\milli\volt$ og $-60\milli\volt$ (grundet strømmens retning). Da microcontrolleren kører med en logik på $3.3\volt$ og har en ADC med en opløsning på 12 Bit, skal signalet dimensioneres efter dette. Med en shuntmodstand på $10\milli\ohm$ vil den er opladning have et spændingsfald på $10\milli\volt$, hvilket og grundet retningsskift af strømmen, skal strømmåleren tage hensyn til dette.
+Spændingsfaldet vil ligge mellem $0\milli\volt$ og $-60\milli\volt$ (grundet strømmens retning). 
+Da microcontrolleren kører med en logik på $3.3\volt$ og har en ADC med en opløsning på 12 Bit, skal signalet dimensioneres efter dette. Med en shuntmodstand på $10\milli\ohm$ vil den er opladning have et spændingsfald på $10\milli\volt$, hvilket og grundet retningsskift af strømmen, skal strømmåleren tage hensyn til dette.
 \\
+
 For valg af shuntmodstand skal der tages højde for den maksimale effektafsættelse i den og udregnes $60\milli\volt * 6\ampere = 360\milli\watt$. Den valgte shuntmodstand kan klare $3\watt$.
 \\
 
@@ -65,9 +68,9 @@ Den maksimale forstærkning $A_{v}$ af signalet for måling af afladestrømmen f
 A_{v} = \frac{V_{o}}{V_{s}} = \frac{3.3\volt}{60\milli\volt} = 55
 \end {equation}
 
-For at opnå denne forstærkning anvendes en indgangsmodstand ($R37$) på $1\kilo\ohm$ og en $47\kilo\ohm$ modstand på feedbacken ($R47$), for at blive på $E6$-serien. Udgangsspændingen fås ved brug af ligning ligning \ref{eq:op_amp_gain}, hvor $V_{cell3} = V+$ og $V_{cell2} = V+$. For at overskueliggøre beregningen vælges $R41 = R37$ og $R47 = R48$. Med disse modstandsværdier fås en forstærkning på $A_{v} = $
+For at opnå denne forstærkning anvendes en indgangsmodstand ($R37$) på $1\kilo\ohm$ og en $47\kilo\ohm$ modstand på feedbacken ($R47$), for at blive på $E6$-serien. Udgangsspændingen fås ved brug af ligning ligning \ref{eq:op_amp_gain}, hvor $V_{cell3} = V+$ og $V_{cell2} = V+$. For at overskueliggøre beregningen vælges $R41 = R37$ og $R47 = R48$. Med disse modstandsværdier fås en forstærkning på $A_{v} = 47$
 \\
-\klp{Gain skal være mindre. 1k og 47k = 2V8 @ 6A }
+
 Som tidligere nævnt vil et retningsskifte af strømmen forekomme under opladning, så forstærkeren skal kunne trigge på et positivt spændingsfald. Ved at vende operationsforstærkeren om, kan måling af strømmen ved opladning ske uden brug af en negativ forsyning.
 \\
 
@@ -75,7 +78,7 @@ Da opladestrømmen er $1\ampere$ kan en væsentlig højere forstærkning anvende
 
 
 \section{Passiv balancering}\label{afs:balancing}
-\klp{balanceringsmodstand skal photoshoppes til 75ohm}
+
 Når batteripakkens opladecyklus er ved at være færdig og den første celle er fuldt opladt, vil passiv balancering blive aktiveret. Batteripakken vil maksimalt balancere tre celler på en gang, da den er færdig med at oplade når den får signal om, at alle fire celle har behov for balancering, da de jo har nået den maksimale cellespænding.
 \\
 
@@ -89,7 +92,7 @@ Balanceringskredsen kan ses på figur \ref{fig:passiv_balancering} består af tr
 	\label{fig:passiv_balancering}
 \end{figure}
 
-Basen på $Q6$ er forspændt med $3.3\volt$ og under afladning vil microcontrolleren sætte benet højt på emitteren, hvilket holder $Q6$ slukket. For at aktivere balancering, skal potentialet på basen af $Q5$ være en base-emitter strækning lavere end dens emitter. Dette kan gøre ved at sætte microcollerens ben lav, hvilket vil tænde $Q6$, trække potentiale på basen af $Q6$ ned og derved lede strømmen igennem $R21$. $R21$ består af to 0805-$150\ohm$ modstande for at få en modstandsværdi på $75\ohm$ som kan klare $2 x 125\milli\watt = 250\milli\watt$. Med denne modstand vil balanceringsstrømmen maksimalt blive $50\milli\ampere$ og have en effektafsættelse på $190\milli\watt$.
+Basen på $Q6$ er forspændt med $3.3\volt$ og under afladning vil microcontrolleren sætte benet højt på emitteren, hvilket holder $Q6$ slukket. For at aktivere balancering, skal potentialet på basen af $Q5$ være en base-emitter strækning lavere end dens emitter. Dette kan gøre ved at sætte microcollerens ben lav, hvilket vil tænde $Q6$, trække potentialet på basen af $Q6$ ned og derved lede strømmen igennem $R21$. $R21$ består af to 0805-$150\ohm$ modstande for at få en modstandsværdi på $75\ohm$ som kan klare $2 x 125\milli\watt = 250\milli\watt$. Med denne modstand vil balanceringsstrømmen maksimalt blive $50\milli\ampere$ og have en effektafsættelse på $190\milli\watt$.
 
 \section{MOSFET driverkreds}
 Batteripakken skal kunne afbrydes fra en belastning i tilfælde af fejlsituationer. For at kunne opnå dette, er to MOSFET'er i en fælles drain konfiguration valgt og virker som en to tovejs kontakt. De kan både være placeret på $V_{pack+}$ og $V_{pack-}$. Hvis en N-kanal MOSFET er på $V_{pack+}$ skal gaten tændes med $V_{out} + V_{gs}$, hvilket i denne applikation giver en spænding på $V_{gs} = 28.8\volt$. For at kunne opnå denne spænding vil en charge pumpe være nødvendig. For at undgå brug af en charge pumpe kan en P-kanal MOSFET anvendes. Udvalget på P-kanal MOSFET'er er dog begrænset og de har en væsentlig hører ledemodstand, $R_{ds-ON}$. 
@@ -111,7 +114,8 @@ I dette projekt vælges der at MOSFET'erne placeres på $V_{pack-}$, for nemmere
 Driveren til begge MOSFET'er er ens og kan ses på figur \ref{fig:mosfet_driver}. Driveren består af en NPN ($Q28$) og PNP ($Q27$) BJT koblet i en push-pull konfiguration. For at kunne tænde og slukke driveren gøres der brug af en NPN BJT. Gate modstanden $R35$ er valgt til $10\ohm$ for hurtig styring af MOSFET'en. De to MOSFET'er er altid tændte, og slukker kun i tilfælde af fejlsituationer.
 
 \section{Sikkerhed ved overstrøm}
-For at beskytte batteripakken ved en overstrøm under op- eller afladning, skal sikkerhedsforanstaltninger realiseres. Igennem dette projekt har flere iterationer været nødvendig, før den endelige løsning kom på plads. Problemet med tidligere versioner var, at i tilfælde af for store strømtræk af en belastning, ville batteripakken sagtens kunne registrere dette og efterfølgende slukke for MOSFET'erne. Problemet opstod dog efterfølgende når belastningen stadig var koblet til. Efter detektering af en overstrøm ville en ny strømmåling blive foretaget, her hvor pakken nu var afbrudt. Den ville så skrive, at forholdene var optimale til at køre igen, så MOSFET'erne ville tænde, en ny måling ville så igen detektere en overstrøm. Her ville den så ende med at oscillere mellem to tilstande. En overstrømsdetektor der kan holde sig slukket ved tilfælde af for store strømtræk under op- og afladning var nødvendig. Det vil derfor blive microcontrollerens opgave at tillade en forbindelse mellem batteripakke og belastning.
+For at beskytte batteripakken ved en overstrøm under op- eller afladning, skal sikkerhedsforanstaltninger realiseres. Igennem dette projekt har flere iterationer været nødvendig, før den endelige løsning kom på plads. Problemet med tidligere versioner var, at i tilfælde af for store strømtræk af en belastning, ville batteripakken sagtens kunne registrere dette og efterfølgende slukke for MOSFET'erne. Problemet opstod dog efterfølgende når belastningen stadig var koblet til. Efter detektering af en overstrøm ville en ny strømmåling blive foretaget, her hvor pakken nu var afbrudt. Den ville så skrive, at forholdene var optimale til at køre igen, så MOSFET'erne ville tænde, en ny måling ville så igen detektere en overstrøm. Her ville den så ende med at oscillere mellem to tilstande. 
+En overstrømsdetektor der kan holde sig slukket ved tilfælde af for store strømtræk under op- og afladning var nødvendig. Det vil derfor blive microcontrollerens opgave at tillade en forbindelse mellem batteripakke og belastning.
 \\
 
 Formålet med at have dedikeret hardware til at trigge på overstrøm i stedet for lade det hele blive styret af microcontrolleren er, at den dedikerede hardware har væsentlig hurtigere reaktionshastighed end micro'en. Når micro'en detekterer en overstrøm har dedikerede hardware allerede slukket for MOSFET'erne og dermed undgået forøget risici for beskadigelse af batteripakken.
@@ -150,8 +154,9 @@ V_{-} = V_{PWM-DSG} + V_{CELL1-GND} = 60\milli\volt + V_{PWM-DSG}
 
 Under afladning antager $V_{PWM-DSG}$ negativ værdi. Når bidraget fra  strømtrækket overstiger grænsen, vil potentialet på $V-$ blive negativ og dermed blive lavere end $V+$, som vil få operationsforstærkerens udgang til at gå høj. Da den er forsynet med $3.3\volt$ vil den udgangen ideelt set antage samme potentiale. Som tidligere nævnt er operationsforstærkerens udgang forbundet med basen på $Q12$ som dermed tændes og slukker driveren.
 \\
+
 Samtidig med at driveren slukkes leder dioden $D1$ og forspænder $V+$ gennem en spændingsdeling af $R12$ og $R13$. Schottky diodernes opgave i både op- og afladning er dertil at levere et spændingsfald på $0.3\volt$, for at sikre at kredsen kan nulstilles. Potentialet på $V+$ vil efter en overstrøms situation være,
-\klp{R12 skal ændres til 330k}
+
 \begin {equation} 
 V_{+} = (V_{High} - V_{diode} ) * \frac{R_{13}}{R_{12}+R_{13}} = (3.3\volt - 0.3\volt ) * \frac{10\kilo\ohm}{330\kilo\ohm + 10\kilo\ohm} =  88\milli\volt
 \end {equation}
@@ -164,7 +169,7 @@ V+ > V- \quad = \quad 88\milli\volt > 60\milli\volt
 \end {equation}
 
 På den måde har operationsforstærkeren en indbygget hysterese.
-Microcontrolleren vil opdage en overstrøms situation, men behøver ikke at slukke driveren, da det allerede sker før den opdager dette. For at tænde MOSFET'en skal operationsforstærkerens "hysterese" nulstilles, og dette gøres ved, at sende en puls på $3.3\volt$ fra $PWM_DSG$, hvilket får $V-$ til at op på $117.9\milli\volt$, og dermed overstiger $V+$.
+Microcontrolleren vil opdage en overstrøms situation, men behøver ikke at slukke driveren, da det allerede sker før den opdager dette. For at tænde MOSFET'en skal operationsforstærkerens "hysterese" \space nulstilles, og dette gøres ved, at sende en puls på $3.3\volt$ fra $PWM_DSG$, hvilket får $V-$ til at op på $117.9\milli\volt$, og dermed overstiger $V+$.
 
 
 \subsection{Overstrøm ved opladning}\label{sec:overcurrent_chg}
@@ -207,10 +212,7 @@ For at nedtrappe spændingen fra $12\volt$ til $3.3\volt$ anvendes LDO'en TS9011
 	\label{fig:voltage_nets}
 \end{figure}
 
-Kredsløbet kan ses på figur \ref{fig:voltage_nets}. Det virker på den måde, at $R10$ lader noget strøm gå igennem zener dioden, så spændingen på MOSFET'ens gate bliver diodens zener-spænding. Når MOSFET'ens gate-source spænding $V_{GS(th)}$ rammer sit arbejdspunkt, vil MOSFET'en fungere som en variabel modstand, og have et spændingsfald over drain-source så den stadig kan holde gaten tændt.
-\\
-
-For at minimere strømforbruget i batteripakken er $3.3\volt$ forsyningen valgt til at være TS9011SCX, da dette er af typen "Low Quiescent Current CMOS", hvilket betyder den kun bruger $2\micro\ampere$ til at regulere udgangspændingen.
+Kredsløbet kan ses på figur \ref{fig:voltage_nets}. Det virker på den måde, at $R10$ lader noget strøm gå igennem zener dioden, så spændingen på MOSFET'ens gate bliver diodens zener-spænding. Når MOSFET'ens gate-source spænding $V_{GS(th)}$ rammer sit arbejdspunkt, vil MOSFET'en fungere som en variabel modstand, og have et spændingsfald over drain-source så den stadig kan holde gaten tændt. For at minimere strømforbruget i batteripakken er $3.3\volt$ forsyningen valgt til at være TS9011SCX, da dette er af typen "Low Quiescent Current CMOS", hvilket betyder den kun bruger $2\micro\ampere$ til at regulere udgangspændingen.
 
 \section{Standby tilstand}
 En standby tilstand kan både indeholde tiltag i hardwaren og softwaren.

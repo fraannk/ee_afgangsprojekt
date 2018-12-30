@@ -7,27 +7,25 @@ Til test af begge versioner konstrueres en batteriholder til de fire celler som 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=11cm]{billeder/battery_holder.jpg}
-	\caption{Batter holder med balanceringsstik.}
+	\caption{Batteriholder med balanceringsstik.}
 	\label{fig:battery_holder}
 \end{figure}
 
 \section{Test af IC version}\label{afs:test_ic}
-I dette afsnit vil en komplet test opstilling af den integrerede version blive gennemgået og udført.
+I dette afsnit vil en komplet test opstilling af den integrerede version af BMS'en blive gennemgået og udført. Alle implementerede funktionaliteter beskrevet i kapitel \ref{kap:funktionaliteter} testes for ønsket og optimal funktion. 
 
 \subsection{Testopstilling}
-Ved brug af en elektrisk belastning vil den maksimale afladestrøm blive testet.
+Ved brug af en elektrisk belastning (til venstre på figur \ref{fig:ic_testsetup}) vil den maksimale afladestrøm blive testet. Der bruges en laboratoriestrømforsyning (midten til højre) til test af opladefunktionalitet. Et oscilloskop med $1^2C$ protokol dekodning bruges til aflæsning af registre og adressering. (midten til venstre) og til sidst en computer med et terminal program til brugergrænsefladen (shell). 
 
-
-
-Billede
-
-
-
-
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=15cm]{billeder/IC_testsetup.png}
+	\caption{Testopsætning til IC versionen}
+	\label{fig:ic_testsetup}
+\end{figure}
 
 \subsection{Resultat skema}
 Resultaterne fra testene kan ses i tabel \ref{tab:resultat_IC}.
-
 
 \begin{table}[h!]
 	\small
@@ -36,20 +34,23 @@ Resultaterne fra testene kan ses i tabel \ref{tab:resultat_IC}.
 		\begin{tabular}{ l l l l l l l }
 			\toprule
 			\multicolumn{1}{l}{\textbf{Funktionalitet}}          &
-			\multicolumn{1}{l}{\textbf{Resultat}}           &
-			\multicolumn{1}{l}{\textbf{Kommentar}}   \\ 
+			\multicolumn{1}{l}{\textbf{Resultat}}           \\
 			\hline
-			Opladestrømsbeskyttelse        & Slår ikke fra  &      \\
-			Afladestrømsbeskyttelse        & Slår fra ved $6\ampere$   &      \\
-			Balancering af 1 celle         & Virker                    &      \\
-			Balancering af 2 celler        & Virker                    &      \\
-			Balancering af 3 celler        & Virker                    &      \\
-			Balancering færdig             & BMS afbryder              &      \\
-			Temperatur - for høj           & BMS afbryder ved   $\SI{45}{\celsius}$       &      \\
-			Strømmåling                    & Virker                    &      \\
-			Information om kapacitet       & Virker                    &      \\
-			Spændingsmålinger              & Virker                    &      \\
-			Display                        & Virker ikke               &      \\
+			Spændingsmålinger              & Virker                         \\
+			Afladestrømmåling                    		& Virker                         \\
+			Opladestrømmåling                    		& Virker ikke optimalt                         \\
+			Temperaturmåling                    		& Virker                       \\
+			Afladestrømsbeskyttelse		& Slår fra ved $6\ampere$        \\
+			Opladestrømsbeskyttelse   	& Slår ikke fra da målingen ikke virker optimalt      \\
+			Temperaturbeskyttelse          & BMS afbryder ved $\SI{45}{\celsius}$ og venter indtil nedkølet til $\SI{40}{\celsius}$           \\
+			Balancering af celle 1         & Virker                         \\
+			Balancering af celle 2        & Virker                         \\
+			Balancering af celle 3        & Virker                         \\			
+			Balancering af celle 4        & Virker                         \\
+			Balancering færdig             & BMS afbryder og informerer brugeren                  \\
+			Information om kapacitet       & Virker                          \\
+			Information om batteriprocent 							& Virker			 \\
+			Brugergrænseflade (Shell)                       & Virker                    \\
 			%    &      &       \\
 			
 			\bottomrule
@@ -63,15 +64,25 @@ Resultaterne fra testene kan ses i tabel \ref{tab:resultat_IC}.
 \end{table} 
 \FloatBlock
 
-
+\subsection{Delkonklusion}
+Som der ses i tabellen \ref{tab:resultat_IC} virker de fleste af funktionerne. Opladestrømmålingen fejler da der sker en fejl i konverteringen af 16-bit 2's complement tallet, og derfor returnerer et mærkeligt tal. Dette er så årsagen til at opladestrømbeskyttelsen ikke virker. Denne fejl er ikke rettet da det ikke ville være hensigtsmæssigt med hensyn til tiden. Dog er det også under afladning at beskyttelsen er mest vigtig, da man oftere kortslutter/aflader for hårdt, end man kommer til at sætte en for kraftig oplader til. 
 
 \section{Test af diskret version}\label{afs:test_diskret}
-
+I dette afsnit vil en komplet test opstilling af den diskrete version af BMS'en blive gennemgået og udført. Alle implementerede funktionaliteter beskrevet i kapitel \ref{kap:funktionaliteter} testes for ønsket og optimal funktion. 
 
 \subsection{Testopstilling}
-Billede
+Da microen ikke monteres og derfor ikke testes på denne version, er testopstillingen lidt anderledes. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=15cm]{billeder/IC_testsetup.png}
+	\caption{Testopsætning til IC versionen}
+	\label{fig:ic_testsetup}
+\end{figure}
 
 \subsection{Resultat skema}
+Resultaterne fra testene kan ses i tabel \ref{tab:resultat_diskret}.
+
 \begin{table}[h!]
 	\small
 	\centering
@@ -79,19 +90,23 @@ Billede
 		\begin{tabular}{ l l l l l l l }
 			\toprule
 			\multicolumn{1}{l}{\textbf{Funktionalitet}}          &
-			\multicolumn{1}{l}{\textbf{Resultat}}           &
-			\multicolumn{1}{l}{\textbf{Kommentar}}   \\ 
+			\multicolumn{1}{l}{\textbf{Resultat}}           \\
 			\hline
-			Opladestrømsbeskyttelse        & Slår fra ved $1\ampere$   &      \\
-			Afladestrømsbeskyttelse        & Slår fra ved $6\ampere$   &      \\
-			Balancering af 1 celle         & Virker                    &      \\
-			Balancering af 2 celler        & Virker                    &      \\
-			Balancering af 3 celler        & Virker                    &      \\
-			Balancering færdig             & BMS afbryder              &      \\
-			Temperatur - for høj           & BMS afbryder ved   $\SI{45}{\celsius}$       &      \\
-			Strømmåling                    & Virker                    &      \\
-			Spændingsmålinger              & Virker                    &      \\
-			Display                        & Virker                    &      \\
+			Spændingsmålinger              & Virker                         \\
+			Afladestrømmåling                    		& Virker                         \\
+			Opladestrømmåling                    		& Virker ikke optimalt                         \\
+			Temperaturmåling                    		& Virker                       \\
+			Afladestrømsbeskyttelse		& Slår fra ved $6\ampere$        \\
+			Opladestrømsbeskyttelse   	& Slår ikke fra da målingen ikke virker optimalt      \\
+			Temperaturbeskyttelse          & BMS afbryder ved $\SI{45}{\celsius}$ og venter indtil nedkølet til $\SI{40}{\celsius}$           \\
+			Balancering af celle 1         & Virker                         \\
+			Balancering af celle 2        & Virker                         \\
+			Balancering af celle 3        & Virker                         \\			
+			Balancering af celle 4        & Virker                         \\
+			Balancering færdig             & BMS afbryder og informerer brugeren                  \\
+			Information om kapacitet       & Virker                          \\
+			Information om batteriprocent 							& Virker			 \\
+			Brugergrænseflade (Shell)                       & Virker                    \\
 			%    &      &       \\
 			
 			\bottomrule
@@ -105,5 +120,5 @@ Billede
 \end{table} 
 \FloatBlock
 
-\section{Delkonklusion}
-Ud fra test af begge versioner, kan der konkluderes ....
+\subsection{Delkonklusion}
+Denne test viser at selvom der ikke kan loades software pga. en manglende microcontroller, kunne de individuelle dele stadig testes manuelt. Her ses at de fleste funktioner virker, men undtagelse til ...

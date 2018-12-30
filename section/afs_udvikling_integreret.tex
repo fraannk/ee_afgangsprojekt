@@ -54,7 +54,6 @@ For at styre op- og afladnings MOSFET'erne, har BQ76920 indbygget MOSFET driver 
 Q5-A styrer afladningen og Q5-B styrer opladningen. Som der ses på figur \ref{fig:bq_fets} er der indsat en p-kanal's MOSFET (Q1) for at holde kredsens CHG ben væk fra negative spændinger. Når CHG ikke er slået til og PACK-2 f.eks. bliver trukket under stel, vil det ikke blive set af CHG benet da Q5-A ikke tænder. Q1 sørger også for at R2 kan holde Q5-B slukket, siden alle spændinger under denne FET kan "følge" \space PACK-2 hvis den går under stel. \\
 
 Dioden (D5) sørger for at CHG hurtigt kan trække Q5-B's gate høj. Modstanden i parallel (R2), får spændingen til at falde når PACK-2 er trukket høj, samtidig med den begrænser strømmen der går ind i CHG benet. Modstanden R1 holder Q5-B slukket når CHG er slukket.\footnote{Se datablad for BQ76920 på side 28; \url{http://www.ti.com/lit/ds/symlink/bq76920.pdf}}
-\sbf{Tjek det stykke her...}
 
 \section{Temperatursensor} \label{sec:temperatur}
 Som endnu en sikkerhedsforanstaltning bruges en temperatursensor til at overvåge temperaturen i batteripakken. Her blev der besluttet at bruge en I2C temperatursensor, da opsætning ville være nemt siden I2C allerede skulle benyttes. Den specifikke del hedder LM75BIM-3/NOPB. Denne model blev valgt da den var tilgængelig på evaluation-boardet af microcontrolleren som blev brugt under udvikling. Derfor kunne udviklingen af software ske før hardware delen var helt færdig, og dermed fremskynde processen. \\ 

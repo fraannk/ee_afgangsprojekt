@@ -1,5 +1,5 @@
 \section{Lithium teknologi}
-Lithium batterier har siden 1973 været under konstant udvikling. Gennem tiden er der opdaget mange forskellige typer for lithium batterier. Målet er, som ved så mange andre typer batterier, at få den højeste kapacitet på mindst mulig plads. Men da der ved lithium batterier er farlige konsekvenser ved dette, er man nødt til at finde det bedste kompromis. "Hovednavnet" \space /det mest brugte navn for de mange forskellige typer er bare "lithium-ion" \space men hvis man går lidt dybere ned i kemien ser man at der findes lithium-ion batterier med mange forskellige karakteristika. 
+Lithium batterier har siden 1973 været under konstant udvikling. Gennem tiden er der opdaget mange forskellige typer for lithium batterier. Målet er, som ved så mange andre typer batterier, at få den højeste kapacitet på mindst mulig plads. Men da der ved lithium batterier er farlige konsekvenser ved dette, skal det det bedste kompromis findes. "Hovednavnet" \space /det mest brugte navn for de mange forskellige typer er bare "lithium-ion" \space men hvis der dykkes lidt dybere ned i kemien ses der at der findes lithium-ion batterier med mange forskellige karakteristika. 
 
 \subsection{Forskel på kemierne}
 Den nok mest brugte er dog lithium cobalt oxid-typen ($LiCoO_2$, også kaldt $LCO$) som bruges i f.eks. mobiltelefoner og moderne bærbare computere. Denne type er den mest fleksible i dens fysiske design, men også den farligste. Derfor er det vigtigt at denne type celle har et overvågningskredsløb, da der ellers kan forekomme katastrofale situationer. Disse celler er oftest formet som "bløde puder" \space \textemdash \space altså uden en hård kasse rundt om. Denne teknologi bruges også oftest i lithium ion polymer-varianten, som bliver brugt meget i RC-industrien pga. den høje afladekapacitet og den kompakte form.
@@ -33,7 +33,7 @@ Lithium jern fosfat ($LiFePO_4$ også kaldt $LFP$) har sammen med lithium mangan
 \caption{Genereliseret tabel der sammenligner de forskellige typer celler}
 \end{table}
 
-Der blev valgt kemien $LiNiMnCoO_2$ (NMC/INR) da den ramte de fleste punkter som var vigtige i dette projekt. Linak havde også nogle celler tilgængelige med denne kemi. Et af grundlagene for valg af kemien var især levetiden, da batteripakken som helhed kommer til at være installeret i et produkt hvor det ikke ønskes at skifte batterier ofte. Der var også nok energitæthed og afladekapacitet. De valgte celler har en kapacitet på $2600\milli\ampere\hour$ og en afladekapacitet på $3C$\footnote{Datablad i appendix X}, og for at udregne den maksimale afladningskapacitet gøres følgende: 
+Der blev valgt kemien $LiNiMnCoO_2$ (NMC/INR) da den ramte de fleste punkter som var vigtige i dette projekt. Linak havde også nogle celler tilgængelige med denne kemi. Et af grundlagene for valg af kemien var især levetiden, da batteripakken som helhed kommer til at være installeret i et produkt hvor det ikke ønskes at skifte batterier ofte. Der var også nok energitæthed og afladekapacitet. De valgte celler har en kapacitet på $2600\milli\ampere\hour$ og en afladekapacitet på $3C$\footnote{Aflæst i cellens datablad.}, og for at udregne den maksimale afladningskapacitet gøres følgende: 
 
 \begin {equation}
 2.6\ampere\hour \times 3C = 7,8\ampere
@@ -53,14 +53,14 @@ Kigges der på en typisk lithium-ion celle, har den en afladningskurve der ser u
 \label{fig:discharge_curve}
 \end{figure}
 
-Her kan det ses at spændingen på batterierne falder i takt med at man aflader dem. Denne kurve er dog ikke lineær og varierer fra celle til celle, og specielt mellem forskellige kemier. Der ses også at jo hårdere man aflader dem, jo mindre kapacitet får man ud af dem. På denne specifikke graf får man optimalt udbytte af cellen hvis man aflader med 1C, uden at gå på kompromis med hverken afladekapacitet eller samlet energiudbytte. \\
+Her kan det ses at spændingen på batterierne falder i takt med at de aflades. Denne kurve er dog ikke lineær og varierer fra celle til celle, og specielt mellem forskellige kemier. Der ses også at jo hårdere der afladers, jo mindre kapacitet kan der udvindes. På denne specifikke graf fås et optimalt udbytte af cellen hvis der aflades med 1C, uden at gå på kompromis med hverken afladekapacitet eller samlet energiudbytte. \\
 
-"Sikkerhedszonen" \space er også i spil her. Hvis man aflader med for eksempel $0.2C$, og stopper afladningen ved omkring de $3.2\volt$, får man udbytte af det meste af cellens kapacitet, mens man sørger for at cellen har så lang en levetid som muligt. Her er man dog nødt til at gå lidt på kompromis med afladekapaciteten, for hvis man aflader med f.eks. $2C$, er der teoretisk set stadig omkring $88-90\percent$ kapacitet tilbage som man ikke kan bruge uden at cellen tager skade i det lange forløb. \\
+"Sikkerhedszonen" \space er også i spil her. Hvis der aflades med for eksempel $0.2C$, og afladningen stoppes ved omkring de $3.2\volt$, udvindes det meste af cellens kapacitet, mens der sørges for at cellen har så lang en levetid som muligt. Her er det dog nødvendigt at gå lidt på kompromis med afladekapaciteten, for hvis der aflades med f.eks. $2C$, er der teoretisk set stadig omkring $88-90\percent$ kapacitet tilbage som der ikke kan blive brugt uden at cellen tager skade i det lange forløb. \\
 
 Skal cellerne opbevares i længere tid, er det en god idé at opbevare dem i den såkaldte "storage mode". Her lades/aflades cellerne til $30-40\percent$ af deres fulde kapacitet, da der her er mindst slid, og man derfor opnår en længere levetid. 
 
 \section{Sikkerhed}
-Da lithium batterier kan være farlige, er man nødt til at foretage de nødvendige sikkerhedsforanstaltninger. Derfor er der en del "regler":
+Da lithium batterier kan være farlige, er det nødvendigt til at foretage de nødvendige sikkerhedsforanstaltninger. Derfor er der en del "regler":
 
 \begin{itemize}[noitemsep]
 \item Oplad ikke på batteriet når omgivelsestemperaturen er under $0\degreeCelsius$ eller over $45\degreeCelsius$. 
@@ -69,7 +69,7 @@ Da lithium batterier kan være farlige, er man nødt til at foretage de nødvend
 \item Brug helst en balance oplader eller et batteristyresystem, hvis der er flere celler i serie.
 \end{itemize}
 
-Når man udvilkler systemer med lithium-ion batterier er det en god ide at batteristyresystemet indeholder kortslutningsbeskyttelse og op- og afladningskontrol. Med dette kan man undgå at aflade cellerne for hårdt og/eller en direkte kortslutning af cellerne. Det er også en god idé at have temperatursensorer i systemet for at overvåge cellernes temperatur samt omgivelsestemperaturerne (se ovenstående punkter). Dette er med til at forøge cellernes levetid. 
+Når der udvilkles systemer med lithium-ion batterier er det en god ide at batteristyresystemet indeholder kortslutningsbeskyttelse og op- og afladningskontrol. Med dette kan der undgås at aflade cellerne for hårdt og/eller en direkte kortslutning af cellerne. Det er også en god idé at have temperatursensorer i systemet for at overvåge cellernes temperatur samt omgivelsestemperaturerne (se ovenstående punkter). Dette er med til at forøge cellernes levetid. 
 
 %\section{Ækvivalent kredsløbs model af en celle (ECM)}
 %For at kunne udvikle et batteristyresystem er det nødvendigt, at have en model for en celle i form at et elektrisk ækvivalensdiagram. Alt afhængig af modellens kompleksitet vil databehandling af State of Charge og State of Health blive mere præcis. \\

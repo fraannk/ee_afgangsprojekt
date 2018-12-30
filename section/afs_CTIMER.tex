@@ -1,2 +1,13 @@
 \section{Timer funktionalitet (CTIMER)}
-For at opnå præcise timingsmuligheder opsættes CTIMER'eren, som er en 32-bit timer. Denne del bliver dog for det meste brugt til at kunne holde øje med om systemet er i live, når der f.eks. ikke er tilsluttet en host. 
+For at opnå præcise timingsmuligheder opsættes CTIMER'eren, som er en 32-bit timer. Denne del bliver dog for det meste brugt til at kunne holde øje med om systemet er i live, når der f.eks. ikke er tilsluttet en host. \\
+
+Timeren sættes op vha. \verb|TIMER_Init()| hvori de krævede parametre opsættes og derefter startes: 
+
+\begin{itemize}[noitemsep]
+	\item Timerens counter resettes. 
+	\item Timerens counter sættes til ikke at stoppe ved match.
+	\item Matchværdien sættes til det halve af timer clock frekvensen. (Ender ud i ca 500ms)
+	\item Der angives at et match skal styre et output. (Specifik pin er angivet i \verb|pin_mux.h|)
+	\item Pin skal initialiseres. 
+	\item Interrupt er ikke ønsket og deaktiveres.
+\end{itemize}

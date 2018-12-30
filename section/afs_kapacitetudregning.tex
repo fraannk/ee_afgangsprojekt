@@ -1,3 +1,22 @@
 \section{Realisering af State of Charge}
-I dette afsnit beskrives udregningerne for state of charge. 
-\sbf{Kapacitet med coulomb counting, procent med spænding.}
+I dette afsnit beskrives udregningerne for realiseringen af state of charge. Der er anvendt to metoder til at indikere state of charge. Der måles på terminalspændingerne, men som forklaret i afsnit \ref{afs:estimering_kapacitet} er denne ganske upræcis. Der er også andvendt coulomb counting, men denne kan også afvige en smule.
+
+\subsection{Batteriprocent vha. spænding}
+For at udregne procenten er det nødvendigt at vide den højeste tilladte spænding samt den absolut laveste tilladte spænding. Disse sættes i de to definitioner som hedder\newline \verb|MAX_PACK_VOLTAGE| og \verb|MIN_PACK_VOLTAGE|. Efter læsning af den aktuelle spænding kaldes funktionen \verb|calculatePackPercentageFromVoltage| som kræver den aktuelle spænding som variabel. Udregningen foregår således:
+
+\begin {equation}
+Q_{percentage} =  \frac{(\mathit{currentVoltage} - \mathit{MIN\_PACK\_VOLTAGE})}{(\mathit{MAX\_PACK\_VOLTAGE} - \mathit{MIN\_PACK\_VOLTAGE})} \times 100\percent
+\label{eq:q_percentage}
+\end {equation}
+
+hvor \verb|currentVoltage| er den seneste spændingsmåling af hele pakken. Funktionen returnerer så værdien i procent, og kan bruges i hovedrutinen.
+
+\subsection{Tilbageværende kapacitet vha. coulomb counting}
+Coulomb counteren tager først en måling og gemmer denne i en variabel, og efter $250\milli\second$ tages endnu en måling og gemmes i en anden variabel. Dvs. der kan regnes en ny kapacitet ca. hver $500\milli\second$. Værdierne omregnes til \micro\ampere\space for at undgå tab i floating point beregninger (da printf ikke understøtter floating point). Funktionen \verb|calculateUsedCapacity| kaldes og de to målinger kræves. Da coulomb counteren kan finde på at måle en meget lille strøm, selvom der ikke trækkes noget, filtreres dette fra vha. et simpelt \verb|if| statement i funktionen. Herefer er udregningen således: 
+
+\begin {equation}
+Q_{used} =  \frac{(\mathit{current1} + \mathit{current2}) / 2}{3600}
+\label{eq:q_used}
+\end {equation}
+
+hvor \verb|current1| og \verb|current2| er de to strømmålinger. Funktionen returnerer det brugte strøm i det forløbne halve sekund, i \micro\ampere, og kan herefter trækkes fra den aktuelle tilbageværende kapacitet (hvert halve sekund). 

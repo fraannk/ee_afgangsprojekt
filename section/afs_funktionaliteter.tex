@@ -70,7 +70,7 @@ Der findes mange former for aktiv balancering. "Controlled shunting" er en af de
 
 En anden aktiv balanceringsteknik hedder "Switched capacitor". Her sidder en kondensator mellem naboceller og kan aktiveres for at flytte energi fra den ene celle til den anden.
 
-\section{Estimering af kapacitet}
+\section{Estimering af kapacitet}\label{afs:estimering_kapacitet}
 En af de vigtigste funktionaliteter i et batteristyresystem er estimering af kapacitet, State of Charge (SoC), og er direkte defineret som den procentdel af maksimal ladning i en celle eller batteripakke. SoC er vigtig da det afspejler batteripakkens ydeevne. Nøjagtig estimering af SoC er ikke kun vigtig til beskyttelse af cellerne, men også for at forhindre overopladning og underafladning, hvilket bidrager til forlængelse af batteripakkens levetid. Dertil muliggør informationen også at lade batteristyresystemet ligge rationelle strategier for at spare energi. \\
 
 Informationen kan også bruges til at indikere behov tilslutning af oplader til brugeren gennem f.eks. en statusindikator eller om afladning af systemet kan tillades. 
@@ -85,7 +85,7 @@ SoC = (Q_{max}-Q_{passed})\times 100/Q_{max} \label{eq:soc}
 Der anvendes typisk tre metoder til at afgøre SoC, gennem en direkte måling af cellespænding, ved at tælle ladning, og en blanding af disse to.
 
 \subsection{Måling af terminalspænding}
-Ved denne metode vil en simpel spændingsmåling henover cellerne kunne indikere kapaciteten, da spændingen på en celle tilnærmelsesvis falder lineært under afladning i dette projekts valgte arbejdsområde. Den er dog ikke så præcis, da den reelle afladningskurve ikke er lineær, men det er i nogen situationer heller ikke nødvendigt med en meget præcis kapacitetsmåling, så længe op- og afladningspunkterne er veldefinerede.
+Ved denne metode vil en simpel spændingsmåling henover cellerne kunne indikere kapaciteten, da spændingen på en celle tilnærmelsesvis falder lineært under afladning i dette projekts valgte arbejdsområde. Den er dog ikke så præcis, da den reelle afladningskurve ikke er lineær, men det er i nogen situationer heller ikke nødvendigt med en meget præcis kapacitetsmåling, så længe op- og afladningspunkterne er veldefinerede. Denne metode er nok den mest brugte grundet dens simplicitet, men er derimod nok også den mest upræcise. 
 \\
 
 Det kræver en meget præcis spændingsmåler, da den skal kunne måle meget små forskelle på afladningskurvens flade region. Derudover er der parametre som cellens indre modstand, der kan have stor betydning for kapacitetsmålingen, da den bliver mere betydende under stigende strømtræk. Hvis realtidsmåling (med stor) ikke er nødvendig, kan et mere nøjagtigt estimat opnås ved at måle spændingen $1000 - 2000 \sec$ efter et strømtræk.

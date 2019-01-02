@@ -15,7 +15,7 @@ Til test af begge versioner konstrueres en batteriholder til de fire celler som 
 I dette afsnit vil en komplet test opstilling af den integrerede version af BMS'en blive gennemgået og udført. Alle implementerede funktionaliteter beskrevet i kapitel \ref{kap:funktionaliteter} testes for ønsket og optimal funktion. 
 
 \subsection{Testopstilling}
-Ved brug af en elektrisk belastning (til venstre på figur \ref{fig:ic_testsetup}) vil den maksimale afladestrøm blive testet. Der bruges en laboratoriestrømforsyning (midten til højre) til test af opladefunktionalitet. Et oscilloskop med $1^2C$ protokol dekodning bruges til aflæsning af registre og adressering. (midten til venstre) og til sidst en computer med et terminal program til brugergrænsefladen (shell). 
+Ved brug af en elektrisk belastning (til venstre på figur \ref{fig:ic_testsetup}) vil den maksimale afladestrøm blive testet. Der bruges en laboratoriestrømforsyning (midten til højre) til test af opladefunktionalitet. Et oscilloskop med $1^2C$ protokol dekodning bruges til aflæsning af registre og adressering (midten til venstre) og til sidst en computer med et terminal program til brugergrænsefladen (shell). 
 
 \begin{figure}[h]
 	\centering
@@ -71,7 +71,7 @@ Som der ses i tabellen \ref{tab:resultat_IC} virker de fleste af funktionerne. O
 I dette afsnit vil en komplet test opstilling af den diskrete version af BMS'en blive gennemgået og udført. Alle implementerede funktionaliteter beskrevet i kapitel \ref{kap:funktionaliteter} testes for ønsket og optimal funktion. 
 
 \subsection{Testopstilling}
-Da microen ikke kunne monteres og derfor ikke kan testes på denne version, er testopstillingen lidt anderledes. Her bruges en laboratoriestrømforsyning (til venstre på figur \ref{fig:diskret_testsetup}) til at sætte de spændinger som microcontrolleren skulle gøre vha. PWM. Hhv. $1,7\volt$ til afladefetten og $0,3\volt$ til opladefetten. Derudover er der en strømforsyning til test af opladning (midten, øverst), og en elektrisk belastning til test af afladning. (midten, nederst). Balanceringen er testet manuelt ved hvert enkelt ben. Oscilloskopet (til højre) bruges til aflæsning af de forskellige værdier. 
+Da microen ikke kunne monteres og derfor ikke kan testes på denne version, er testopstillingen lidt anderledes. Her bruges en laboratoriestrømforsyning (til venstre på figur \ref{fig:diskret_testsetup}) til at sætte de spændinger som microcontrolleren skulle gøre ved hjælp af PWM på henholdsvis $1,7\volt$ til afladefetten og $300\milli\volt$ til opladefetten. Derudover er der en strømforsyning til test af opladning (midten, øverst), og en elektrisk belastning til test af afladning (midten, nederst). Balanceringen er testet manuelt ved hvert enkelt ben. Oscilloskopet (til højre) bruges til aflæsning af værdierne på strømmålings-operationsforstærkernes indgangsben.
 
 \begin{figure}[h]
 	\centering
@@ -121,10 +121,10 @@ Resultaterne fra testene kan ses i tabel \ref{tab:resultat_diskret}.
 \FloatBlock
 
 \subsection{Delkonklusion}
-Ud fra test af denne version kan der konkluderes at, på trods af manglende microcontroller, kunne de vigtigste funktionaliteter stadig testes manuelt. Den maksimale op- og ladeladestrøm slog fra før den skulle. Der blev derfor også testet med at forøge reference spændingen på op- og afladebenet, hvortil den ønskede cut-off strøm kunne opnås. Der blev i projektet ikke fundet ud af, hvorfor strømmene blev afbrudt før målet.
+Ud fra test af denne version kan der konkluderes at, på trods af manglende microcontroller, kunne de vigtigste funktionaliteter stadig testes manuelt. Den maksimale op- og ladeladestrøm slog fra før den skulle. Derfor blev tests foretaget med at forøge reference spændingen på op- og afladebenet, hvortil den ønskede cut-off strøm kunne opnås. Der blev i projektet ikke fundet ud af, hvorfor strømmene blev afbrudt før målet.
 \\
 
-Under test af balancering af cellerne, blev MOSFET'erne manuelt slukket grundet manglende styring fra microcontrolleren.
+For at test balancering af cellerne, blev MOSFET'erne manuelt slukket grundet manglende styring fra microcontrolleren. Derefter kunne balancering testes ved at holde opladte cellers ben højt og trække spændingen lav på celler under balancering.
 
 
 

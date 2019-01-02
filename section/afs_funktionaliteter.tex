@@ -1,5 +1,5 @@
 \section{Om batteristyresystemer}
-Et batteristyresystem er et elektrisk system, der styrer de enkelte battericeller i en batteripakke. Den overvåger og holder styr på cellens tilstand herunder spænding, kapacitet, ladning og temperatur. Dertil søger systemet for at holde cellerne beskyttet i et sikkert operation område (Safe Operating Area). Systemet sørger for at batteripakkens celler er i balance med hinanden, hvilket praktisk betyder at cellespændingerne er tilnærmelsesvis ens. I tilfælde af at parametre skulle overstige deres max værdi, skal systemet sørge for at afbryde batteriet fra belastningen eller opladeren. Figur \ref{fig:blokdiagram} viser et blokdiagram over et batteristyresystems opbygning. Efter flere iterationer er dette blokdiagram løsningsmodel for den diskret opbyggede version.
+Et batteristyresystem er et elektrisk system, der styrer de enkelte battericeller i en batteripakke. Den overvåger og holder styr på cellens tilstand herunder spænding, kapacitet, ladning og temperatur. Dertil søger systemet for at holde cellerne beskyttet i et sikkert operations område (Safe Operating Area). Systemet sørger for at batteripakkens celler er i balance med hinanden, hvilket praktisk betyder at cellespændingerne er tilnærmelsesvis ens. I tilfælde af at parametrene skulle overstige deres max værdi, skal systemet sørge for at afbryde batteriet fra belastningen eller opladeren. Figur \ref{fig:blokdiagram} viser et blokdiagram over et batteristyresystems opbygning. Efter flere iterationer er dette blokdiagram løsningsmodel for den diskret opbyggede version.
 
 \begin{figure}[h]
 	\centering
@@ -47,7 +47,7 @@ Tredje og sidste fase er når cellerne har færdiggjort deres ladecyklus og går
 Blanceringsteknikkerne kan opdeles i to kategorier: passiv og aktiv balancering. Passiv balancering går ud på at de omdanne overskudsenergi til varme fra fuldt opladte celler, modsat aktiv balancering som flytter overskudenergien til lavere opladte celler.
 \\
 
-Under passiv balancering holder systemet øje med spændingen på de enkelte celler. Når en eller flere celler opnår maks cellespænding $V_{EOC}$ og derved er fuldt opladet, aflades de igennem en modstand til de har samme spænding som den laveste celle i systemet eller til en spændingsreference. Efterfølgende oplades alle celler igen, og denne proces vil forsætte indtil alle celler er fuldt opladet. Afladningsmetoden hedder "controlled shunting resistor" og er vist på figur \ref{fig:passiv_balancering_teknik}. 
+Under passiv balancering holder systemet øje med spændingen på de enkelte celler. Når en eller flere celler opnår maks cellespænding $V_{EOC}$ og derved er fuldt opladet, aflades de igennem en modstand til de har samme spænding som den laveste celle i systemet eller til en spændingsreference. Efterfølgende oplades alle celler igen, og denne proces vil fortsætte indtil alle celler er fuldt opladet. Afladningsmetoden hedder "controlled shunting resistor" og er vist på figur \ref{fig:passiv_balancering_teknik}. \\
 
 
 %Denne metode har MOSFET i parallel med hver enkelt celle og kan styres simpelt ved hjælp af en comparator som får en MOSFET til at tænde for indkobling af en afladningsmodstand. Microcontrolleren vil samtidig overvåge samtlige cellespændinger, og vil derfor have styr på om hvorvidt der er behov for balancering.
@@ -56,14 +56,14 @@ Fordelen ved denne metode er at den er simpel og pålidelig, men tilgengæld er 
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=10cm]{billeder/passiv_balancering.png}
+	\includegraphics[width=9cm]{billeder/passiv_balancering.png}
 	\caption{Passiv balancering gennem en færdig BMS chip.}
 	\label{fig:passiv_balancering_teknik}
 \end{figure}
 
 
 \subsection{Aktiv balancering}
-Fælles for de aktive balanceringsteknikker er at de redistribuerer energi fra celler med høj ladning til celler med lav. På den måde mindskes tabet i forhold til passiv balancering hvor overskuds energi er ren tab. Da der i visse applikationer kan forekomme mange celler kan der være langt fra en celle der skal afgive energi til en der skal modtage, hvilket vil medføre et energi tab i transport. Aktiv balancering tillader større balanceringsstrømme end passiv balancering, meget af energien bliver redistribueret i stedet for omdannet til varme.
+Fælles for de aktive balanceringsteknikker er at de redistribuerer energi fra celler med høj ladning til celler med lav. På den måde mindskes tabet i forhold til passiv balancering hvor overskuds energi er ren tab. Da der i visse applikationer kan forekomme mange celler kan der være langt fra en celle der skal afgive energi til en der skal modtage, hvilket vil medføre et energi tab i transport. Aktiv balancering tillader større balanceringsstrømme end passiv balancering, da meget af energien bliver redistribueret i stedet for omdannet til varme.
 \\
 
 Der findes mange former for aktiv balancering. "Controlled shunting" \space er en af dem, og går ud på at omdirigere fuldt opladte celler, og derved kun lade på de resterende i batteripakken.
@@ -74,7 +74,7 @@ En anden aktiv balanceringsteknik hedder "Switched capacitor". Her sidder en kon
 \section{Estimering af kapacitet}\label{afs:estimering_kapacitet}
 En af de vigtigste funktionaliteter i et batteristyresystem er estimering af kapacitet, State of Charge (SoC), og er direkte defineret som den procentdel af maksimal ladning i en celle eller batteripakke. SoC er vigtig da det afspejler batteripakkens ydeevne. Nøjagtig estimering af SoC er ikke kun vigtig til beskyttelse af cellerne, men også for at forhindre overopladning og underafladning, hvilket bidrager til forlængelse af batteripakkens levetid. Dertil muliggør informationen også at lade batteristyresystemet ligge rationelle strategier for at spare energi. \\
 
-Informationen kan også bruges til at indikere behov tilslutning af oplader til brugeren gennem f.eks. en statusindikator eller om afladning af systemet kan tillades. 
+Informationen kan også bruges til at indikere behov for tilslutning af oplader til brugeren gennem f.eks. en statusindikator eller om afladning af systemet kan tillades. 
 Ved strømsvigt hvor f.eks et UPS-anlæg (Uninterruptible power supply) skal levere nødstrøm indtil normal drift genoprettes, vil SoC bidrage med information om hvorvidt anlægget overhovedet vil være i stand til at understøtte den tilkoblede belastning. \\
 
 Den simpleste definition er baseret på den maximalt mulige kapacitet der kan opnås ved meget langsom afladning (for eksempel $C/20$) indtil den absolut minimale spænding for cellen er nået. Derfor for at finde $Q_{max}$, oplades batteriet helt, og denne afladning finder sted. Derefter er SoC defineret som: 
@@ -89,9 +89,7 @@ Der anvendes typisk tre metoder til at afgøre SoC, gennem en direkte måling af
 Ved denne metode vil en simpel spændingsmåling henover cellerne kunne indikere kapaciteten, da spændingen på en celle tilnærmelsesvis falder lineært under afladning i dette projekts valgte arbejdsområde. Den er dog ikke så præcis, da den reelle afladningskurve ikke er lineær, men det er i nogen situationer heller ikke nødvendigt med en meget præcis kapacitetsmåling, så længe op- og afladningspunkterne er veldefinerede. Denne metode er nok den mest brugte grundet dens simplicitet, men er derimod nok også den mest upræcise. 
 \\
 
-Det kræver en meget præcis spændingsmåler, da den skal kunne måle meget små forskelle på afladningskurvens flade region. Derudover er der parametre som cellens indre modstand, der kan have stor betydning for kapacitetsmålingen, da den bliver mere betydende under stigende strømtræk. Hvis realtidsmåling (med stor) ikke er nødvendig, kan et mere nøjagtigt estimat opnås ved at måle spændingen $2\min$ efter et strømtræk.
-
-
+Det kræver en meget præcis spændingsmåler, da den skal kunne måle meget små forskelle på afladningskurvens flade region. Derudover er der parametre som cellens indre modstand, der kan have stor betydning for kapacitetsmålingen, da den bliver mere betydende under stigende strømtræk. Hvis realtidsmåling ikke er nødvendig, kan et mere nøjagtigt estimat opnås ved at måle spændingen $2\min$ efter et strømtræk.
 
 \subsection{Coulomb-tælle metode}
 Denne metode går ud på at måle afladningsstrømmen i en batteripakke og integrere strømmen over tid, for at estimere realtids-kapaciteten $SoC(t)$. 
@@ -107,7 +105,7 @@ Her er $SoC(0)$ start kapaciteten, hvor $SoC(t)$ er nuværende kapacitet. $C$ er
 Strømmåling kan give et mere nøjagtig realtidsbillede af hvordan kapaciteten ser ud i batteripakken i forhold til at måle terminalspændingen.
 \\
 
-Disse to teknikker kan også kombineres for at give et mere nøjagtigt estimat af batteripakkens kapacitet. I dette projekt benyttes måling af cellespændingerne, da man ikke har behov for en præcis kapacitetsmåling, men nærmere kun hvornår der skal oplades. Da batteripakken er integreret i reclinerstolen og dermed gemt af vejen for brugeren, så der er ikke nem mulighed for aflæsning af kapacitet i forvejen. 
+Disse to teknikker kan også kombineres for at give et mere nøjagtigt estimat af batteripakkens kapacitet. I dette projekt benyttes måling af cellespændingerne, da man ikke har behov for en præcis kapacitetsmåling, men nærmere kun hvornår der skal oplades. Da batteripakken er integreret i reclinerstolen og dermed gemt af vejen for brugeren, så der er ikke nem mulighed for aflæsning af kapacitet i forvejen. Coulomb-counting metoden er dog også implementeret, men mere som en nice-to-have. 
 
 \section{State of Health (SoH)}
 Formålet med SoH er at give en indikation af hvilken ydeevne der kan forventes af en celle eller batteripakke i den nuværende tilstand, eller fortælle noget omkring den resterende levetid før der er behov for udskiftning. Der findes dog her, lige som ved state of charge, også flere metoder med hensyn til præcisionen. 
@@ -128,14 +126,13 @@ En anden måde at beregne state of health på, er ved at holde øje med kapacite
 SoH = \frac{C_{max}}{C_{rated}}\times 100\percent \label{eq:soh_capacity}
 \end {equation}
 
-Her angiver resultatet cellens restende maksimum kapacitet i procent. Denne metode er en del mere præcis, da den viser hvor meget cellen fysisk stadig kan levere. Der kan ikke særlig præcist estimeres hvornår cellerne skal skiftes, da information som temperatur og hvor hård op- og afladningen er i fremtiden, skal med i beregningerne. Som en "hovedregel" \space siges der at når cellen når $70\percent$ af dens maksimum kapacitet, anses den død og skal udskiftes. Årsagen til dette er efter de $70\percent$ begynder den brugbare kapacitet at falde meget hurtigt og upålideligt.\footnote{s. 170 i Battery Power Management for Portable Devices af Yevgen Barsukov}
+Her angiver resultatet cellens restende maksimum kapacitet i procent. Denne metode er en del mere præcis, da den viser hvor meget cellen fysisk stadig kan levere. Der kan ikke særlig præcist estimeres hvornår cellerne skal skiftes, da information som temperatur og hvor hård op- og afladningen er i fremtiden, skal med i beregningerne. Som en "hovedregel" \space siges der at når cellen kun kan oplades $70\percent$ af dens oprindelige kapacitet, anses den død og skal udskiftes. Årsagen til dette er efter de $70\percent$ begynder den brugbare kapacitet at falde meget hurtigt og upålideligt.\footnote{s. 170 i Battery Power Management for Portable Devices af Yevgen Barsukov}
 
 \section{Temperaturmåling}
-Måling af temperature i en batteripakke er nødvendig, for at sikre optimal op- og afladningsforhold. Alt afhængig vigtigheden af kendskab til temperaturene forskellige steder, kan der være flere temperaturmålere. Placeringerne er typisk på PCB'et og cellerne.
+Måling af temperaturen i en batteripakke er nødvendig, for at sikre optimal op- og afladningsforhold. Alt afhængig vigtigheden af kendskab til temperaturene forskellige steder, kan der være flere temperaturmålere. Placeringerne er typisk på PCB'et og cellerne.
 \\
 
 Temperaturmålingen kan blive brugt flere steder i en batteripakke. Værdien kan indgå som en parameter til udregning af cellernes helbredsmæssige tilstand og til at sikre, at cellerne ikke blive op- og afladt under for kølige eller varme temperaturer. Når temperaturen næsten er for høj eller for lav, kan en batteripakke designes således at den kun tillader en begrænset indadgående eller udadgående strøm.
 
 \section{Op- og afladningskontrol samt kortslutningsbeskyttelse}
-For at isolere batteripakken fra belastning og oplader i tilfælde af fejl ved op- og afladning, skal BMS'en kunne afbryde forbindelsen mellem opladeren eller belastningen. Det kan realiseres ved hjælp af en oplade og aflade MOSFET som sammen virker som en to vejs kontakt kontakt i fejlsituationer, også kaldet cutott-MOSFETs. Opførelsen af cutoff-MOSFEN'en er typisk defineret ud fra parametre som maksimums værdier af cellespændinger, strømtræk og temperatur. 
-\
+For at isolere batteripakken fra belastning og oplader i tilfælde af fejl ved op- og afladning, skal BMS'en kunne afbryde forbindelsen mellem opladeren eller belastningen. Det kan realiseres ved hjælp af en oplade og aflade MOSFET som sammen virker som en to vejs kontakt i fejlsituationer, også kaldet cutoff-MOSFETs. Opførelsen af cutoff-MOSFEN'en er typisk defineret ud fra parametre som maksimums værdier af cellespændinger, strømtræk og temperatur. 

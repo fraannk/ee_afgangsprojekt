@@ -33,7 +33,7 @@ Lithium jern fosfat ($LiFePO_4$ også kaldt $LFP$) har sammen med lithium mangan
 \caption{Genereliseret tabel der sammenligner de forskellige typer celler}
 \end{table}
 
-Der blev valgt kemien $LiNiMnCoO_2$ (NMC/INR) da den ramte de fleste punkter som var vigtige i dette projekt. Linak havde også nogle celler tilgængelige med denne kemi. Et af grundlagene for valg af kemien var især levetiden, da batteripakken som helhed kommer til at være installeret i et produkt hvor der ikke ønskes at skifte batterier ofte. De dertil også nok energitæthed og afladekapacitet. De valgte celler har en kapacitet på $2600\milli\ampere\hour$ og en afladekapacitet på $3C$\footnote{Aflæst i cellens datablad.}, og for at udregne den maksimale afladningskapacitet gøres følgende: 
+Der blev valgt kemien $LiNiMnCoO_2$ (NMC/INR) da den ramte de fleste punkter som var vigtige i dette projekt. Linak havde også nogle celler tilgængelige med denne kemi. Et af grundlagene for valg af kemien var især levetiden, da batteripakken som helhed kommer til at være installeret i et produkt hvor der ikke ønskes at skifte batterier ofte. Der er også nok energitæthed og afladekapacitet. De valgte celler har en kapacitet på $2600\milli\ampere\hour$ og en afladekapacitet på $3C$\footnote{Aflæst i cellens datablad.}, og for at udregne den maksimale afladningskapacitet gøres følgende: 
 
 \begin {equation}
 2.6\ampere\hour \times 3C = 7,8\ampere
@@ -53,14 +53,14 @@ Kigges der på en typisk lithium-ion celle, har den en afladningskurve der ser u
 \label{fig:discharge_curve}
 \end{figure}
 
-Her kan det ses at spændingen på batterierne falder i takt med at de aflades. Denne kurve er dog ikke lineær og varierer fra celle til celle, og specielt mellem forskellige kemier. Der ses også at jo hårdere der afladers, jo mindre kapacitet kan der udvindes. På denne specifikke graf fås et optimalt udbytte af cellen hvis der aflades med 1C, uden at gå på kompromis med hverken afladekapacitet eller det samlede energiudbytte. \\
+Her kan det ses at spændingen på batterierne falder i takt med at de aflades. Denne kurve er dog ikke lineær og varierer fra celle til celle, og specielt mellem forskellige kemier. Der ses også at jo hårdere der aflades, jo mindre kapacitet kan der udvindes. På denne specifikke graf fås et optimalt udbytte af cellen hvis der aflades med $1C$, uden at gå på kompromis med hverken afladekapacitet eller det samlede energiudbytte. \\
 
 "Sikkerhedszonen" \space er også i spil her. Hvis der aflades med for eksempel $0.2C$, og afladningen stoppes ved omkring de $3.2\volt$, udvindes det meste af cellens kapacitet, mens der sørges for at cellen har så lang en levetid som muligt. Her er det dog nødvendigt at gå lidt på kompromis med afladekapaciteten, for hvis der aflades med f.eks. $2C$, er der teoretisk set stadig omkring $88-90\percent$ kapacitet tilbage som der ikke kan blive brugt uden at cellen tager skade i det lange forløb. \\
 
 Skal cellerne opbevares i længere tid, er det en god idé at opbevare dem i den såkaldte "storage mode". Her lades/aflades cellerne til $30-40\percent$ af deres fulde kapacitet, da der her er mindst slid, og man derfor opnår en længere levetid. 
 
 \section{Sikkerhed}
-Da lithium batterier kan være farlige, er det nødvendigt til at foretage de nødvendige sikkerhedsforanstaltninger. Derfor er der en del "regler":
+Da lithium batterier kan være farlige, er det nødvendigt til at foretage nogle sikkerhedsforanstaltninger. Derfor er der en del "regler":
 
 \begin{itemize}[noitemsep]
 \item Oplad ikke på batteriet når omgivelsestemperaturen er under $0\degreeCelsius$ eller over $45\degreeCelsius$. 

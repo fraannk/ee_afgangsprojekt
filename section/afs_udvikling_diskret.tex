@@ -169,7 +169,7 @@ V+ > V- \quad = \quad 88\milli\volt > 60\milli\volt
 \end {equation}
 
 På den måde har operationsforstærkeren en indbygget hysterese.
-Microcontrolleren vil opdage en overstrøms situation, men behøver ikke at slukke driveren, da det allerede sker før den opdager dette. For at tænde MOSFET'en skal operationsforstærkerens "hysterese" \space nulstilles, og dette gøres ved, at sende en puls på $3.3\volt$ fra $PWM_DSG$, hvilket får $V-$ til at op på $117.9\milli\volt$, og dermed overstiger $V+$.
+Microcontrolleren vil opdage en overstrøms situation, men behøver ikke at slukke driveren, da det allerede sker før den opdager dette. For at tænde MOSFET'en skal operationsforstærkerens "hysterese" \space nulstilles, og dette gøres ved, at sende en puls på $3.3\volt$ fra $PWM_{DSG}$, hvilket får $V-$ til at op på $117.9\milli\volt$, og dermed overstiger $V+$.
 
 
 \subsection{Overstrøm ved opladning}\label{sec:overcurrent_chg}
